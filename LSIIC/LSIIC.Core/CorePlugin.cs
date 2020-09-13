@@ -7,10 +7,10 @@ using FistVR;
 using HarmonyLib;
 using UnityEngine;
 
-[assembly: AssemblyVersion("0.8")]
+[assembly: AssemblyVersion("1.0")]
 namespace LSIIC.Core
 {
-	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "0.8")]
+	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.0")]
 	[BepInDependency("dll.cursed.timescale", BepInDependency.DependencyFlags.SoftDependency)]
 	public class CorePlugin : BaseUnityPlugin
 	{

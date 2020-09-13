@@ -7,10 +7,10 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
-[assembly: AssemblyVersion("0.8")]
+[assembly: AssemblyVersion("1.0")]
 namespace LSIIC.SmartPalming
 {
-	[BepInPlugin("net.block57.lsiic.smartpalming", "LSIIC - Smart Palming", "0.8")]
+	[BepInPlugin("net.block57.lsiic.smartpalming", "LSIIC - Smart Palming", "1.0")]
 	public class SmartPalmingPlugin : BaseUnityPlugin
 	{
 		public static ManualLogSource Logger { get; set; }
