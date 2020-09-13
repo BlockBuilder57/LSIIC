@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032f812947686a541a935e2a5fdfdd91, type: 3}
+  m_Name: Flagtachment_Trans
+  m_EditorClassIdentifier: 
+  IsDisplayedInMainEntry: 1
+  DisplayName: Flagtachment Trans
+  Sprite: {fileID: 21300000, guid: df25f0bdb9f771c418d71d9cf2e75a36, type: 3}
+  SubHeading: Trans rights!
+  Description: 
+  Category: 4
+  SubCategory: 24
+  ItemID: AttDecFlagTrans
+  MainObject: {fileID: 11400000, guid: 3ca4572363df99e4c9b83650aa78ff6f, type: 2}
+  SecondObject: {fileID: 0}
+  Secondaries: []
+  UsesLargeSpawnPad: 0
+  UsesHugeSpawnPad: 0
+  UnlockCost: 0
+  IsUnlockedByDefault: 1
+  IsReward: 0

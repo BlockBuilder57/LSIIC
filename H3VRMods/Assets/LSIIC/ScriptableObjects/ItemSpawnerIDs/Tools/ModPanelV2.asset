@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032f812947686a541a935e2a5fdfdd91, type: 3}
+  m_Name: ModPanelV2
+  m_EditorClassIdentifier: 
+  IsDisplayedInMainEntry: 1
+  DisplayName: ModPanel V2
+  Sprite: {fileID: 21300000, guid: 35365799cf475804995f57ab92db8159, type: 3}
+  SubHeading: Bend the meaty reality to your whim!
+  Description: 'I don''t think this is used
+
+    But maybe it is
+
+    Either way,
+
+    hello'
+  Category: 6
+  SubCategory: 28
+  ItemID: MiscUtModPanelV2
+  MainObject: {fileID: 11400000, guid: 6491271329a5de040a5e87454a4c6ae7, type: 2}
+  SecondObject: {fileID: 0}
+  Secondaries: []
+  UsesLargeSpawnPad: 1
+  UsesHugeSpawnPad: 0
+  UnlockCost: 999999
+  IsUnlockedByDefault: 1
+  IsReward: 0

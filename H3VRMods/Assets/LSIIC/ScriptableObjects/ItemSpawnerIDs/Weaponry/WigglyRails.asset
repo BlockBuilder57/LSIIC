@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032f812947686a541a935e2a5fdfdd91, type: 3}
+  m_Name: WigglyRails
+  m_EditorClassIdentifier: 
+  IsDisplayedInMainEntry: 1
+  DisplayName: Wiggly Rails
+  Sprite: {fileID: 21300000, guid: a18bbaa7c1fe92b468ea7510bd26cc85, type: 3}
+  SubHeading: Wiggle wiggle wiggle
+  Description: 
+  Category: 4
+  SubCategory: 23
+  ItemID: AttRailWigglyRails
+  MainObject: {fileID: 11400000, guid: 359ca4c4c41b2e14d91e1b590a11532c, type: 2}
+  SecondObject: {fileID: 0}
+  Secondaries: []
+  UsesLargeSpawnPad: 0
+  UsesHugeSpawnPad: 0
+  UnlockCost: 0
+  IsUnlockedByDefault: 0
+  IsReward: 0

@@ -1,0 +1,566 @@
+fileFormatVersion: 2
+guid: bc4f00f7c125a304db644c3fb0c26d60
+timeCreated: 1599022304
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: MeatTrak_Panel_Char0
+    21300002: MeatTrak_Panel_Char1
+    21300004: MeatTrak_Panel_Char2
+    21300006: MeatTrak_Panel_Char3
+    21300008: MeatTrak_Panel_Char4
+    21300010: MeatTrak_Panel_Char5
+    21300012: MeatTrak_Panel_Char6
+    21300014: MeatTrak_Panel_Char7
+    21300016: MeatTrak_Panel_Char8
+    21300018: MeatTrak_Panel_Char9
+    21300020: MeatTrak_Panel_CharWide0
+    21300022: MeatTrak_Panel_CharWide1
+    21300024: MeatTrak_Panel_CharWide2
+    21300026: MeatTrak_Panel_CharWide3
+    21300028: MeatTrak_Panel_CharWide4
+    21300030: MeatTrak_Panel_CharWide5
+    21300032: MeatTrak_Panel_CharWide6
+    21300034: MeatTrak_Panel_CharWide7
+    21300036: MeatTrak_Panel_CharWide8
+    21300038: MeatTrak_Panel_CharWide9
+    21300040: MeatTrak_Panel_CharDash
+    21300042: MeatTrak_Panel_CharPeriod
+    21300044: MeatTrak_Panel_CharQuote
+    21300046: MeatTrak_Panel_CharDoubleQuote
+    21300048: MeatTrak_Panel_CharSpace
+    21300050: MeatTrak_Panel_CharWideDash
+    21300052: MeatTrak_Panel_CharWidePeriod
+    21300054: MeatTrak_Panel_CharWideQuote
+    21300056: MeatTrak_Panel_CharWideDoubleQuote
+    21300058: MeatTrak_Panel_CharWideSpace
+    21300060: MeatTrak_Panel_TrackingMode_Kills
+    21300062: MeatTrak_Panel_TrackingMode_Reloads
+    21300064: MeatTrak_Panel_TrackingMode_Shots
+    21300066: MeatTrak_Panel_TrackingMode_None
+    21300068: MeatTrak_Panel_TrackingMode_Bullets
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 112
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 104
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 88
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char5
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 120
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char6
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 112
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char7
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 104
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char8
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 96
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_Char9
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 88
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 56
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide5
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 72
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide6
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 64
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide7
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 56
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide8
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 48
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWide9
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 40
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharDash
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 120
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharPeriod
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 112
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharQuote
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 104
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharDoubleQuote
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 96
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharSpace
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 88
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWideDash
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 72
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWidePeriod
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 64
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWideQuote
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 56
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWideDoubleQuote
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 48
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_CharWideSpace
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 40
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_TrackingMode_Kills
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10
+        width: 23
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_TrackingMode_Reloads
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 10
+        width: 23
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_TrackingMode_Shots
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 23
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_TrackingMode_None
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 0
+        width: 23
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MeatTrak_Panel_TrackingMode_Bullets
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 20
+        width: 23
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net35</TargetFramework>
+		<!-- ignore .NET sdk generating one for us... -->
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+
+	<!-- output release binaries in a single directory -->
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<OutputPath>$(SolutionDir)..\bin\BepInEx\monomod\LSIIC</OutputPath>
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- We set a special BepInEx output path, as this is a MonoMod assembly. -->
+		<BepInExOutputPath>monomod\LSIIC</BepInExOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\LSIIC.Core\LSIIC.Core.csproj">
+			<Private>false</Private>
+		</ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="0Harmony">
+			<HintPath>$(SolutionDir)..\lib\0Harmony.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(SolutionDir)..\lib\Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp-firstpass">
+		  <HintPath>..\..\lib\Assembly-CSharp-firstpass.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="BepInEx">
+			<HintPath>$(SolutionDir)..\lib\BepInEx.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>$(SolutionDir)..\lib\UnityEngine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+		  <HintPath>..\..\lib\UnityEngine.UI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+	<!-- Import our commonized copy-to-game logic -->
+	<Import Project="$(SolutionDir)LSIIC.CopyToGame.targets" />
+
+</Project>

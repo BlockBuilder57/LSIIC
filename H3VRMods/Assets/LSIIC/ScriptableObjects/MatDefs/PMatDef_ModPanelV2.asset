@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16f6e98292f2554f8636506aaad4055, type: 3}
+  m_Name: PMatDef_ModPanelV2
+  m_EditorClassIdentifier: 
+  material: 12
+  yieldStrength: 20
+  roughness: 20
+  stiffness: 20
+  density: 20
+  bounciness: 20
+  toughness: 20
+  soundCategory: 1
+  impactCategory: 1
