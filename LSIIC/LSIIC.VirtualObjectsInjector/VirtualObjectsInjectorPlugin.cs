@@ -12,10 +12,10 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-[assembly: AssemblyVersion("1.0")]
+[assembly: AssemblyVersion("1.1")]
 namespace LSIIC.VirtualObjectsInjector
 {
-	[BepInPlugin("net.block57.lsiic.virtualobjectsinjector", "LSIIC - Virtual Objects Injector", "1.0")]
+	[BepInPlugin("net.block57.lsiic.virtualobjectsinjector", "LSIIC - Virtual Objects Injector", "1.1")]
 	public class VirtualObjectsInjectorPlugin : BaseUnityPlugin
 	{
 		public static ManualLogSource Logger { get; set; }
