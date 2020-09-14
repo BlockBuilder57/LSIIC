@@ -47,6 +47,54 @@ namespace LSIIC.Core
 			.InstructionEnumeration();
 		}
 
+		[HarmonyPatch(typeof(FVRPivotLocker), "FVRUpdate")]
+		[HarmonyTranspiler]
+		public static IEnumerable<CodeInstruction> PivotLockerObjectParentageCheck(IEnumerable<CodeInstruction> instrs)
+		{
+			return new CodeMatcher(instrs).MatchForward(false,
+				new CodeMatch(i => i.opcode == OpCodes.Callvirt && ((MethodInfo)i.operand).Name == "get_parent"),
+				new CodeMatch(i => i.opcode == OpCodes.Ldnull),
+				new CodeMatch(i => i.opcode == OpCodes.Call && ((MethodInfo)i.operand).Name == "op_Inequality"))
+			.Repeat(m =>
+			{
+				m.Advance(1)
+				.SetOpcodeAndAdvance(OpCodes.Ldarg_0)
+				.InsertAndAdvance(new CodeInstruction(OpCodes.Call, AccessTools.PropertyGetter(typeof(Component), "transform")));
+			})
+			.InstructionEnumeration();
+		}
+
+		[HarmonyPatch(typeof(FVRPivotLocker), "FVRUpdate")]
+		[HarmonyTranspiler]
+		public static IEnumerable<CodeInstruction> PivotLockerObjectParentageSet(IEnumerable<CodeInstruction> instrs)
+		{
+			return new CodeMatcher(instrs).MatchForward(false,
+				new CodeMatch(i => i.opcode == OpCodes.Ldnull),
+				new CodeMatch(i => i.opcode == OpCodes.Callvirt && ((MethodInfo)i.operand).Name == "SetParent"))
+			.Repeat(m =>
+			{
+				m.SetOpcodeAndAdvance(OpCodes.Ldarg_0)
+				.InsertAndAdvance(new CodeInstruction(OpCodes.Call, AccessTools.PropertyGetter(typeof(Component), "transform")));
+			})
+			.InstructionEnumeration();
+		}
+
+		[HarmonyPatch(typeof(FVRPivotLocker), "IsInteractable")]
+		[HarmonyPrefix]
+		public static bool PivotLockerUnlockParentage(FVRPivotLocker __instance, ref bool __result)
+		{
+			__result = !__instance.IsPickUpLocked;
+			return false;
+		}
+
+		[HarmonyPatch(typeof(FVRPivotLocker), "UnlockObject")]
+		[HarmonyPrefix]
+		public static bool PivotLockerUnlockParentage(FVRPivotLocker __instance, FVRPhysicalObject ___m_obj)
+		{
+			___m_obj.transform.SetParent(null);
+			return true;
+		}
+
 		/*
 		 * Functionality patches
 		 * The fun stuff
