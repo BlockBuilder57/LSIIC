@@ -42,8 +42,8 @@ Requirements are:
 Optionally:
 
 * [BepInEx.ConfigurationManager](https://github.com/BepInEx/BepInEx.ConfigurationManager)
-* [RuntimeUnityEditor](https://github.com/ManlyMarco/RuntimeUnityEditor)
-* [WurstMod](https://github.com/Nolenz/WurstMod) (for LSIIC-Generic
+* [RuntimeUnityEditor](https://github.com/ManlyMarco/RuntimeUnityEditor) (for at keyboard object editing)
+* [WurstMod](https://github.com/Nolenz/WurstMod) (for Generic-LSIICTestingArea)
 
 To install, do the following:
 
@@ -79,7 +79,8 @@ This plugin contains most of the core functionality of LSIIC, including printing
 Some new functionality includes:
 - Magazines and clips can now go up to 1024x their normal capacity if changed with ModPanelV2.
 - If enabled, time will stop with an Armswinger/Twinstick jump.
-	- Note that you'll have to use teleport if you wish to move around in frozen time
+	- Note that you'll have to use teleport if you wish to move around in frozen time.
+	- This gets better with the timescale plugin from the CursedDlls.
 - Custom wrist menu with much more information than usual.
 
 #### `LSIIC.SmartPalming` -- smarter round palming
@@ -94,4 +95,4 @@ This plugin is now a part of [H3VR.Sideloader](https://github.com/denikson/H3VR.
 
 The LSIIC plugins can be compiled with any C# compilier, but it has been written under Visual Studio 2019 with some MSBuild customization written by [modeco80](https://github.com/modeco80). These custom MSBuild scripts will automatically copy the built dlls to the average H3VR install folder. (when Steam is in `C:\Program Files (x86)`) If needed, line 17 of [LSIIC.CopyToGame.targets](LSIIC/LSIIC.CopyToGame.targets) can be changed to your local install folder. Check the [README](lib/README.md) in /lib to see what dependencies are needed for a successful compilation.
 
-The Unity side of LSIIC is found in the H3VRMods folder. To avoid uploading other's work, the only parts of the project included there are the project settings and `Assets/LSIIC` folder. The project requires this specific fork of [Alloy](https://github.com/Josh015/Alloy/tree/unity-5-6/), the PBR rendering pipeline used in H3VR, and [WurstMod](https://github.com/Nolenz/WurstMod) for the testing area map. Unity's [AssetBundles Browser](https://github.com/Unity-Technologies/AssetBundles-Browser) addon is also used to export the `lsiic` assetbundle in `H3VR/VirtualObjects`. The project uses [uTinyRipper](https://github.com/mafaca/UtinyRipper) for the .meta files from H3VR. To extract these, drag/select the h3vr_Data folder in your H3VR install folder and export the scripts from the output.
+The Unity side of LSIIC is found in the H3VRMods folder. To avoid uploading other's work, the only parts of the project included there are the project settings and `Assets/LSIIC` folder. The project requires this specific fork of [Alloy](https://github.com/Josh015/Alloy/tree/unity-5-6/), the PBR rendering pipeline used in H3VR, and [WurstMod](https://github.com/Nolenz/WurstMod) for the testing area map. Unity's [AssetBundles Browser](https://github.com/Unity-Technologies/AssetBundles-Browser) addon is also used to export the `lsiic` assetbundle in `H3VR/VirtualObjects`, when LSIIC.VirtualObjectsInjector is installed. The project uses [uTinyRipper](https://github.com/mafaca/UtinyRipper) for the .meta files from H3VR. To extract these, drag/select the h3vr_Data folder in your H3VR install folder and export the scripts from the output.
