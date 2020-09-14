@@ -38,6 +38,7 @@ Requirements are:
 
 * [BepInEx 5.2 or newer](https://github.com/BepInEx/BepInEx)
 * [BepInEx.MonoMod.Loader](https://github.com/BepInEx/BepInEx.MonoMod.Loader)
+* [H3VR.Sideloader](https://github.com/denikson/H3VR.Sideloader)
 
 Optionally:
 
@@ -59,6 +60,7 @@ To install, do the following:
 3. Download the latest LSIIC release from the releases page.
 4. Open the downloaded zip. Extract the downloaded zip into your **H3VR** folder. If you did it correctly, you should now have an `LSIIC` folder in the `BepInEx/plugins` folder, and a `VirtualObjects` folder in your H3VR folder.
 5. Download BepInEx.MonoMod.Loader from its [releases](https://github.com/BepInEx/BepInEx.MonoMod.Loader/releases) and extract the zip into your **H3VR** folder. If you did it correctly, you should now have a `monomod` folder in `BepInEx`.
+6. Download H3VR.Sideloader from its [releases](https://github.com/denikson/H3VR.Sideloader//releases) and follow the [installation instructions](https://github.com/denikson/H3VR.Sideloader/#installation) in its repo.
 
 Optional Instructions:
 
@@ -82,6 +84,7 @@ Some new functionality includes:
 	- Note that you'll have to use teleport if you wish to move around in frozen time.
 	- This gets better with the timescale plugin from the CursedDlls.
 - Custom wrist menu with much more information than usual.
+- Hover Bench can be picked up even with an object on it.
 
 #### `LSIIC.SmartPalming` -- smarter round palming
 
