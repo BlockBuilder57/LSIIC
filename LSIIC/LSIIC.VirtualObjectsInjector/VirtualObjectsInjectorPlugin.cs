@@ -31,9 +31,9 @@ namespace LSIIC.VirtualObjectsInjector
 		}
 
 		//injects FVRObject(s) and ItemSpawnerID(s) into IM
-		[HarmonyPatch(typeof(GM), "GenerateItemDBs")]
+		[HarmonyPatch(typeof(IM), "GenerateItemDBs")]
 		[HarmonyPostfix]
-		public static void GM_Awake(GM __instance)
+		public static void IM_GenerateItemDBs(GM __instance)
 		{
 			Uri StreamingAssetsUri = new Uri(Application.streamingAssetsPath + "\\dummy");
 			Logger.LogDebug(Application.streamingAssetsPath + "\\dummy");
