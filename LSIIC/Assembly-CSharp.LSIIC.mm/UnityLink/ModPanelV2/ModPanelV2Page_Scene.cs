@@ -31,11 +31,11 @@ namespace LSIIC.ModPanel
 			if (ObjectControls.Count <= 0)
             {
 				if (GM.CurrentSceneSettings != null)
-					m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], GM.CurrentSceneSettings, new string[] { "DoesDamageGetRegistered", "IsQuickbeltSwappingAllowed", "IsSpawnLockingEnabled", "IsAmmoInfinite", "AllowsInfiniteAmmoMags", "IsSceneLowLight", "UsesUnlockSystem", "DoesTeleportUseCooldown", "DoesAllowAirControl", "UsesPlayerCatcher", "CatchHeight", "DefaultPlayerIFF" });
+					m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], GM.CurrentSceneSettings, new string[] { "IsSpawnLockingEnabled", "DoesDamageGetRegistered", "MaxProjectileRange", "DoesTeleportUseCooldown", "DoesAllowAirControl", "UsesPlayerCatcher", "CatchHeight", "DefaultPlayerIFF", "IsQuickbeltSwappingAllowed", "IsSceneLowLight", "IsAmmoInfinite", "AllowsInfiniteAmmoMags", "UsesUnlockSystem" });
 				if (GM.CurrentPlayerBody != null)
                 {
-					m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], this, new string[] { "m_powerupType", "m_powerupIntensity", "m_powerupDuration", "m_powerupInverted", "m_powerupDurationOverride" });
-					m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], GM.CurrentPlayerBody, new string[] { "ActivatePower", "", "SetPlayerIFF", "m_playerIFF", "Health", "m_startingHealth" }, new string[] { "{1} {0}.{2}" }, null, new bool[] { true, false, true }, new object[][] { new object[] { m_powerupType, m_powerupIntensity, m_powerupDuration, false, m_powerupInverted, m_powerupDurationOverride }, null, new object[] { m_playerIFF }  });
+					m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], this, new string[] { "m_powerupType", "m_powerupIntensity", "m_powerupDuration", "m_powerupInverted", "m_powerupDurationOverride", "ActivatePower", "", "SetPlayerIFF" }, new string[] { null, null, null, null, null, "{1} {0}.{2}" }, null, new bool[] { false, false, false, false, false, true, false, true });
+					m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], GM.CurrentPlayerBody, new string[] { "m_playerIFF", "Health", "m_startingHealth" });
 				}
 				if (ManagerSingleton<SM>.Instance != null)
                 {
@@ -51,6 +51,18 @@ namespace LSIIC.ModPanel
 
 			if (GM.CurrentPlayerBody != null)
 				m_playerIFF = GM.CurrentPlayerBody.GetPlayerIFF();
+		}
+
+		public void ActivatePower()
+        {
+			if (GM.CurrentPlayerBody != null)
+				GM.CurrentPlayerBody.ActivatePower(m_powerupType, m_powerupIntensity, m_powerupDuration, false, m_powerupInverted, m_powerupDurationOverride);
+		}
+
+		public void SetPlayerIFF()
+        {
+			if (GM.CurrentPlayerBody != null)
+				GM.CurrentPlayerBody.SetPlayerIFF(m_playerIFF);
 		}
     }
 }

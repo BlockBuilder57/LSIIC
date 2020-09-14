@@ -132,23 +132,23 @@ namespace LSIIC.ModPanel
 						TryToGetCurrentChamber();
 
 					if (AccessTools.Field(Object.GetType(), "Chamber") != null)
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object.GetType().GetField("Chamber").GetValue(Object), new string[] { "ChamberVelocityMultiplier", "RoundType", "SpreadRangeModifier" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object.GetType().GetField("Chamber").GetValue(Object), new string[] { "RoundType", "ChamberVelocityMultiplier", "IsManuallyExtractable" });
 					else if (AccessTools.Field(Object.GetType(), "m_curChamber") != null)
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], m_curChamber, new string[] { "ChamberVelocityMultiplier", "RoundType", "SpreadRangeModifier" }, null, new bool[] { true, true, true });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], m_curChamber, new string[] { "RoundType", "ChamberVelocityMultiplier", "IsManuallyExtractable" }, null, new bool[] { true, true, true });
 
 					if (Object.GetComponent<Handgun>() != null)
 					{
 						Handgun handgun = Object.GetComponent<Handgun>();
-						//m_heldTouchpadAction
-						AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun, new string[] { "HasManualDecocker", "HasMagReleaseInput", "CanPhysicsSlideRack" });
-						AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun.Slide, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundSlideHoldOpen" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun, new string[] { "HasManualDecocker", "HasMagReleaseInput", "CanPhysicsSlideRack" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun.Slide, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundSlideHoldOpen" });
 						AddObjectControls(Columns[2], 14, handgun.FireSelectorModes[handgun.FireSelectorModeIndex], new string[] { "ModeType", "BurstAmount" });
 					}
 
 					else if (Object.GetComponent<OpenBoltReceiver>() != null)
 					{
 						OpenBoltReceiver obr = Object.GetComponent<OpenBoltReceiver>();
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], obr.Bolt, new string[] { "BoltSpeed_Forward", "BoltSpeed_Rearward", "BoltSpeed_Held", "BoltSpringStiffness", "HasLastRoundBoltHoldOpen", "HasMagReleaseButton", "BoltRot_Standard", "BoltRot_Safe", "BoltRot_SlipDistance" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, obr, new string[] { "HasMagReleaseButton" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, obr.Bolt, new string[] { "BoltSpeed_Forward", "BoltSpeed_Rearward", "BoltSpeed_Held", "BoltSpringStiffness", "HasLastRoundBoltHoldOpen", "BoltRot_Standard", "BoltRot_Safe", "BoltRot_SlipDistance" });
 						AddObjectControls(Columns[2], 14, obr.FireSelector_Modes[obr.FireSelectorModeIndex], new string[] { "ModeType" });
 						AddObjectControls(Columns[2], 15, obr, new string[] { "SuperBurstAmount" });
 					}
@@ -156,8 +156,8 @@ namespace LSIIC.ModPanel
 					else if (Object.GetComponent<ClosedBoltWeapon>() != null)
 					{
 						ClosedBoltWeapon cbw = Object.GetComponent<ClosedBoltWeapon>();
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw, new string[] { "EjectsMagazineOnEmpty", "BoltLocksWhenNoMagazineFound", "DoesClipEntryRequireBoltBack" });
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw.Bolt, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundBoltHoldOpen", "HasMagReleaseButton", "UsesAKSafetyLock", "DoesClipHoldBoltOpen" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw, new string[] { "EjectsMagazineOnEmpty", "BoltLocksWhenNoMagazineFound", "DoesClipEntryRequireBoltBack", "HasMagReleaseButton" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw.Bolt, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundBoltHoldOpen", "UsesAKSafetyLock", "DoesClipHoldBoltOpen" });
 						AddObjectControls(Columns[2], 14, cbw.FireSelector_Modes[cbw.FireSelectorModeIndex], new string[] { "ModeType", "BurstAmount" });
 					}
 
