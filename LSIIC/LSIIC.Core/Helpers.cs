@@ -119,14 +119,14 @@ namespace LSIIC.Core
 		 * These are only needed because of weird behaviour in BepInEx when it comes to keybinds
 		 */
 		public static bool BepInExGetKeyDown(KeyboardShortcut shortcut)
-        {
+		{
 			if (Input.GetKeyDown(shortcut.MainKey))
-            {
+			{
 				bool allModifiersPressed = shortcut.Modifiers.All(c => Input.GetKey(c));
 				return allModifiersPressed;
 			}
 			return false;
-        }
+		}
 
 		public static bool BepInExGetKey(KeyboardShortcut shortcut)
 		{

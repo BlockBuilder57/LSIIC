@@ -37,7 +37,7 @@ namespace LSIIC
 		}
 
 		public static Texture2D ConvertSpriteToTexture(Sprite sprite)
-        {
+		{
 			if (sprite != null)
 			{
 				Texture2D croppedTexture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);

@@ -51,18 +51,18 @@ namespace LSIIC
 		}
 
 		public void Update()
-        {
+		{
 			switch (TrackingMode)
-            {
+			{
 				case TrackingModes.Bullets:
 					if (Attachment != null && Attachment.GetRootObject() != null && Attachment.GetRootObject() is FVRFireArm)
 						UpdateBulletMode((FVRFireArm)Attachment.GetRootObject());
 					break;
-            }
+			}
 		}
 
 		public void OnDestroy()
-        {
+		{
 #if !UNITY_EDITOR && !UNITY_STANDALONE
 			GM.CurrentSceneSettings.KillEvent -= wwBotKillEvent;
 			GM.CurrentSceneSettings.SosigKillEvent -= SosigKillEvent;

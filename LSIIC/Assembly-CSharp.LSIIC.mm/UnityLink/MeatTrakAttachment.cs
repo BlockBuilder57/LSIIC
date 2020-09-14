@@ -11,7 +11,7 @@ namespace LSIIC
 	public class MeatTrakAttachment : FVRFireArmAttachment
 	{
 		public void Awake()
-        {
+		{
 			base.Awake();
 
 			MeatTrakAttachmentInterface meatInterface = AttachmentInterface as MeatTrakAttachmentInterface;
@@ -38,7 +38,7 @@ namespace LSIIC
 			Dictionary<string, string> dictionary = new Dictionary<string, string>();
 			MeatTrakAttachmentInterface meatInterface = AttachmentInterface as MeatTrakAttachmentInterface;
 			if (meatInterface != null)
-            {
+			{
 				dictionary.Add("TrackingMode", meatInterface.TrackingMode.ToString());
 				if (meatInterface.MeatTrak != null)
 					dictionary.Add("NumberTarget", meatInterface.MeatTrak.NumberTarget.ToString());

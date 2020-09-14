@@ -93,12 +93,12 @@ namespace LSIIC
 				else if (completion < AutoComplete / 360f)
 					m_curState = State.Min;
 				else
-                {
+				{
 					m_curState = State.Between;
 					if (m_prevState != State.Between)
 						if (OnStartedBetween != null)
 							OnStartedBetween.Invoke();
-                }
+				}
 
 				if (m_curState == State.Min && m_prevState != State.Min)
 					if (OnCompleteMin != null)
