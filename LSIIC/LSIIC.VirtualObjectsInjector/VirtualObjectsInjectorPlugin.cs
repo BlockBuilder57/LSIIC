@@ -24,9 +24,6 @@ namespace LSIIC.VirtualObjectsInjector
 		{
 			Logger = base.Logger;
 
-			Logger.LogWarning("This plugin has been deprecated and has been integrated into H3VR.Sideloader.");
-			Logger.LogWarning("It should only be used for hassle-free rapid prototyping from Unity into H3VR.");
-
 			Harmony.CreateAndPatchAll(typeof(VirtualObjectsInjectorPlugin));
 		}
 
@@ -36,7 +33,12 @@ namespace LSIIC.VirtualObjectsInjector
 		public static void IM_GenerateItemDBs(GM __instance)
 		{
 			Uri StreamingAssetsUri = new Uri(Application.streamingAssetsPath + "\\dummy");
-			Logger.LogDebug(Application.streamingAssetsPath + "\\dummy");
+			if (!Directory.Exists(Paths.GameRootPath + @"\VirtualObjects"))
+			{
+				Logger.LogWarning("VirtualObjectsInjector has no H3VR/VirtualObjects folder. No objects will be loaded.");
+				return;
+			}
+
 			foreach (string file in Directory.GetFiles(Paths.GameRootPath + @"\VirtualObjects", "*", SearchOption.AllDirectories))
 			{
 				if (Path.GetFileName(file) != Path.GetFileNameWithoutExtension(file) || Path.GetFileName(file).Contains("VirtualObjects"))
@@ -50,6 +52,8 @@ namespace LSIIC.VirtualObjectsInjector
 					if (bundle.Result != null)
 					{
 						Logger.Log(LogLevel.Info, $"Injecting FVRObject(s) and ItemSpawnerID(s) from {Path.GetFileName(file)}");
+
+						int objectsFound = 0;
 
 						foreach (FVRObject fvrObj in bundle.Result.LoadAllAssets<FVRObject>())
 						{
@@ -70,11 +74,27 @@ namespace LSIIC.VirtualObjectsInjector
 							ManagerSingleton<IM>.Instance.odicTagFirearmMount.AddOrCreate(fvrObj.TagFirearmMounts.FirstOrDefault()).Add(fvrObj);
 							ManagerSingleton<IM>.Instance.odicTagAttachmentMount.AddOrCreate(fvrObj.TagAttachmentMount).Add(fvrObj);
 							ManagerSingleton<IM>.Instance.odicTagAttachmentFeature.AddOrCreate(fvrObj.TagAttachmentFeature).Add(fvrObj);
+
+							objectsFound++;
 						}
 						foreach (ItemSpawnerID id in bundle.Result.LoadAllAssets<ItemSpawnerID>())
 						{
 							IM.CD[id.Category].Add(id);
 							IM.SCD[id.SubCategory].Add(id);
+
+							Dictionary<string, ItemSpawnerID> SIDD = (Dictionary<string, ItemSpawnerID>)AccessTools.Field(typeof(IM), "SpawnerIDDic").GetValue(ManagerSingleton<IM>.Instance);
+							if (SIDD != null)
+								SIDD[id.ItemID] = id;
+						}
+
+						if (objectsFound > 0)
+						{
+							Logger.LogWarning($"{objectsFound} object(s) were loaded through VirtualObjectsInjector!");
+#if !DEBUG
+							Logger.LogWarning("This plugin has been deprecated and has been integrated into H3VR.Sideloader.");
+							Logger.LogWarning("It should only be used for hassle-free rapid prototyping from Unity into H3VR.");
+							Logger.LogWarning("Please ask the creators of the asset bundle to covert their object(s) to a Sideloader mod.");
+#endif
 						}
 					}
 					else
