@@ -43,7 +43,7 @@ Requirements are:
 Optionally:
 
 * [BepInEx.ConfigurationManager](https://github.com/BepInEx/BepInEx.ConfigurationManager)
-* [RuntimeUnityEditor](https://github.com/ManlyMarco/RuntimeUnityEditor) (for at keyboard object editing)
+* [RuntimeUnityEditor](https://github.com/ManlyMarco/RuntimeUnityEditor) (for at-keyboard object editing)
 * [WurstMod](https://github.com/Nolenz/WurstMod) (for Generic-LSIICTestingArea)
 
 To install, do the following:
@@ -60,7 +60,7 @@ To install, do the following:
 3. Download the latest LSIIC release from the releases page.
 4. Open the downloaded zip. Extract the downloaded zip into your **H3VR** folder. If you did it correctly, you should now have an `LSIIC` folder in the `BepInEx/plugins` folder, and a `VirtualObjects` folder in your H3VR folder.
 5. Download BepInEx.MonoMod.Loader from its [releases](https://github.com/BepInEx/BepInEx.MonoMod.Loader/releases) and extract the zip into your **H3VR** folder. If you did it correctly, you should now have a `monomod` folder in `BepInEx`.
-6. Download H3VR.Sideloader from its [releases](https://github.com/denikson/H3VR.Sideloader//releases) and follow the [installation instructions](https://github.com/denikson/H3VR.Sideloader/#installation) in its repo.
+6. To properly install H3VR.Sideloader, follow the [installation instructions](https://github.com/denikson/H3VR.Sideloader/#installation) in its repo. Be sure you have the BepIn 5x version of XUnity.ResourceRedirector as linked in the repo.
 
 Optional Instructions:
 
@@ -92,7 +92,7 @@ Conceptualized by Jack Foxtrot, smart palming will only take as many rounds as n
 
 #### `LSIIC.VirtualObjectsInjector` -- inject custom objects into the game
 
-This plugin is now a part of [H3VR.Sideloader](https://github.com/denikson/H3VR.Sideloader/). However, it is still in the LSIIC repo for its hassle-free rapid prototyping. It is not included in releases.
+This plugin is now a part of [H3VR.Sideloader](https://github.com/denikson/H3VR.Sideloader/). However, it is still in the LSIIC repo for its hassle-free rapid prototyping. While included in releases, I'd recommend that object makers make Sideloader mods for easier distribution.
 
 ## Compiling/Developing
 
