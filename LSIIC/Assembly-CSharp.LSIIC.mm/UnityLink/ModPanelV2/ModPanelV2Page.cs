@@ -25,6 +25,8 @@ namespace LSIIC.ModPanel
 		public List<ModPanelV2ObjectControl> ObjectControls = new List<ModPanelV2ObjectControl>();
 		[HideInInspector]
 		public List<ModPanelV2ObjectControl> UpdatingObjectControls = new List<ModPanelV2ObjectControl>();
+		[HideInInspector]
+		public List<ModPanelV2ObjectControl> SavedObjectControls = new List<ModPanelV2ObjectControl>();
 
 		protected Dictionary<string, GameObject> Elements = new Dictionary<string, GameObject>();
 
@@ -146,9 +148,23 @@ namespace LSIIC.ModPanel
 		public void ClearObjectControls()
 		{
 			foreach (ModPanelV2ObjectControl control in ObjectControls)
-				if (control != null)
-					Destroy(control.gameObject);
+			{
+				if (control == null)
+					continue;
+				if (SavedObjectControls != null && SavedObjectControls.Contains(control))
+					continue;
+
+				Destroy(control.gameObject);
+			}
 			ObjectControls.Clear();
+
+			foreach (ModPanelV2ObjectControl control in SavedObjectControls)
+			{
+				if (control == null)
+					continue;
+
+				ObjectControls.Add(control);
+			}
 		}
 	}
 }

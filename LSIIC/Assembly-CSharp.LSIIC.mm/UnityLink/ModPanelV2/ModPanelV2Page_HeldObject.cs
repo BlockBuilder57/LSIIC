@@ -20,14 +20,17 @@ namespace LSIIC.ModPanel
 		private int[] m_columnStarts;
 
 		private FVRFireArmChamber m_curChamber;
-		private int m_curChamberIndex;
+		private int m_curChamberIndex = -1;
 
 		public override void PageInit()
 		{
 			base.PageInit();
 
 			if (m_clearObjectControl == null)
+			{
 				m_clearObjectControl = AddObjectControl(new Vector2(20, 16), 0, this, "ClearObjectControlsOnRelease", "Clear object controls on release? Currently {3}");
+				SavedObjectControls.Add(m_clearObjectControl);
+			}
 		}
 
 		public override void PageOpen()
@@ -88,7 +91,7 @@ namespace LSIIC.ModPanel
 			if (Object != null && Object.GetComponent<FVRFireArm>() != null && AccessTools.Field(Object.GetType(), "m_curChamber") != null)
 			{
 				int CurChamber = (int)AccessTools.Field(Object.GetType(), "m_curChamber").GetValue(Object);
-				if (CurChamber != m_curChamberIndex && Object.GetType().GetField("Chambers") != null)
+				if ((CurChamber != m_curChamberIndex || m_curChamber == null) && Object.GetType().GetField("Chambers") != null)
 				{
 					m_curChamberIndex = CurChamber;
 					FVRFireArmChamber[] Chambers = (FVRFireArmChamber[])Object.GetType().GetField("Chambers").GetValue(Object);
@@ -128,13 +131,15 @@ namespace LSIIC.ModPanel
 				if (Object.GetComponent<FVRFireArm>() != null)
 				{
 					m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0] + 1, Object.GetComponent<FVRFireArm>(), new string[] { "MagazineType", "ClipType", "RoundType" });
-					if (m_curChamber == null)
-						TryToGetCurrentChamber();
 
 					if (AccessTools.Field(Object.GetType(), "Chamber") != null)
 						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object.GetType().GetField("Chamber").GetValue(Object), new string[] { "RoundType", "ChamberVelocityMultiplier", "IsManuallyExtractable" });
 					else if (AccessTools.Field(Object.GetType(), "m_curChamber") != null)
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], m_curChamber, new string[] { "RoundType", "ChamberVelocityMultiplier", "IsManuallyExtractable" }, null, new bool[] { true, true, true });
+					{
+						TryToGetCurrentChamber();
+						if (m_curChamber != null)
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], m_curChamber, new string[] { "RoundType", "ChamberVelocityMultiplier", "IsManuallyExtractable" }, null, new bool[] { true, true, true });
+					}
 
 					if (Object.GetComponent<Handgun>() != null)
 					{
@@ -157,7 +162,7 @@ namespace LSIIC.ModPanel
 					{
 						ClosedBoltWeapon cbw = Object.GetComponent<ClosedBoltWeapon>();
 						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw, new string[] { "EjectsMagazineOnEmpty", "BoltLocksWhenNoMagazineFound", "DoesClipEntryRequireBoltBack", "HasMagReleaseButton" });
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw.Bolt, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundBoltHoldOpen", "UsesAKSafetyLock", "DoesClipHoldBoltOpen" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw.Bolt, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundBoltHoldOpen", "DoesClipHoldBoltOpen" });
 						AddObjectControls(Columns[2], 14, cbw.FireSelector_Modes[cbw.FireSelectorModeIndex], new string[] { "ModeType", "BurstAmount" });
 					}
 
@@ -209,8 +214,6 @@ namespace LSIIC.ModPanel
 						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, lapd, new string[] { "m_isCylinderArmLocked", "CylinderRotRange", "GravityRotsCylinderPositive", "m_isAutoChargeEnabled", "m_hasBattery", "m_batteryCharge", "m_hasThermalClip", "m_heatThermalClip", "m_heatSystem", "m_barrelHeatDamage" });
 						m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], lapd.BoltHandle, new string[] { "UsesQuickRelease", "BaseRotOffset", "MinRot", "MaxRot", "UnlockThreshold" });
 					}
-
-					m_curChamberIndex = 0;
 				}
 
 				else if (Object.GetComponent<FVRFireArmRound>() != null)

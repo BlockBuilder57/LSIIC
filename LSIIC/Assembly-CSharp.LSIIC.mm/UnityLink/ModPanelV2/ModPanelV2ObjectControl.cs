@@ -147,7 +147,7 @@ namespace LSIIC.ModPanel
 			if (Field == null)
 				return;
 
-			if (Field.GetType().GetField("MaxValue") != null)
+			if (Field.FieldType.GetField("MaxValue") != null)
 				Field.SetValue(Instance, Field.FieldType.GetField("MaxValue").GetValue(null));
 
 			UpdateDisplay();
