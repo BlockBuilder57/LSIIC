@@ -30,7 +30,7 @@ namespace LSIIC.VirtualObjectsInjector
 		//injects FVRObject(s) and ItemSpawnerID(s) into IM
 		[HarmonyPatch(typeof(IM), "GenerateItemDBs")]
 		[HarmonyPostfix]
-		public static void IM_GenerateItemDBs(GM __instance)
+		public static void IM_GenerateItemDBs(IM __instance, Dictionary<string, ItemSpawnerID> ___SpawnerIDDic)
 		{
 			Uri StreamingAssetsUri = new Uri(Application.streamingAssetsPath + "\\dummy");
 			if (!Directory.Exists(Paths.GameRootPath + @"\VirtualObjects"))
@@ -65,15 +65,15 @@ namespace LSIIC.VirtualObjectsInjector
 
 							IM.OD.Add(fvrObj.ItemID, fvrObj);
 
-							ManagerSingleton<IM>.Instance.odicTagCategory.AddOrCreate(fvrObj.Category).Add(fvrObj);
-							ManagerSingleton<IM>.Instance.odicTagFirearmEra.AddOrCreate(fvrObj.TagEra).Add(fvrObj);
-							ManagerSingleton<IM>.Instance.odicTagFirearmSize.AddOrCreate(fvrObj.TagFirearmSize).Add(fvrObj);
-							ManagerSingleton<IM>.Instance.odicTagFirearmAction.AddOrCreate(fvrObj.TagFirearmAction).Add(fvrObj);
-							ManagerSingleton<IM>.Instance.odicTagFirearmFiringMode.AddOrCreate(fvrObj.TagFirearmFiringModes.FirstOrDefault()).Add(fvrObj);
-							ManagerSingleton<IM>.Instance.odicTagFirearmFeedOption.AddOrCreate(fvrObj.TagFirearmFeedOption.FirstOrDefault()).Add(fvrObj);
-							ManagerSingleton<IM>.Instance.odicTagFirearmMount.AddOrCreate(fvrObj.TagFirearmMounts.FirstOrDefault()).Add(fvrObj);
-							ManagerSingleton<IM>.Instance.odicTagAttachmentMount.AddOrCreate(fvrObj.TagAttachmentMount).Add(fvrObj);
-							ManagerSingleton<IM>.Instance.odicTagAttachmentFeature.AddOrCreate(fvrObj.TagAttachmentFeature).Add(fvrObj);
+							__instance.odicTagCategory.AddOrCreate(fvrObj.Category).Add(fvrObj);
+							__instance.odicTagFirearmEra.AddOrCreate(fvrObj.TagEra).Add(fvrObj);
+							__instance.odicTagFirearmSize.AddOrCreate(fvrObj.TagFirearmSize).Add(fvrObj);
+							__instance.odicTagFirearmAction.AddOrCreate(fvrObj.TagFirearmAction).Add(fvrObj);
+							__instance.odicTagFirearmFiringMode.AddOrCreate(fvrObj.TagFirearmFiringModes.FirstOrDefault()).Add(fvrObj);
+							__instance.odicTagFirearmFeedOption.AddOrCreate(fvrObj.TagFirearmFeedOption.FirstOrDefault()).Add(fvrObj);
+							__instance.odicTagFirearmMount.AddOrCreate(fvrObj.TagFirearmMounts.FirstOrDefault()).Add(fvrObj);
+							__instance.odicTagAttachmentMount.AddOrCreate(fvrObj.TagAttachmentMount).Add(fvrObj);
+							__instance.odicTagAttachmentFeature.AddOrCreate(fvrObj.TagAttachmentFeature).Add(fvrObj);
 
 							objectsFound++;
 						}
@@ -81,10 +81,10 @@ namespace LSIIC.VirtualObjectsInjector
 						{
 							IM.CD[id.Category].Add(id);
 							IM.SCD[id.SubCategory].Add(id);
-
-							Dictionary<string, ItemSpawnerID> SIDD = (Dictionary<string, ItemSpawnerID>)AccessTools.Field(typeof(IM), "SpawnerIDDic").GetValue(ManagerSingleton<IM>.Instance);
-							if (SIDD != null)
-								SIDD[id.ItemID] = id;
+							if (!___SpawnerIDDic.ContainsKey(id.ItemID))
+								___SpawnerIDDic[id.ItemID] = id;
+							else
+								Logger.LogError($"ItemID {id.ItemID} from {Path.GetFileName(file)} already exists in SpawnerIDDic! You need to change the ItemID in your ItemSpawnerID to something else.");
 						}
 
 						if (objectsFound > 0)
