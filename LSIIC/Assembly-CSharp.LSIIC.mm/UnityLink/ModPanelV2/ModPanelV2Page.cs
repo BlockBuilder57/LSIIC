@@ -63,6 +63,18 @@ namespace LSIIC.ModPanel
 			PageClose(true);
 		}
 
+		/// <param name="message"><br><b>For reference, fields are formatted like so:</b></br>
+		/// <br>{0} - Field.FieldType.BaseType.Name</br>
+		/// <br>{1} - Field.FieldType.Name</br>
+		/// <br>{2} - Field.Name</br>
+		/// <br>{3} - Field.GetValue(Instance)</br>
+		/// <br></br>
+		/// <br><b>And methods are formatted like this:</b></br>
+		/// <br>{0} - Method.DeclaringType.Name</br>
+		/// <br>{1} - Method.ReturnType.Name</br>
+		/// <br>{2} - Method.Name</br>
+		/// <br>{3} - Parameters in "{curParam.ParameterType.Name} {curParam.Name}" format</br>
+		/// </param>
 		public ModPanelV2ObjectControl AddObjectControl(Vector2 startOffset, int startIndex, object instance, string memberName, string message = null, bool updateOnTick = false, bool isMethod = false, object[] methodParameters = null)
 		{
 			if (Panel != null)
@@ -127,6 +139,18 @@ namespace LSIIC.ModPanel
 			return null;
 		}
 
+		/// <param name="messages"><br><b>For reference, fields are formatted like so:</b></br>
+		/// <br>{0} - Field.FieldType.BaseType.Name</br>
+		/// <br>{1} - Field.FieldType.Name</br>
+		/// <br>{2} - Field.Name</br>
+		/// <br>{3} - Field.GetValue(Instance)</br>
+		/// <br></br>
+		/// <br><b>And methods are formatted like this:</b></br>
+		/// <br>{0} - Method.DeclaringType.Name</br>
+		/// <br>{1} - Method.ReturnType.Name</br>
+		/// <br>{2} - Method.Name</br>
+		/// <br>{3} - Parameters in "{curParam.ParameterType.Name} {curParam.Name}" format</br>
+		/// </param>
 		public int AddObjectControls(Vector2 startOffset, int startIndex, object instance, string[] memberNames, string[] messages = null, bool[] updatesOnTick = null, bool[] methods = null, object[][] methodParams = null)
 		{
 			for (int i = 0; i < memberNames.Length; i++)

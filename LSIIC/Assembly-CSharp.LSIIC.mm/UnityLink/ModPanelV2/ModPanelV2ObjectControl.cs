@@ -55,18 +55,14 @@ namespace LSIIC.ModPanel
 					m_display.text = string.Format(string.IsNullOrEmpty(m_message) ? "{1} {2}: {3}" : m_message, Field.FieldType.BaseType.Name, Field.FieldType.Name, Field.Name, Field.GetValue(Instance));
 				else if (Method != null)
 				{
-					m_display.text = string.Format(string.IsNullOrEmpty(m_message) ? "{1} {0}.{2}(" : m_message, Method.DeclaringType.Name, Method.ReturnType.Name, Method.Name);
-					if (string.IsNullOrEmpty(m_message) && !m_message.Contains("{") && !m_message.Contains("}")) //now *this* is crusty
+					string parameters = "";
+					for (int i = 0; i < Method.GetParameters().Length; i++)
 					{
-						for (int i = 0; i < Method.GetParameters().Length; i++)
-						{
-							ParameterInfo curParam = Method.GetParameters()[i];
-							m_display.text += curParam.ParameterType.Name + ' ' + curParam.Name;
-							m_display.text += i == Method.GetParameters().Length - 1 ? "" : ", ";
-						}
-						m_display.text += ')'; //put here in case the method has no parameters
+						ParameterInfo curParam = Method.GetParameters()[i];
+						parameters += curParam.ParameterType.Name + ' ' + curParam.Name;
+						parameters += i == Method.GetParameters().Length - 1 ? "" : ", ";
 					}
-
+					m_display.text = string.Format(string.IsNullOrEmpty(m_message) ? "{1} {0}.{2}({3})" : m_message, Method.DeclaringType.Name, Method.ReturnType.Name, Method.Name, parameters);
 				}
 				else
 					m_display.text = m_message;
