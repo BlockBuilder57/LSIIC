@@ -108,11 +108,34 @@ namespace LSIIC.Core
 						}
 					}
 					holdingInfo += $"\nLayer(s): {LayerMask.LayerToName(targetObject.layer)}";
+					holdingInfo += $"\nTag: {targetObject.tag}";
+
+					if (targetObject.GetComponent<FVRFireArmRound>() != null)
+						holdingInfo += GetHeldObjects_RoundInfo(targetObject.GetComponent<FVRFireArmRound>());
+					if (targetObject.GetComponentInChildren<FVRFireArmMagazine>() != null)
+						holdingInfo += $"\n[Mag Type]: {targetObject.GetComponentInChildren<FVRFireArmMagazine>().RoundType}\n[Mag Rounds]: {targetObject.GetComponentInChildren<FVRFireArmMagazine>().m_numRounds}/{targetObject.GetComponentInChildren<FVRFireArmMagazine>().m_capacity}";
+					if (targetObject.GetComponentInChildren<FVRFireArmClip>() != null)
+						holdingInfo += $"\n[Clip Type]: {targetObject.GetComponentInChildren<FVRFireArmClip>().RoundType}\n[Clip Rounds]: {targetObject.GetComponentInChildren<FVRFireArmClip>().m_numRounds}/{targetObject.GetComponentInChildren<FVRFireArmClip>().m_capacity}";
+					if (targetObject.GetComponent<FVRFireArm>() != null)
+						holdingInfo += $"\n[Round Type]: {targetObject.GetComponent<FVRFireArm>().RoundType}";
 				}
 				if (holdingInfo != "")
 					holdingInfo += "\n\n";
 			}
 			return holdingInfo;
+		}
+
+		public static string GetHeldObjects_RoundInfo(FVRFireArmRound round)
+		{
+			string temp = "";
+			temp += $"\n[Round Type]: {round.RoundType}\n[Round Class]: {round.RoundClass}\n[Round Projectile Count:] {round.NumProjectiles}*{round.ProjectileSpread}s";
+			temp += $"\n[Round Manually Chamberable]: {round.isManuallyChamberable}\n[Round Loadable]: {round.isMagazineLoadable}";
+			temp += $"\n[Round Palmable]: {round.isPalmable}\n[Round Palm Amount]: {round.ProxyRounds.Count + 1}/{round.MaxPalmedAmount + 1}";
+			if (round.IsSpent)
+				temp += $"\n[Round Status]: Spent\n";
+			else
+				temp += $"\n[Round Status]: Ready\n";
+			return temp;
 		}
 
 		/*
