@@ -920,7 +920,8 @@ MonoBehaviour:
   IsKinematicLocked: 0
   DoesQuickbeltSlotFollowHead: 0
   IsInWater: 0
-  AttachmentMounts: []
+  AttachmentMounts:
+  - {fileID: 114121167236477704}
   IsAltToAltTransfer: 0
   CollisionSound:
     Clips: []
@@ -1054,7 +1055,8 @@ MonoBehaviour:
   IsKinematicLocked: 0
   DoesQuickbeltSlotFollowHead: 0
   IsInWater: 0
-  AttachmentMounts: []
+  AttachmentMounts:
+  - {fileID: 114121167236477704}
   IsAltToAltTransfer: 0
   CollisionSound:
     Clips: []
