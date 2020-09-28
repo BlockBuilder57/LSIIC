@@ -166,7 +166,7 @@ namespace LSIIC.ModPanel
 			}
 		}
 
-		public void RefreshObjectControls(FVRPhysicalObject obj = null)
+		public void RefreshObjectControls(FVRInteractiveObject obj = null)
 		{
 			CleanupHeldObject();
 
@@ -244,6 +244,14 @@ namespace LSIIC.ModPanel
 								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], baw.Barrels[i].Chamber, new string[] { "RoundType", "ChamberVelocityMultiplier" });
 						}
 
+						else if (Object is Derringer)
+						{
+							Derringer derringer = Object as Derringer;
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], derringer, new string[] { "HingeValues", "DoesAutoEjectRounds", "IsTriggerDoubleAction", "DeletesCartridgeOnFire" });
+							for (int i = 0; i < Math.Max(derringer.Barrels.Count, 7); i++) //capped to 7 to avoid controls overflowing
+								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], derringer.Barrels[i].Chamber, new string[] { "RoundType", "ChamberVelocityMultiplier" });
+						}
+
 						else if (Object is TubeFedShotgun)
 						{
 							TubeFedShotgun tfs = Object as TubeFedShotgun;
@@ -275,7 +283,13 @@ namespace LSIIC.ModPanel
 						else if (Object is Revolver)
 						{
 							Revolver revolver = Object as Revolver;
-							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, revolver, new string[] { "CanManuallyCockHammer", "m_isHammerLocked", "m_isCylinderArmLocked", "CylinderRotRange", "IsCylinderArmZ", "GravityRotsCylinderPositive" });
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, revolver, new string[] { "AllowsSuppressor", "CanManuallyCockHammer", "m_isHammerLocked", "m_isCylinderArmLocked", "CylinderRotRange", "IsCylinderArmZ", "GravityRotsCylinderPositive" });
+						}
+
+						else if (Object is SingleActionRevolver)
+						{
+							SingleActionRevolver saRevolver = Object as SingleActionRevolver;
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, saRevolver, new string[] { "AllowsSuppressor", "DoesCylinderTranslateForward", "DoesHalfCockHalfRotCylinder", "HasTransferBarSafety" });
 						}
 
 						else if (Object is LAPD2019)
@@ -283,6 +297,13 @@ namespace LSIIC.ModPanel
 							LAPD2019 lapd = Object as LAPD2019;
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, lapd, new string[] { "m_isCylinderArmLocked", "CylinderRotRange", "GravityRotsCylinderPositive", "m_isAutoChargeEnabled", "m_hasBattery", "m_batteryCharge", "m_hasThermalClip", "m_heatThermalClip", "m_heatSystem", "m_barrelHeatDamage" });
 							m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], lapd.BoltHandle, new string[] { "UsesQuickRelease", "BaseRotOffset", "MinRot", "MaxRot", "UnlockThreshold" });
+						}
+
+						else if (Object is RevolvingShotgun)
+						{
+							RevolvingShotgun revolvingShotgun = Object as RevolvingShotgun;
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, revolvingShotgun, new string[] { "DoesFiringRecock", "CylinderLoaded", "IsCylinderRotClockwise", "EjectCylinder" });
+							AddObjectControls(Columns[2], 15, revolvingShotgun.FireSelector_Modes[revolvingShotgun.FireSelectorModeIndex], new string[] { "ModeType" }, null, new bool[] { true });
 						}
 					}
 
