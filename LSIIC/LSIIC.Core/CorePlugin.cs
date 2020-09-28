@@ -17,6 +17,7 @@ namespace LSIIC.Core
 		public static ManualLogSource Logger { get; set; }
 
 		public static ConfigEntry<bool> _timeStopsOnJump;
+		public static ConfigEntry<bool> _pilotPlayerSosigBodyHead;
 
 		public static ConfigEntry<KeyboardShortcut> _shortcutPrintLayerAndTagsInfo;
 		public static ConfigEntry<KeyboardShortcut> _shortcutPrintAllStreamingAssetsBundles;
@@ -34,8 +35,10 @@ namespace LSIIC.Core
 			Logger = base.Logger;
 			Logger.Log(LogLevel.Debug, "Core pre");
 
-			_timeStopsOnJump = Config.Bind("General", "Time Stops On Jump", false,
+			_timeStopsOnJump = Config.Bind("Functionality", "Time Stops On Jump", false,
 				"Insert funny JoJoke™ here. This one gets better with the timescale plugin from the CursedDlls.");
+			_pilotPlayerSosigBodyHead = Config.Bind("Functionality", "Pilot PlayerSosigBody Head", true,
+				"Pilot the PlayerSosigBody's head with your actual head rotation instead of the head's physics joint.");
 
 			_shortcutPrintLayerAndTagsInfo = Config.Bind("Keybinds - Debug", "Print Layer and Tags Info", new KeyboardShortcut(KeyCode.L, KeyCode.LeftShift),
 				"Prints all Layers and Tags.");
