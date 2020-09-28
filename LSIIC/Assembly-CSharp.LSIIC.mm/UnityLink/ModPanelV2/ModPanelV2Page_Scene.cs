@@ -41,7 +41,7 @@ namespace LSIIC.ModPanel
 				}
 				if (ManagerSingleton<SM>.Instance != null)
 				{
-					m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, this, new string[] { "SetReverbEnvironment", "m_soundEnv" });
+					m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, this, new string[] { "", "SetReverbEnvironment", "m_soundEnv" }, new string[] { "This function will only work when the player\nis not in a reverb environment. The Indoor\nRange is a good place to test this out." });
 				}
 				if (GM.Options != null && GM.Options.ControlOptions != null)
 				{
