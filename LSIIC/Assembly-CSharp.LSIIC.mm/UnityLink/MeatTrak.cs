@@ -22,7 +22,15 @@ namespace LSIIC
 		private Texture2D[] m_defaultTextures;
 		private Texture2D[] m_wideTextures;
 
+		private bool m_hasStarted;
+
 		public void Awake()
+		{
+			if (m_hasStarted)
+				InitDisplay();
+		}
+
+		public void InitDisplay()
 		{
 			m_defaultTextures = new Texture2D[DefaultCharacters.Length];
 			for (int i = 0; i < DefaultCharacters.Length; i++)

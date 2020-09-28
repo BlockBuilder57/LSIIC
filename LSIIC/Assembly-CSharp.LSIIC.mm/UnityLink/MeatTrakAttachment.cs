@@ -16,7 +16,11 @@ namespace LSIIC
 
 			MeatTrakAttachmentInterface meatInterface = AttachmentInterface as MeatTrakAttachmentInterface;
 			if (meatInterface != null && meatInterface.MeatTrak != null)
-				meatInterface.MeatTrak.Awake(); //call this early so we don't have to wait for the interface
+			{
+				//call these early so we don't have to wait for the interface
+				meatInterface.InitInterface();
+				meatInterface.MeatTrak.InitDisplay();
+			}
 		}
 
 		public override void ConfigureFromFlagDic(Dictionary<string, string> f)
@@ -28,8 +32,12 @@ namespace LSIIC
 			if (meatInterface != null)
 			{
 				meatInterface.TrackingMode = (MeatTrakAttachmentInterface.TrackingModes)Enum.Parse(typeof(MeatTrakAttachmentInterface.TrackingModes), f["TrackingMode"]);
+				meatInterface.UpdateMode();
 				if (meatInterface.MeatTrak != null)
+				{
 					meatInterface.MeatTrak.NumberTarget = float.Parse(f["NumberTarget"]);
+					meatInterface.MeatTrak.NumberDisplay = meatInterface.MeatTrak.NumberTarget;
+				}
 			}
 		}
 

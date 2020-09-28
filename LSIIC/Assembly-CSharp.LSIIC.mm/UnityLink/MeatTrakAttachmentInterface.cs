@@ -32,10 +32,8 @@ namespace LSIIC
 		private bool m_waitingForConfirmation;
 		private Texture2D[] m_modeTextures;
 
-		public void Awake()
+		public void InitInterface()
 		{
-			base.Awake();
-
 			m_modeTextures = new Texture2D[ModeSprites.Length];
 			for (int i = 0; i < ModeSprites.Length; i++)
 				m_modeTextures[i] = MeatTrak.ConvertSpriteToTexture(ModeSprites[i]);
@@ -52,6 +50,7 @@ namespace LSIIC
 
 		public void Update()
 		{
+#if !UNITY_EDITOR && !UNITY_STANDALONE
 			switch (TrackingMode)
 			{
 				case TrackingModes.Bullets:
@@ -59,6 +58,7 @@ namespace LSIIC
 						UpdateBulletMode((FVRFireArm)Attachment.GetRootObject());
 					break;
 			}
+#endif
 		}
 
 		public void OnDestroy()
@@ -71,6 +71,20 @@ namespace LSIIC
 #endif
 
 			base.OnDestroy();
+		}
+
+		public override void OnAttach()
+		{
+			base.OnAttach();
+
+			if (Attachment != null && Attachment.GetRootObject() != null && Attachment.GetRootObject() is FVRFireArm)
+			{
+				if (MeatTrak != null && MeatTrak.NumberTarget == 0 && TrackingMode == TrackingModes.None)
+				{
+					TrackingMode = TrackingModes.Bullets;
+					UpdateMode();
+				}
+			}
 		}
 
 		public override void UpdateInteraction(FVRViveHand hand)
