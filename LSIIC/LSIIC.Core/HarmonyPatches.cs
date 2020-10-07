@@ -131,6 +131,13 @@ namespace LSIIC.Core
 			return true;
 		}
 
+		[HarmonyPatch(typeof(Banger), nameof(Banger.Complete))]
+		[HarmonyPostfix]
+		public static void BangerSpawnLockableOnComplete(Banger __instance)
+		{
+			__instance.SpawnLockable = true;
+		}
+
 		/*
 		 * Functionality Patches
 		 * Changes that add functionality or information
