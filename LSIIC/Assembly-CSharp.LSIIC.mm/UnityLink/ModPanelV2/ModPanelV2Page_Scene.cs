@@ -21,8 +21,16 @@ namespace LSIIC.ModPanel
 		private bool m_powerupInverted = false;
 		private float m_powerupDurationOverride = -1f;
 
-		private FVRSoundEnvironment m_soundEnv = GM.CurrentSceneSettings.DefaultSoundEnvironment;
+		private FVRSoundEnvironment m_soundEnv = FVRSoundEnvironment.Forest;
 #pragma warning restore CS0414
+
+		public override void PageInit()
+		{
+			base.PageInit();
+
+			if (GM.CurrentSceneSettings != null)
+				m_soundEnv = GM.CurrentSceneSettings.DefaultSoundEnvironment;
+		}
 
 		public override void PageOpen()
 		{
@@ -79,6 +87,9 @@ namespace LSIIC.ModPanel
 
 		public void UpdateSosigPlayerBodyState()
 		{
+			if (GM.Options == null)
+				return;
+
 			if (ManagerSingleton<IM>.Instance.odicSosigObjsByID.ContainsKey(GM.Options.ControlOptions.MBClothing))
 			{
 				SosigEnemyTemplate set = ManagerSingleton<IM>.Instance.odicSosigObjsByID[GM.Options.ControlOptions.MBClothing];

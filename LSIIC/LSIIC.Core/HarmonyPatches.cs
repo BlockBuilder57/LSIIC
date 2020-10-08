@@ -1,6 +1,7 @@
 ﻿using Anvil;
 using FistVR;
 using HarmonyLib;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -136,6 +137,26 @@ namespace LSIIC.Core
 		public static void BangerSpawnLockableOnComplete(Banger __instance)
 		{
 			__instance.SpawnLockable = true;
+		}
+
+		[HarmonyPatch(typeof(ClosedBoltWeapon), "UpdateInputAndAnimate")]
+		[HarmonyTranspiler]
+		public static IEnumerable<CodeInstruction> ClosedBoltWeaponStickyFireSelector(IEnumerable<CodeInstruction> instrs)
+		{
+			return new CodeMatcher(instrs).MatchForward(false,
+				new CodeMatch(i => i.IsLdarg()),
+				new CodeMatch(i => i.opcode == OpCodes.Ldfld && ((FieldInfo)i.operand).Name == "UsesStickyDetonation"),
+				new CodeMatch(i => i.opcode == OpCodes.Brfalse || i.opcode == OpCodes.Brfalse_S),
+				new CodeMatch(i => i.IsLdarg()),
+				new CodeMatch(i => i.opcode == OpCodes.Ldfld && ((FieldInfo)i.operand).Name == "Bolt"))
+			.Repeat(m =>
+			{
+				m.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_1, null))
+				.Advance(2)
+				.InsertAndAdvance(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Convert), "ToInt32", new Type[] { typeof(bool) })))
+				.SetOpcodeAndAdvance(OpCodes.Bne_Un);
+			})
+			.InstructionEnumeration();
 		}
 
 		/*
