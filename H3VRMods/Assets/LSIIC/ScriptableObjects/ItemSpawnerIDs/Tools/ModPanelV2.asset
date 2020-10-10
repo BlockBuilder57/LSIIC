@@ -22,6 +22,7 @@ MonoBehaviour:
     Either way,
 
     hello'
+  Infographic: {fileID: 11400000, guid: 41f9ac2e771f6904c8a5a7fabd365590, type: 2}
   Category: 6
   SubCategory: 28
   ItemID: MiscUtModPanelV2

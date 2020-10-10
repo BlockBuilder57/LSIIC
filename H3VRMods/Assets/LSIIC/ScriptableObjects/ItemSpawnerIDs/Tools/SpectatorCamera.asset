@@ -16,6 +16,7 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: 8a6a7575f2f70d34d80037327eb44d98, type: 3}
   SubHeading: '"Hey bros, today we''re gonna play H3VR"'
   Description: 
+  Infographic: {fileID: 11400000, guid: 623eeea2ee4a1234e973dff85ce9fb8d, type: 2}
   Category: 6
   SubCategory: 28
   ItemID: MisUtSpectatorCamera
