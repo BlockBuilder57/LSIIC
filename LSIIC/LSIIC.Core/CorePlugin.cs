@@ -19,6 +19,7 @@ namespace LSIIC.Core
 		public static ConfigEntry<bool> _timeStopsOnJump;
 		public static ConfigEntry<bool> _pilotPlayerSosigBodyHead;
 
+		public static ConfigEntry<KeyboardShortcut> _shortcutDeleteFVRPhysicalObjects;
 		public static ConfigEntry<KeyboardShortcut> _shortcutPrintLayerAndTagsInfo;
 		public static ConfigEntry<KeyboardShortcut> _shortcutPrintAllStreamingAssetsBundles;
 
@@ -40,6 +41,8 @@ namespace LSIIC.Core
 			_pilotPlayerSosigBodyHead = Config.Bind("Functionality", "Pilot PlayerSosigBody Head", true,
 				"Pilot the PlayerSosigBody's head with your actual head rotation instead of the head's physics joint.");
 
+			_shortcutDeleteFVRPhysicalObjects = Config.Bind("Keybinds - Debug", "Delete FVRPhysicalObjects", new KeyboardShortcut(KeyCode.P, KeyCode.LeftShift),
+				"Deletes all FVRPhysicalObjects that aren't in quickbelts in the scene.");
 			_shortcutPrintLayerAndTagsInfo = Config.Bind("Keybinds - Debug", "Print Layer and Tags Info", new KeyboardShortcut(KeyCode.L, KeyCode.LeftShift),
 				"Prints all Layers and Tags.");
 			_shortcutPrintAllStreamingAssetsBundles = Config.Bind("Keybinds - Debug", "Print All StreamingAssets Bundles", new KeyboardShortcut(KeyCode.A, KeyCode.LeftShift),
@@ -83,6 +86,15 @@ namespace LSIIC.Core
 
 		public void Update()
 		{
+			if (Helpers.BepInExGetKeyDown(_shortcutDeleteFVRPhysicalObjects.Value))
+			{
+				foreach (var phys in FindObjectsOfType<FVRPhysicalObject>())
+				{
+					if (phys.QuickbeltSlot != null || phys.m_isHardnessed || phys.IsHeld)
+						continue;
+					Destroy(phys.gameObject);
+				}
+			}
 			if (Helpers.BepInExGetKeyDown(_shortcutPrintLayerAndTagsInfo.Value))
 			{
 				string LayerNames = "Layers:";
