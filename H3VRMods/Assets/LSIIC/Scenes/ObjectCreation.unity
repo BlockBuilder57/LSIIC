@@ -1476,7 +1476,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1261777070}
   - component: {fileID: 1261777069}
-  - component: {fileID: 1261777071}
   m_Layer: 0
   m_Name: '[Managers]'
   m_TagString: Untagged
@@ -1492,12 +1491,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1261777068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 224703402a5e07944a81c68f38321c66, type: 3}
+  m_Script: {fileID: 11500000, guid: ebbf4bc80813e8e4aab23abec728f182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_currentSceneSettings: {fileID: 0}
   m_currentMovementManager: {fileID: 0}
   m_currentPlayerBody: {fileID: 0}
+  QuickbeltConfigurations: []
+  ViveControllerStyles: []
+  ControllerDefinitions: []
+  LivPrefab: {fileID: 0}
+  ShaderVariants: {fileID: 0}
 --- !u!4 &1261777070
 Transform:
   m_ObjectHideFlags: 0
@@ -1511,31 +1515,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1261777071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1261777068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8078849c90201404d91688a9be11882c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PrefabDirectory: {fileID: 0}
-  TailsDirectories: []
-  ReverbSettingProfiles: []
-  AudioImpactSets: []
-  OcclusionLM:
-    serializedVersion: 2
-    m_Bits: 0
-  OcclusionFactorCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  MasterMixer: {fileID: 0}
 --- !u!1 &1434581700
 GameObject:
   m_ObjectHideFlags: 0

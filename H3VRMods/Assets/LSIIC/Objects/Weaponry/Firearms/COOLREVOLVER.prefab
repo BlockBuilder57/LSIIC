@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1209525190863050
 GameObject:
   m_ObjectHideFlags: 1
@@ -3031,7 +3031,6 @@ MonoBehaviour:
   OverrideAudioSet: {fileID: 0}
   IsManuallyExtractable: 0
   IsManuallyChamberable: 1
-  SpreadRangeModifier: {x: 1, y: 0}
   ChamberVelocityMultiplier: 1
   IsAccessible: 0
   IsFull: 0
@@ -3079,7 +3078,6 @@ MonoBehaviour:
   OverrideAudioSet: {fileID: 0}
   IsManuallyExtractable: 0
   IsManuallyChamberable: 1
-  SpreadRangeModifier: {x: 1, y: 0}
   ChamberVelocityMultiplier: 1
   IsAccessible: 0
   IsFull: 0
@@ -3127,7 +3125,6 @@ MonoBehaviour:
   OverrideAudioSet: {fileID: 0}
   IsManuallyExtractable: 0
   IsManuallyChamberable: 1
-  SpreadRangeModifier: {x: 1, y: 0}
   ChamberVelocityMultiplier: 1
   IsAccessible: 0
   IsFull: 0
@@ -3211,7 +3208,6 @@ MonoBehaviour:
   OverrideAudioSet: {fileID: 0}
   IsManuallyExtractable: 0
   IsManuallyChamberable: 1
-  SpreadRangeModifier: {x: 1, y: 0}
   ChamberVelocityMultiplier: 1
   IsAccessible: 0
   IsFull: 0
@@ -3259,7 +3255,6 @@ MonoBehaviour:
   OverrideAudioSet: {fileID: 0}
   IsManuallyExtractable: 0
   IsManuallyChamberable: 1
-  SpreadRangeModifier: {x: 1, y: 0}
   ChamberVelocityMultiplier: 1
   IsAccessible: 0
   IsFull: 0
@@ -3307,7 +3302,6 @@ MonoBehaviour:
   OverrideAudioSet: {fileID: 0}
   IsManuallyExtractable: 0
   IsManuallyChamberable: 1
-  SpreadRangeModifier: {x: 1, y: 0}
   ChamberVelocityMultiplier: 1
   IsAccessible: 0
   IsFull: 0
@@ -3350,7 +3344,6 @@ MonoBehaviour:
   UseFilteredHandPosition: 0
   UseFilteredHandRotation: 0
   UseSecondStepRotationFiltering: 0
-  LastGrabbedInGrip: {fileID: 0}
   PrimaryObject: {fileID: 114878910505579346}
   FunctionalityEnabled: 1
   DoesBracing: 1
@@ -3380,7 +3373,6 @@ MonoBehaviour:
   LoudnessVelocityMult: 1
   MaxLoudness: 10
   UsesAltTypes: 0
-  Alts: []
 --- !u!114 &114755143913962168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3440,7 +3432,6 @@ MonoBehaviour:
   OverrideAudioSet: {fileID: 0}
   IsManuallyExtractable: 0
   IsManuallyChamberable: 1
-  SpreadRangeModifier: {x: 1, y: 0}
   ChamberVelocityMultiplier: 1
   IsAccessible: 0
   IsFull: 0
@@ -3488,7 +3479,6 @@ MonoBehaviour:
   OverrideAudioSet: {fileID: 0}
   IsManuallyExtractable: 0
   IsManuallyChamberable: 1
-  SpreadRangeModifier: {x: 1, y: 0}
   ChamberVelocityMultiplier: 1
   IsAccessible: 0
   IsFull: 0
@@ -3614,15 +3604,15 @@ MonoBehaviour:
     LM_DamageTest:
       serializedVersion: 2
       m_Bits: 0
-  ClipEjectDelay: 0
-  EjectDelay: 0
-  LastEjectedMag: {fileID: 0}
   MagazineType: 0
   ClipType: 0
   RoundType: 11
+  AccuracyClass: 0
   MuzzlePos: {fileID: 4457028426826260}
+  Foregrip: {fileID: 1933459067999914}
   AudioClipSet: {fileID: 11400000, guid: 1090def3600e62c49a2f00d6b9c6a616, type: 2}
   DefaultMuzzleState: 0
+  DefaultMuzzleDamping: 0
   CurrentSuppressor: {fileID: 0}
   CurrentMuzzleBrake: {fileID: 0}
   MuzzleDevices: []
@@ -3663,7 +3653,6 @@ MonoBehaviour:
     OverridePoint: {fileID: 0}
   ControlsOwnGasOut: 1
   IsBreachOpenForGasOut: 1
-  Foregrip: {fileID: 1933459067999914}
   SceneSettings: {fileID: 0}
   StockDist: 0
   isChiappa: 0
@@ -3686,7 +3675,6 @@ MonoBehaviour:
   IsCylinderArmZ: 0
   GravityRotsCylinderPositive: 1
   Cylinder: {fileID: 114891963928809786}
-  m_curChamber: 0
   Chambers:
   - {fileID: 114286486760139650}
   - {fileID: 114473882865851186}
