@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06a38e0b46f83c04796e7df08c69bd61, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b3aa3a150a01cc449f04acf988a6c2e, type: 3}
   m_Name: Electronicboop
   m_EditorClassIdentifier: 
   Loudness_Primary: 100
@@ -23,19 +23,19 @@ MonoBehaviour:
   Shots_Main:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   Shots_Suppressed:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   Shots_LowPressure:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   TailPitchMod_Main: {x: 1, y: 1.03}
@@ -48,229 +48,229 @@ MonoBehaviour:
   BoltRelease:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BoltSlideBack:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BoltSlideBackHeld:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BoltSlideBackLocked:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BoltSlideForward:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BoltSlideForwardHeld:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BreachOpen:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BreachClose:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BeltBulletSet:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   CatchOnSear:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   ChamberManual:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   FireSelector:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   HammerHit:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   HandleBack:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   HandleBackEmpty:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   HandleForward:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   HandleForwardEmpty:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   HandleUp:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   HandleDown:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   HandleGrab:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   MagazineIn:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   MagazineOut:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   MagazineInsertRound:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   MagazineEjectRound:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   Prefire:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   Safety:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   TriggerReset:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   TopCoverRelease:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   TopCoverUp:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   TopCoverDown:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   StockOpen:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   StockClosed:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BipodOpen:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BipodClosed:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BeltGrab:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BeltRelease:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BeltSeat:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BeltSettle:
     Clips:
     - {fileID: 8300000, guid: 51963a97ef4701349a5d9fa861cfb0e3, type: 3}
-    VolumeRange: {x: 0.4, y: 0.5}
+    VolumeRange: {x: 0.1, y: 0.12}
     PitchRange: {x: 0.8, y: 1.2}
     ClipLengthRange: {x: 1, y: 1}
   BeltSettlingLimit: 0

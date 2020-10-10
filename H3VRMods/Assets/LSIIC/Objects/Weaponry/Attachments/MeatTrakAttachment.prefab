@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 65816248687053642}
   - component: {fileID: 54519264279586048}
   - component: {fileID: 114916849070926046}
+  - component: {fileID: 114746719146173378}
   m_Layer: 10
   m_Name: MeatTrakAttachment
   m_TagString: Untagged
@@ -1336,6 +1337,32 @@ MonoBehaviour:
     VolumeRange: {x: 0.6, y: 0.6}
     PitchRange: {x: 1, y: 1}
     ClipLengthRange: {x: 1, y: 1}
+--- !u!114 &114746719146173378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1111252560360224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd72b05e58d742428e4938a8fce6864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpactType: 30
+  SoundOnRB: 1
+  SoundOnNonRb: 1
+  DelayLengthMult: 1
+  DistLimit: 25
+  PoolToUse: 41
+  HitThreshold_High: 2
+  HitThreshold_Medium: 1
+  HitThreshold_Ignore: 0.25
+  IgnoreRBs: []
+  CausesSonicEventOnSoundPlay: 0
+  BaseLoudness: 1
+  LoudnessVelocityMult: 1
+  MaxLoudness: 10
+  UsesAltTypes: 0
 --- !u!114 &114916849070926046
 MonoBehaviour:
   m_ObjectHideFlags: 1
