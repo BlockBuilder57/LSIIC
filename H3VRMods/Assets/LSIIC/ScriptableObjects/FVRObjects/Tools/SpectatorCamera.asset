@@ -18,7 +18,7 @@ MonoBehaviour:
   ItemID: SpectatorCamera
   DisplayName: Spectator Camera
   Category: 40
-  SpawnedFromId: SpectatorCamera
+  SpawnedFromId: MiscUtSpectatorCamera
   Mass: 0
   MagazineCapacity: 0
   RequiresPicatinnySight: 0

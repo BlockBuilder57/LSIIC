@@ -9,18 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1776ad15522695429ffed938cbe6bc9, type: 3}
-  m_Name: ModPanelV2
+  m_Name: Magazine_COOLCLOSEDBOLT
   m_EditorClassIdentifier: 
   m_anvilPrefab:
     Guid: 
     Bundle: ../../VirtualObjects/lsiic
-    AssetName: assets/lsiic/objects/tools/modpanelv2.prefab
-  ItemID: ModPanelV2
-  DisplayName: ModPanel V2
-  Category: 40
-  SpawnedFromId: MiscUtModPanelV2
+    AssetName: assets/lsiic/objects/weaponry/firearms/magazine_coolclosedbolt.prefab
+  ItemID: MagazineCOOLCLOSEDBOLT
+  DisplayName: Magazine COOLCLOSEDBOLT
+  Category: 2
+  SpawnedFromId: MagCOOLCLOSEDBOLT
   Mass: 0
-  MagazineCapacity: 0
+  MagazineCapacity: 32
   RequiresPicatinnySight: 0
   TagEra: 8
   TagSet: 3
@@ -34,7 +34,7 @@ MonoBehaviour:
   TagAttachmentFeature: 0
   TagMeleeStyle: 0
   TagMeleeHandedness: 0
-  TagPowerupType: -1
+  TagPowerupType: 0
   TagThrownType: 0
   TagThrownDamageType: 0
   CompatibleMagazines: []
@@ -45,5 +45,5 @@ MonoBehaviour:
   RequiredSecondaryPieces: []
   MinCapacityRelated: -1
   MaxCapacityRelated: -1
-  CreditCost: 999999
+  CreditCost: 0
   OSple: 1

@@ -9,27 +9,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1776ad15522695429ffed938cbe6bc9, type: 3}
-  m_Name: ModPanelV2
+  m_Name: COOLREVOLVER
   m_EditorClassIdentifier: 
   m_anvilPrefab:
     Guid: 
     Bundle: ../../VirtualObjects/lsiic
-    AssetName: assets/lsiic/objects/tools/modpanelv2.prefab
-  ItemID: ModPanelV2
-  DisplayName: ModPanel V2
-  Category: 40
-  SpawnedFromId: MiscUtModPanelV2
+    AssetName: assets/lsiic/objects/weaponry/firearms/coolrevolver.prefab
+  ItemID: COOLREVOLVER
+  DisplayName: COOLREVOLVER
+  Category: 1
+  SpawnedFromId: PisRevCOOLREVOLVER
   Mass: 0
   MagazineCapacity: 0
   RequiresPicatinnySight: 0
   TagEra: 8
   TagSet: 3
-  TagFirearmSize: 0
-  TagFirearmAction: 0
-  TagFirearmRoundPower: 0
-  TagFirearmFiringModes: 
-  TagFirearmFeedOption: 
-  TagFirearmMounts: 
+  TagFirearmSize: 2
+  TagFirearmAction: 3
+  TagFirearmRoundPower: 2
+  TagFirearmFiringModes: 04000000
+  TagFirearmFeedOption: 01000000
+  TagFirearmMounts: 010000000300000004000000
   TagAttachmentMount: 0
   TagAttachmentFeature: 0
   TagMeleeStyle: 0
@@ -45,5 +45,5 @@ MonoBehaviour:
   RequiredSecondaryPieces: []
   MinCapacityRelated: -1
   MaxCapacityRelated: -1
-  CreditCost: 999999
+  CreditCost: 0
   OSple: 1

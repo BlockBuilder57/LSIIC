@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032f812947686a541a935e2a5fdfdd91, type: 3}
+  m_Name: COOLCLOSEDBOLT
+  m_EditorClassIdentifier: 
+  IsDisplayedInMainEntry: 1
+  DisplayName: COOLCLOSEDBOLT
+  Sprite: {fileID: 21300000, guid: f85236aa729fe48418c0e2b1e474c806, type: 3}
+  SubHeading: THE COOLEST CLOSED BOLT EVER MADE
+  Description: 
+  Infographic: {fileID: 0}
+  Category: 2
+  SubCategory: 8
+  ItemID: PDWCOOLCLOSEDBOLT
+  MainObject: {fileID: 11400000, guid: fc67a27c7a0d1df4aa5e79aed8b6992f, type: 2}
+  SecondObject: {fileID: 0}
+  Secondaries:
+  - {fileID: 11400000, guid: c5bf13e8528970c4db6ed44619d01672, type: 2}
+  UsesLargeSpawnPad: 1
+  UsesHugeSpawnPad: 0
+  UnlockCost: 0
+  IsUnlockedByDefault: 0
+  IsReward: 0

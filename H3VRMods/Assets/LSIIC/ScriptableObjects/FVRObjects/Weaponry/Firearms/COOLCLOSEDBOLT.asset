@@ -9,27 +9,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1776ad15522695429ffed938cbe6bc9, type: 3}
-  m_Name: COOLREVOLVER
+  m_Name: COOLCLOSEDBOLT
   m_EditorClassIdentifier: 
   m_anvilPrefab:
     Guid: 
     Bundle: ../../VirtualObjects/lsiic
-    AssetName: assets/lsiic/objects/weaponry/firearms/coolrevolver.prefab
-  ItemID: COOLREVOLVER
-  DisplayName: COOLREVOLVER
+    AssetName: assets/lsiic/objects/weaponry/firearms/coolclosedbolt.prefab
+  ItemID: COOLCLOSEDBOLT
+  DisplayName: COOLCLOSEDBOLT
   Category: 1
-  SpawnedFromId: PisRevCOOLREVOLVER
+  SpawnedFromId: PDWCOOLCLOSEDBOLT
   Mass: 0
   MagazineCapacity: 0
   RequiresPicatinnySight: 0
   TagEra: 8
   TagSet: 3
-  TagFirearmSize: 2
-  TagFirearmAction: 3
-  TagFirearmRoundPower: 2
-  TagFirearmFiringModes: 
-  TagFirearmFeedOption: 
-  TagFirearmMounts: 
+  TagFirearmSize: 4
+  TagFirearmAction: 6
+  TagFirearmRoundPower: 4
+  TagFirearmFiringModes: 04000000010000000300000002000000
+  TagFirearmFeedOption: 03000000
+  TagFirearmMounts: 0100000003000000
   TagAttachmentMount: 0
   TagAttachmentFeature: 0
   TagMeleeStyle: 0
@@ -37,7 +37,8 @@ MonoBehaviour:
   TagPowerupType: -1
   TagThrownType: 0
   TagThrownDamageType: 0
-  CompatibleMagazines: []
+  CompatibleMagazines:
+  - {fileID: 11400000, guid: 6bdf541f583ffd54caac79e0e74b16ef, type: 2}
   CompatibleClips: []
   CompatibleSpeedLoaders: []
   CompatibleSingleRounds: []
