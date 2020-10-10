@@ -1,4 +1,5 @@
 ﻿using FistVR;
+using HarmonyLib;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,18 @@ namespace LSIIC
 
 		public bool CameraOn { get; private set; }
 
+		public override void BeginInteraction(FVRViveHand hand)
+		{
+			base.BeginInteraction(hand);
+
+			if (AccessTools.Field(typeof(FVRSceneSettings), "m_previewCam") != null)
+			{
+				Camera previewCam = (Camera)AccessTools.Field(typeof(FVRSceneSettings), "m_previewCam").GetValue(GM.CurrentSceneSettings);
+				if (ScreenOn != null && previewCam != null)
+					ScreenOn.SetTexture("_MainTex", previewCam.targetTexture);
+			}
+		}
+
 		public override void UpdateInteraction(FVRViveHand hand)
 		{
 			base.UpdateInteraction(hand);
@@ -44,7 +57,7 @@ namespace LSIIC
 						SM.PlayCoreSound(FVRPooledAudioType.UIChirp, KinematicToggle, this.transform.position);
 				}
 
-				if (DisplayCam != null && RenderTargetCam != null)
+				if (DisplayCam != null /*&& RenderTargetCam != null*/)
 				{
 					if (Vector2.Angle(touchpadAxes, Vector2.up) <= 45f)
 					{
@@ -56,8 +69,9 @@ namespace LSIIC
 					if (CameraOn && (Vector2.Angle(hand.Input.TouchpadAxes, Vector2.left) <= 45f || Vector2.Angle(hand.Input.TouchpadAxes, Vector2.right) <= 45f))
 					{
 						int direction = (int)Mathf.Sign(touchpadAxes.x) * 10;
-						DisplayCam.fieldOfView = Mathf.Clamp(DisplayCam.fieldOfView + direction, 20, 80);
-						RenderTargetCam.fieldOfView = DisplayCam.fieldOfView;
+						GM.Options.ControlOptions.CamFOV = Mathf.Clamp(GM.Options.ControlOptions.CamFOV + direction, 10f, 180f);
+						//DisplayCam.fieldOfView = Mathf.Clamp(DisplayCam.fieldOfView + direction, 20, 80);
+						//RenderTargetCam.fieldOfView = DisplayCam.fieldOfView;
 						if (FOVChange.Clips.Count > 0)
 							SM.PlayCoreSound(FVRPooledAudioType.UIChirp, FOVChange, this.transform.position);
 					}
@@ -65,20 +79,34 @@ namespace LSIIC
 			}
 		}
 
+		protected override void FVRUpdate()
+		{
+			base.FVRUpdate();
+			if (CameraOn && GM.CurrentSceneSettings.GetCamObjectPoint() != DisplayCam.transform)
+				UpdateCameraState(false);
+		}
+
 		[ContextMenu("Toggle Camera")]
 		public void ToggleCameraState()
 		{
 			UpdateCameraState(!CameraOn);
-			if (Screen != null)
-				Screen.TargetRotation = new Vector3(0f, CameraOn ? 0f : -90f, 0f);
+			if (!CameraOn && GM.CurrentSceneSettings.GetCamObjectPoint() == DisplayCam.transform)
+				GM.CurrentSceneSettings.SetCamObjectPoint(null);
 		}
 
-		public void UpdateCameraState(bool isOn, bool globalDeactivation = false)
+		public void UpdateCameraState(bool isOn)
 		{
 			DisplayCam.gameObject.SetActive(isOn);
-			DisplayCam.enabled = isOn;
-			RenderTargetCam.gameObject.SetActive(isOn);
-			RenderTargetCam.enabled = isOn;
+			//DisplayCam.enabled = isOn;
+			//RenderTargetCam.gameObject.SetActive(isOn);
+			//RenderTargetCam.enabled = isOn;
+			
+			if (isOn)
+			{
+				if (DisplayCam)
+					GM.CurrentSceneSettings.SetCamObjectPoint(DisplayCam.transform);
+				GM.Options.ControlOptions.PCamMode = ControlOptions.PreviewCamMode.Enabled;
+			}
 
 			if (LEDRenderer != null)
 			{
@@ -87,13 +115,14 @@ namespace LSIIC
 			}
 			if (Screen != null)
 			{
+				Screen.TargetRotation = new Vector3(0f, isOn ? 0f : -90f, 0f);
 				Material[] materials = Screen.gameObject.GetComponent<Renderer>().materials;
 				if (materials.Length > 1)
 					materials[1] = isOn ? ScreenOn : ScreenOff;
 				Screen.gameObject.GetComponent<Renderer>().materials = materials;
 			}
 
-			foreach (SpectatorCamera cam in FindObjectsOfType<SpectatorCamera>())
+			/*foreach (SpectatorCamera cam in FindObjectsOfType<SpectatorCamera>())
 			{
 				if (cam != this && cam.CameraOn)
 					cam.UpdateCameraState(false);
@@ -102,7 +131,7 @@ namespace LSIIC
 			{
 				if (cam != this && cam.CameraOn)
 					cam.UpdateCameraState(false);
-			}
+			}*/
 
 			if (isOn && CamOn.Clips.Count > 0)
 				SM.PlayCoreSound(FVRPooledAudioType.UIChirp, CamOn, this.transform.position);
