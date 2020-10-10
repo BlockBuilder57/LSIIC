@@ -16,6 +16,7 @@ namespace LSIIC.SmartPalming
 		public static ManualLogSource Logger { get; set; }
 
 		public static ConfigEntry<bool> _enableSmartPalming;
+		public static ConfigEntry<bool> _addPlusOneForChamber;
 
 		private void Awake()
 		{
@@ -25,6 +26,8 @@ namespace LSIIC.SmartPalming
 
 			_enableSmartPalming = Config.Bind("General", "Enable Smart Palming", true,
 				"Enables smart palming. Smart Palming occurs when you duplicate palmed rounds with a mag/gun in your other hand, where it will only take as many rounds as needed out of the palm.");
+			_addPlusOneForChamber = Config.Bind("General", "Add +1 for Chamber", false,
+				"If the chamber on the gun is empty or spent, then another round will be added to the palm stack you pull out.");
 
 			Harmony.CreateAndPatchAll(typeof(SmartPalmingPlugin));
 
@@ -48,7 +51,7 @@ namespace LSIIC.SmartPalming
 				if (clip != null)
 					roundsNeeded = clip.m_capacity - clip.m_numRounds;
 
-				if (hand.OtherHand.CurrentInteractable is FVRFireArm)
+				if (_addPlusOneForChamber.Value && hand.OtherHand.CurrentInteractable is FVRFireArm)
 				{
 					if (hand.OtherHand.CurrentInteractable is BreakActionWeapon)
 					{
