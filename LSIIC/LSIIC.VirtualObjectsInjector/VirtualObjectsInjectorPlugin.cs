@@ -4,6 +4,8 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using FistVR;
 using HarmonyLib;
+using RUST.Steamworks;
+using Steamworks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,10 +14,10 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-[assembly: AssemblyVersion("1.2")]
+[assembly: AssemblyVersion("1.3")]
 namespace LSIIC.VirtualObjectsInjector
 {
-	[BepInPlugin("net.block57.lsiic.virtualobjectsinjector", "LSIIC - Virtual Objects Injector", "1.2")]
+	[BepInPlugin("net.block57.lsiic.virtualobjectsinjector", "LSIIC - Virtual Objects Injector", "1.3")]
 	public class VirtualObjectsInjectorPlugin : BaseUnityPlugin
 	{
 		public static ManualLogSource Logger { get; set; }
@@ -101,6 +103,17 @@ namespace LSIIC.VirtualObjectsInjector
 						Logger.LogError("AssetBundle is somehow null, what did you do?");
 				});
 			}
+		}
+
+		/*
+		 * Skiddie prevention
+		 */
+		[HarmonyPatch(typeof(HighScoreManager), nameof(HighScoreManager.UpdateScore), new Type[] { typeof(string), typeof(int), typeof(Action<int, int>) })]
+		[HarmonyPatch(typeof(HighScoreManager), nameof(HighScoreManager.UpdateScore), new Type[] { typeof(SteamLeaderboard_t), typeof(int) })]
+		[HarmonyPrefix]
+		public static bool HSM_UpdateScore()
+		{
+			return false;
 		}
 	}
 

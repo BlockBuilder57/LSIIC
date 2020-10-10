@@ -5,12 +5,14 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using FistVR;
 using HarmonyLib;
+using RUST.Steamworks;
+using Steamworks;
 using UnityEngine;
 
-[assembly: AssemblyVersion("1.2")]
+[assembly: AssemblyVersion("1.3")]
 namespace LSIIC.Core
 {
-	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.2")]
+	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.3")]
 	[BepInDependency("dll.cursed.timescale", BepInDependency.DependencyFlags.SoftDependency)]
 	public class CorePlugin : BaseUnityPlugin
 	{
@@ -95,7 +97,7 @@ namespace LSIIC.Core
 					Destroy(phys.gameObject);
 				}
 			}
-			if (Helpers.BepInExGetKeyDown(_shortcutPrintLayerAndTagsInfo.Value))
+			else if (Helpers.BepInExGetKeyDown(_shortcutPrintLayerAndTagsInfo.Value))
 			{
 				string LayerNames = "Layers:";
 				for (int i = 0; i < 32; i++)
@@ -174,6 +176,17 @@ namespace LSIIC.Core
 				foreach (MeshFilter mf in UnityEngine.Object.FindObjectsOfType(typeof(UnityEngine.MeshFilter)))
 					mf.mesh = (Resources.FindObjectsOfTypeAll(typeof(Mesh))[UnityEngine.Random.Range(0, Resources.FindObjectsOfTypeAll(typeof(Mesh)).Length)] as Mesh);
 			}
+		}
+
+		/*
+		 * Skiddie prevention
+		 */
+		[HarmonyPatch(typeof(HighScoreManager), nameof(HighScoreManager.UpdateScore), new Type[] { typeof(string), typeof(int), typeof(Action<int, int>) })]
+		[HarmonyPatch(typeof(HighScoreManager), nameof(HighScoreManager.UpdateScore), new Type[] { typeof(SteamLeaderboard_t), typeof(int) })]
+		[HarmonyPrefix]
+		public static bool HSM_UpdateScore()
+		{
+			return false;
 		}
 	}
 }

@@ -11,24 +11,19 @@ Here's that weird [Hot Dogs, Horseshoes, and Hand Grenades](http://h3vr.com) mod
 		- Held Object Modifier
 		- Scene Settings and Options
 		- Damage Report/Rate of Fire Tester
-	- Controls:
-		- Left and Right - Change Page
-		- Down - Kinematic lock (freeze it in place)
 - COOL GUNS
 	- COOLREVOLVER
 		- The first ever custom gun in H3VR, this is the COOLEST REVOLVER EVER MADE!!!1!
+    - COOLCLOSEDBOLT
+		- A more feature packed alternative to the MP7A1, this is the COOLEST CLOSED BOLT EVER MADE!!!1!
 - env_cubemap
 	- The first ever custom melee weapon for H3VR, doubles as a cubemap viewer.
 - Flagtachments
 	- Fun flag(s) to attach on your gun.
 - Spectator Camera
-	- A camera that draws at a higher resolution than the headset does with the drawback of no post processing.
-	- Touchpad/Joystick Controls:
-		- Up - Turn on camera (will turn off every other camera)
-		- Left and Right - Change FOV
-		- Down - Kinematic lock (freeze it in place)
+	- The first spectator system for H3VR, added in to the game officially when systems were ready.
 - Spectator Camera Attachment
-	- Above as an attachment, but down disconnects the attachment from the object.
+	- Above, but as an attachment.
 
 This repo also includes a WurstMod testing map for LSIIC.
 
@@ -78,13 +73,14 @@ Adds all the additional functionality to the base game. For example, this is wha
 
 This plugin contains most of the core functionality of LSIIC, including printing game information and a few other fun patches. Refer to the config file (`BepInEx/config/net.block57.lsiic.core.cfg`) to see all the keybinds
 
-Some new functionality includes:
+Some new functionality includes (among other changes):
 - Magazines and clips can now go up to 1024x their normal capacity if changed with ModPanelV2.
 - If enabled, time will stop with an Armswinger/Twinstick jump.
 	- Note that you'll have to use teleport if you wish to move around in frozen time.
 	- This gets better with the timescale plugin from the CursedDlls.
 - Custom wrist menu with much more information than usual.
 - Hover Bench can be picked up even with an object on it.
+- Bangers can be spawnlocked.
 
 #### `LSIIC.SmartPalming` -- smarter round palming
 
