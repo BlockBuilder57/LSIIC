@@ -40,7 +40,7 @@ namespace LSIIC.ModPanel
 			{
 				if (GM.CurrentSceneSettings != null)
 				{
-					m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], GM.CurrentSceneSettings, new string[] { "IsSpawnLockingEnabled", "DoesDamageGetRegistered", "MaxProjectileRange", "DoesTeleportUseCooldown", "DoesAllowAirControl", "UsesPlayerCatcher", "CatchHeight", "DefaultPlayerIFF", "IsQuickbeltSwappingAllowed", "IsSceneLowLight", "IsAmmoInfinite", "AllowsInfiniteAmmoMags", "UsesUnlockSystem" });
+					m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], GM.CurrentSceneSettings, new string[] { "IsSpawnLockingEnabled", "DoesDamageGetRegistered", "MaxProjectileRange", "ForcesCasingDespawn", "DoesTeleportUseCooldown", "DoesAllowAirControl", "UsesPlayerCatcher", "CatchHeight", "DefaultPlayerIFF", "IsQuickbeltSwappingAllowed", "IsSceneLowLight", "IsAmmoInfinite", "AllowsInfiniteAmmoMags", "UsesUnlockSystem" });
 				}
 				if (GM.CurrentPlayerBody != null)
 				{

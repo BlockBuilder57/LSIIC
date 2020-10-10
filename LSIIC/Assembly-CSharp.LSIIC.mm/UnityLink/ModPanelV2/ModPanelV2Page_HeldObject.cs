@@ -205,11 +205,11 @@ namespace LSIIC.ModPanel
 				{
 					if (Object is FVRFireArm)
 					{
-						m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0] + 1, Object as FVRFireArm, new string[] { "MagazineType", "ClipType", "RoundType" });
+						AddObjectControl(Columns[0], 15, Object as FVRFireArm, "RoundType"); //kept around for auto zeroing
 
 						TryToGetCurrentChamber();
 						if (m_curChamber != null)
-							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], m_curChamber, new string[] { "RoundType", "ChamberVelocityMultiplier", "IsManuallyExtractable" }, null, new bool[] { true, true, true });
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], m_curChamber, new string[] { "ChamberVelocityMultiplier", "IsManuallyExtractable" }, null, new bool[] { true, true, true });
 
 						if (Object is Handgun)
 						{
@@ -240,16 +240,16 @@ namespace LSIIC.ModPanel
 						{
 							BreakActionWeapon baw = Object as BreakActionWeapon;
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], baw, new string[] { "m_isLatched", "UsesManuallyCockedHammers", "FireAllBarrels", "PopOutEmpties" });
-							for (int i = 0; i < Math.Max(baw.Barrels.Length, 7); i++) //capped to 7 to avoid controls overflowing
-								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], baw.Barrels[i].Chamber, new string[] { "RoundType", "ChamberVelocityMultiplier" });
+							for (int i = 0; i < Math.Max(baw.Barrels.Length, 14); i++) //capped to 14 to avoid controls overflowing
+								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], baw.Barrels[i].Chamber, new string[] { "ChamberVelocityMultiplier" });
 						}
 
 						else if (Object is Derringer)
 						{
 							Derringer derringer = Object as Derringer;
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], derringer, new string[] { "HingeValues", "DoesAutoEjectRounds", "IsTriggerDoubleAction", "DeletesCartridgeOnFire" });
-							for (int i = 0; i < Math.Max(derringer.Barrels.Count, 7); i++) //capped to 7 to avoid controls overflowing
-								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], derringer.Barrels[i].Chamber, new string[] { "RoundType", "ChamberVelocityMultiplier" });
+							for (int i = 0; i < Math.Max(derringer.Barrels.Count, 14); i++) //capped to 14 to avoid controls overflowing
+								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], derringer.Barrels[i].Chamber, new string[] { "ChamberVelocityMultiplier" });
 						}
 
 						else if (Object is TubeFedShotgun)
