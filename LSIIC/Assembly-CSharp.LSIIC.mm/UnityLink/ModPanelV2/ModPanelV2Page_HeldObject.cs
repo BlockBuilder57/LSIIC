@@ -214,7 +214,7 @@ namespace LSIIC.ModPanel
 						if (Object is Handgun)
 						{
 							Handgun handgun = Object as Handgun;
-							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun, new string[] { "HasManualDecocker", "HasMagReleaseInput", "CanPhysicsSlideRack" });
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun, new string[] { "HasSlideRelease", "HasSlideReleaseControl", "HasSlideLockFunctionality", "HasManualDecocker", "HasMagReleaseInput", "CanPhysicsSlideRack" });
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun.Slide, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundSlideHoldOpen" });
 							AddObjectControls(Columns[2], 14, handgun.FireSelectorModes[handgun.FireSelectorModeIndex], new string[] { "ModeType", "BurstAmount" }, null, new bool[] { true });
 						}

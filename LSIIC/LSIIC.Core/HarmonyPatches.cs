@@ -80,6 +80,27 @@ namespace LSIIC.Core
 				__instance.SpectatorCamPreviewPrefab.GetComponent<Camera>().nearClipPlane = 0.001f;
 		}
 
+		[HarmonyPatch(typeof(Handgun), "UpdateComponents")]
+		[HarmonyTranspiler]
+		public static IEnumerable<CodeInstruction> HandgunIgnoreHasSlideRelease(IEnumerable<CodeInstruction> instrs, ILGenerator il)
+		{
+			return new CodeMatcher(instrs).MatchForward(false,
+				new CodeMatch(i => i.opcode == OpCodes.Ldarg_0),
+				new CodeMatch(i => i.opcode == OpCodes.Ldfld && ((FieldInfo)i.operand).Name == "HasSlideRelease"),
+				new CodeMatch(i => i.opcode == OpCodes.Brfalse || i.opcode == OpCodes.Brfalse_S))
+			.Repeat(m =>
+			{
+				m.Advance(1)
+				.SetAndAdvance(OpCodes.Call, AccessTools.Method(typeof(HarmonyPatches), "HandgunIgnoreHasSlideRelease_Check"));
+			})
+			.InstructionEnumeration();
+		}
+
+		public static bool HandgunIgnoreHasSlideRelease_Check(Handgun handgun)
+		{
+			return handgun.HasSlideRelease && handgun.SlideRelease != null;
+		}
+
 		/*
 		 * Object Patches
 		 * Changes to in-game objects
