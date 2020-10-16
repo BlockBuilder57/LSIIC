@@ -8,6 +8,7 @@ using HarmonyLib;
 using RUST.Steamworks;
 using Steamworks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [assembly: AssemblyVersion("1.3")]
 namespace LSIIC.Core
@@ -82,6 +83,8 @@ namespace LSIIC.Core
 			}
 
 			//Environment.SetEnvironmentVariable("MONOMOD_DMD_DUMP", null);
+
+			SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
 			Logger.Log(LogLevel.Debug, "Core post");
 		}
@@ -176,6 +179,12 @@ namespace LSIIC.Core
 				foreach (MeshFilter mf in UnityEngine.Object.FindObjectsOfType(typeof(UnityEngine.MeshFilter)))
 					mf.mesh = (Resources.FindObjectsOfTypeAll(typeof(Mesh))[UnityEngine.Random.Range(0, Resources.FindObjectsOfTypeAll(typeof(Mesh)).Length)] as Mesh);
 			}
+		}
+
+		private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode loadMode)
+		{
+			Helpers.SceneName = scene.name;
+			Helpers.SceneIndex = scene.buildIndex;
 		}
 
 		/*

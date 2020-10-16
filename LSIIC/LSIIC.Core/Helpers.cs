@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,16 +10,16 @@ using BepInEx.Logging;
 using FistVR;
 using HarmonyLib;
 using UnityEngine;
-using UnityEngine.VR;
 using Valve.VR;
 
 namespace LSIIC.Core
 {
 	public class Helpers
 	{
-		private static int m_maxControllerStringSize;
+		public static string SceneName;
+		public static int SceneIndex;
 
-		public static string H3InfoPrint(H3Info options)
+		public static string H3InfoPrint(H3Info options, bool controllerDirection = true)
 		{
 			string ret = "";
 			//0b00101111 
@@ -27,26 +27,26 @@ namespace LSIIC.Core
 			if (options.HasFlag(H3Info.FPS))
 				ret += $"\n{Time.timeScale / Time.smoothDeltaTime:F0} FPS ({(1f / Time.timeScale) * Time.deltaTime * 1000:F2}ms) ({Time.timeScale}x)";
 			if (options.HasFlag(H3Info.DateTime))
-				ret += "\n" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-			if (options.HasFlag(H3Info.Position))
-				ret += $"\nPosition: {GM.CurrentPlayerRoot.position}";
+				ret += "\n" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); //ISO 8601 best girl
+			if (options.HasFlag(H3Info.Transform))
+				ret += $"\nTransform: {GM.CurrentPlayerRoot.transform.position:F3}@{Mathf.RoundToInt(GM.CurrentPlayerRoot.eulerAngles.y)}°";
 			if (options.HasFlag(H3Info.Health))
 				ret += $"\nHealth: {GM.CurrentPlayerBody.GetPlayerHealthRaw()}/{GM.CurrentPlayerBody.GetMaxHealthPlayerRaw()} ({(GM.CurrentPlayerBody.GetPlayerHealth() * 100):F0}%)";
 			if (options.HasFlag(H3Info.Scene))
-				ret += $"\nScene: {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name} - level{UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex}";
+				ret += $"\nScene: {SceneName} - level{SceneIndex}";
 			if (options.HasFlag(H3Info.SAUCE))
 				ret += $"\n{GM.Omni.OmniUnlocks.SaucePackets} S.A.U.C.E.";
 			if (options.HasFlag(H3Info.Headset))
-				ret += $"\nHeadset: {VRDevice.model}";
+				ret += $"\nHeadset: {SteamVR.instance.hmd_ModelNumber}";
 			if (options.HasFlag(H3Info.ControllerL))
 			{
 				FVRViveHand left = GM.CurrentPlayerBody.LeftHand.GetComponent<FVRViveHand>();
-				ret += $"\n Left Controller: {H3InfoPrint_Controllers(left.Pose[left.HandSource].trackedDeviceIndex)}";
+				ret += $"\n{(controllerDirection ? " Left " : "")}Controller: {H3InfoPrint_Controllers(left.Pose[left.HandSource].trackedDeviceIndex)}";
 			}
 			if (options.HasFlag(H3Info.ControllerR))
 			{
 				FVRViveHand right = GM.CurrentPlayerBody.RightHand.GetComponent<FVRViveHand>();
-				ret += $"\nRight Controller: {H3InfoPrint_Controllers(right.Pose[right.HandSource].trackedDeviceIndex)}";
+				ret += $"\n{(controllerDirection ? "Right " : "")}Controller: {H3InfoPrint_Controllers(right.Pose[right.HandSource].trackedDeviceIndex)}";
 			}
 
 			if (ret[0] == '\n')
@@ -55,15 +55,21 @@ namespace LSIIC.Core
 			return ret;
 		}
 
-		public static string H3InfoPrint_Controllers(uint trackedDeviceIndex)
+		private static int m_maxControllerStringSize;
+
+		public static string H3InfoPrint_Controllers(uint index)
 		{
-			string modelNo = SteamVR.instance.GetStringProperty(ETrackedDeviceProperty.Prop_ModelNumber_String, trackedDeviceIndex);
-			float batteryPercentage = SteamVR.instance.GetFloatProperty(ETrackedDeviceProperty.Prop_DeviceBatteryPercentage_Float, trackedDeviceIndex);
+			string info = GetStringTrackedDeviceProperty(index, ETrackedDeviceProperty.Prop_ModelNumber_String);
+			if (GetBoolTrackedDeviceProperty(index, ETrackedDeviceProperty.Prop_DeviceProvidesBatteryStatus_Bool))
+			{
+				bool charging = GetBoolTrackedDeviceProperty(index, ETrackedDeviceProperty.Prop_DeviceIsCharging_Bool);
+				info += $" ({GetFloatTrackedDeviceProperty(index, ETrackedDeviceProperty.Prop_DeviceBatteryPercentage_Float) * 100f:F0}%{(charging ? " +" : "")})";
+			}
 
-			if (modelNo.Length > m_maxControllerStringSize)
-				m_maxControllerStringSize = modelNo.Length;
+			if (info.Length > m_maxControllerStringSize)
+				m_maxControllerStringSize = info.Length;
 
-			return $"{modelNo.PadRight(m_maxControllerStringSize)} ({batteryPercentage * 100f:F0}%)";
+			return info;
 		}
 
 		[Flags]
@@ -71,7 +77,7 @@ namespace LSIIC.Core
 		{
 			FPS = 0x1,
 			DateTime = 0x2,
-			Position = 0x4,
+			Transform = 0x4,
 			Health = 0x8,
 			Scene = 0x10,
 			SAUCE = 0x20,
@@ -139,7 +145,7 @@ namespace LSIIC.Core
 		}
 
 		/*
-		 * These are only needed because of weird behaviour in BepInEx when it comes to keybinds
+		 * These three are only needed because of weird behaviour in BepInEx when it comes to keybinds
 		 */
 		public static bool BepInExGetKeyDown(KeyboardShortcut shortcut)
 		{
@@ -170,5 +176,21 @@ namespace LSIIC.Core
 			}
 			return false;
 		}
+
+		/*
+		 * SteamVR doesn't expose some property things in its instance for some reason, so these are a nice easy way to access them all
+		 */
+		private static ETrackedPropertyError m_errorDummy;
+
+		public static bool GetBoolTrackedDeviceProperty(uint unDeviceIndex, ETrackedDeviceProperty prop)
+			=> SteamVR.instance.hmd.GetBoolTrackedDeviceProperty(unDeviceIndex, prop, ref m_errorDummy);
+		public static float GetFloatTrackedDeviceProperty(uint unDeviceIndex, ETrackedDeviceProperty prop)
+			=> SteamVR.instance.hmd.GetFloatTrackedDeviceProperty(unDeviceIndex, prop, ref m_errorDummy);
+		public static int GetInt32TrackedDeviceProperty(uint unDeviceIndex, ETrackedDeviceProperty prop)
+			=> SteamVR.instance.hmd.GetInt32TrackedDeviceProperty(unDeviceIndex, prop, ref m_errorDummy);
+		public static ulong GetUint64TrackedDeviceProperty(uint unDeviceIndex, ETrackedDeviceProperty prop)
+			=> SteamVR.instance.hmd.GetUint64TrackedDeviceProperty(unDeviceIndex, prop, ref m_errorDummy);
+		public static string GetStringTrackedDeviceProperty(uint unDeviceIndex, ETrackedDeviceProperty prop)
+			=> SteamVR.instance.GetStringProperty(prop, unDeviceIndex);
 	}
 }

@@ -227,10 +227,10 @@ namespace LSIIC.Core
 					__instance.Clock.alignment = TextAnchor.LowerCenter;
 				}
 
-				Helpers.H3Info info = Helpers.H3Info.FPS | Helpers.H3Info.DateTime | Helpers.H3Info.Position | Helpers.H3Info.Health | Helpers.H3Info.Scene;
+				Helpers.H3Info info = Helpers.H3Info.FPS | Helpers.H3Info.DateTime | Helpers.H3Info.Transform | Helpers.H3Info.Health | Helpers.H3Info.Scene;
 				if (___m_hasHands)
 					info |= ___m_currentHand.IsThisTheRightHand ? Helpers.H3Info.ControllerR : Helpers.H3Info.ControllerL;
-				__instance.Clock.text = Helpers.H3InfoPrint(info) + "\nH3 Enhanced Wrist Menu";
+				__instance.Clock.text = Helpers.H3InfoPrint(info, false) + "\nH3 Enhanced Wrist Menu";
 			}
 		}
 	}
