@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
-#if !UNITY_EDITOR && !UNITY_STANDALONE
 using HarmonyLib;
 using Valve.VR;
-#endif
 
 namespace LSIIC.ModPanel
 {
@@ -20,6 +18,8 @@ namespace LSIIC.ModPanel
 
 		public Transform SpawnPos;
 
+		public GameObject OpenInItemSpawnerButton;
+
 		private GameObject m_currentGameObj;
 		private FVRObject m_currentFVRObj;
 		private FVRPhysicalObject m_currentFVRPhysObj;
@@ -27,10 +27,8 @@ namespace LSIIC.ModPanel
 
 		private FVRObject.ObjectCategory m_objCategory = FVRObject.ObjectCategory.Uncategorized;
 
-#if !UNITY_EDITOR && !UNITY_STANDALONE
 		private ObjectTable m_objectTable;
 		private ObjectTableDef m_objectTableDef;
-#endif
 
 		public override void PageInit()
 		{
@@ -41,7 +39,7 @@ namespace LSIIC.ModPanel
 			AddObjectControl(ObjectControlStart, 0, this, "m_objCategory");
 		}
 
-		private GameObject UpdateCurrentGameObj(GameObject obj)
+		public GameObject UpdateCurrentGameObj(GameObject obj)
 		{
 			if (obj != null)
 			{
@@ -68,7 +66,7 @@ namespace LSIIC.ModPanel
 			return m_currentGameObj;
 		}
 
-		private GameObject UpdateCurrentGameObj(FVRObject fvrObj)
+		public GameObject UpdateCurrentGameObj(FVRObject fvrObj)
 		{
 			if (fvrObj != null && fvrObj.GetGameObject() != null)
 				return UpdateCurrentGameObj(fvrObj.GetGameObject());
@@ -156,8 +154,6 @@ namespace LSIIC.ModPanel
 
 		public void OpenInItemSpawner()
 		{
-
-#if !UNITY_EDITOR && !UNITY_STANDALONE
 			if (m_currentItemSpawnerID != null && m_currentItemSpawnerID.SubCategory != ItemSpawnerID.ESubCategory.None)
 			{
 				foreach (ItemSpawnerUI spawner in FindObjectsOfType<ItemSpawnerUI>())
@@ -169,7 +165,7 @@ namespace LSIIC.ModPanel
 					AccessTools.Method(typeof(ItemSpawnerUI), "SetMode_Details").Invoke(spawner, null);
 				}
 			}
-#else
+#if UNITY_EDITOR || UNITY_STANDALONE
 			if (m_currentItemSpawnerID != null)
 				Debug.Log("ItemSpawnerUIs would open " + m_currentItemSpawnerID.DisplayName);
 #endif
@@ -237,13 +233,15 @@ namespace LSIIC.ModPanel
 				if (!string.IsNullOrEmpty(firstMatch))
 					ItemInfo.text += $"\nThe match text was {firstMatch}.";
 			}
+
+			if (OpenInItemSpawnerButton != null)
+				OpenInItemSpawnerButton.SetActive(m_currentItemSpawnerID != null);
 #endif
 		}
 
 		#region Get Random FVRObjects
 		public void GetRandomFVRObjectFromCategory(FVRObject.ObjectCategory category)
 		{
-#if !UNITY_EDITOR && !UNITY_STANDALONE
 			if (m_objectTable == null)
 			{
 				m_objectTable = new ObjectTable();
@@ -252,7 +250,6 @@ namespace LSIIC.ModPanel
 
 			m_objectTable.Initialize(m_objectTableDef, category);
 			UpdateCurrentGameObj(m_objectTable.GetRandomObject());
-#endif
 		}
 
 		public void GetRandomFVRObject()
@@ -262,26 +259,32 @@ namespace LSIIC.ModPanel
 
 		public void GetRandomBespokeAttachment()
 		{
-#if !UNITY_EDITOR && !UNITY_STANDALONE
 			if (m_objectTable == null)
 			{
 				m_objectTable = new ObjectTable();
 				m_objectTableDef = (ObjectTableDef)ScriptableObject.CreateInstance(typeof(ObjectTableDef));
 			}
 
-			if (m_currentFVRObj != null && m_objectTable.GetRandomBespokeAttachment(m_currentFVRObj) != null)
-				UpdateCurrentGameObj(m_objectTable.GetRandomBespokeAttachment(m_currentFVRObj));
-			//else
-				//make an "error" print 
-#endif
+			foreach (FVRViveHand hand in GM.CurrentMovementManager.Hands)
+			{
+				if (hand.CurrentInteractable != null && hand.CurrentInteractable is FVRPhysicalObject)
+					UpdateCurrentGameObj(m_objectTable.GetRandomBespokeAttachment((hand.CurrentInteractable as FVRPhysicalObject).ObjectWrapper));
+			}
 		}
 
 		public void GetRandomAmmoObject()
 		{
-			if (m_currentFVRObj != null && m_currentFVRObj.GetRandomAmmoObject(m_currentFVRObj) != null)
-				UpdateCurrentGameObj(m_currentFVRObj.GetRandomAmmoObject(m_currentFVRObj));
-			//else
-				//make an "error" print 
+			if (m_objectTable == null)
+			{
+				m_objectTable = new ObjectTable();
+				m_objectTableDef = (ObjectTableDef)ScriptableObject.CreateInstance(typeof(ObjectTableDef));
+			}
+
+			foreach (FVRViveHand hand in GM.CurrentMovementManager.Hands)
+			{
+				if (hand.CurrentInteractable != null && hand.CurrentInteractable is FVRPhysicalObject && m_currentFVRObj != null)
+					UpdateCurrentGameObj(m_currentFVRObj.GetRandomAmmoObject((hand.CurrentInteractable as FVRPhysicalObject).ObjectWrapper));
+			}
 		}
 		#endregion
 

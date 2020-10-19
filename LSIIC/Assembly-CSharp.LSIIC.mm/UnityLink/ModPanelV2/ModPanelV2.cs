@@ -1,7 +1,5 @@
-﻿#if !UNITY_EDITOR && !UNITY_STANDALONE
+﻿using FistVR;
 using LSIIC.Core;
-#endif
-using FistVR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +23,7 @@ namespace LSIIC.ModPanel
 		public List<GameObject> PagePrefabs;
 		[HideInInspector]
 		public List<ModPanelV2Page> Pages = new List<ModPanelV2Page>();
+		public Dictionary<Type, ModPanelV2Page> PagesByType = new Dictionary<Type, ModPanelV2Page>();
 
 		public List<GameObject> ControlPrefabs;
 
@@ -41,6 +40,8 @@ namespace LSIIC.ModPanel
 				page.Panel = this;
 				page.PageInit();
 				Pages.Add(page);
+				if (!PagesByType.ContainsKey(page.GetType()))
+					PagesByType[page.GetType()] = page;
 			}
 
 			SwitchPage(0);
@@ -73,14 +74,12 @@ namespace LSIIC.ModPanel
 					Pages[m_pageIndex].PageTick();
 
 			if (BackgroundText != null)
-#if !UNITY_EDITOR && !UNITY_STANDALONE
 				BackgroundText.text = Helpers.H3InfoPrint(Helpers.H3Info.All);
 
 			if (HeldObjectsText != null)
 				HeldObjectsText.text = LSIIC.Core.Helpers.GetHeldObjects();
-#else
-				BackgroundText.text = string.Format("90 FPS (11.11ms) (1x)\n{0}\nPosition: (0.0, 0.0, 0.0)\n5000 / 5000 Health - 100.00%\nScene: ItemSpawnerVoid - level-1\n123456 S.A.U.C.E.\nHeadset: Vive MV\n Left Controller: Vive Controller MV (100%)\nRight Controller: Vive Controller MV (100%)", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
 
+#if UNITY_EDITOR || UNITY_STANDALONE
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 				PrevPage();
 			if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -99,6 +98,41 @@ namespace LSIIC.ModPanel
 			if (PageNameText != null)
 				PageNameText.text = Pages[index].PageTitle;
 			m_pageIndex = index;
+		}
+
+		public void SwitchPage(ModPanelV2Page page)
+		{
+			int index = Pages.IndexOf(page);
+			if (index == -1)
+			{
+				Debug.LogError("Page does not exist to panel");
+				return;
+			}
+
+			Pages[m_pageIndex].PageClose();
+			Pages[m_pageIndex].gameObject.SetActive(false);
+			Pages[index].gameObject.SetActive(true);
+			Pages[index].PageOpen();
+			if (PageNameText != null)
+				PageNameText.text = Pages[index].PageTitle;
+			m_pageIndex = index;
+		}
+
+		public void SwitchPage(Type pagetype)
+		{
+			if (!PagesByType.ContainsKey(pagetype))
+			{
+				Debug.LogError("Page type does not exist in dictionary");
+				return;
+			}
+
+			Pages[m_pageIndex].PageClose();
+			Pages[m_pageIndex].gameObject.SetActive(false);
+			PagesByType[pagetype].gameObject.SetActive(true);
+			PagesByType[pagetype].PageOpen();
+			if (PageNameText != null)
+				PageNameText.text = PagesByType[pagetype].PageTitle;
+			m_pageIndex = Pages.IndexOf(PagesByType[pagetype]);
 		}
 
 		public void PrevPage() { SwitchPage(m_pageIndex - 1); }

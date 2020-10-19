@@ -1561,10 +1561,11 @@ MonoBehaviour:
   PageNameText: {fileID: 114395600910404892}
   PagePrefabs:
   - {fileID: 1364787261086874, guid: bf715ee642a8ea844a15f99b1d32dfbe, type: 2}
-  - {fileID: 1073404935638744, guid: 8331ede10c9eb1e48a3950c61d2f1746, type: 2}
   - {fileID: 1646245838657074, guid: d923f1cbc3c269f4dba67bb8a41f67f1, type: 2}
   - {fileID: 1682170893763188, guid: 8f37a9ab86ba4424f878621d0f44628c, type: 2}
+  - {fileID: 1073404935638744, guid: 8331ede10c9eb1e48a3950c61d2f1746, type: 2}
   - {fileID: 1699546687268230, guid: 6246f2298a478054a9bd27dc424c24e8, type: 2}
+  - {fileID: 1715109900840964, guid: 6f2e12aec9eac9a469a0d6426236cbb6, type: 2}
   Pages: []
   ControlPrefabs:
   - {fileID: 1082003113938108, guid: 8094058e9991d6941b324d8782d91977, type: 2}
@@ -1698,7 +1699,6 @@ MonoBehaviour:
   LoudnessVelocityMult: 1
   MaxLoudness: 10
   UsesAltTypes: 0
-  Alts: []
 --- !u!114 &114546501878412152
 MonoBehaviour:
   m_ObjectHideFlags: 1

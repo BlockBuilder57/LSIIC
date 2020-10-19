@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114560006008997128}
   - component: {fileID: 65123899157018588}
   m_Layer: 10
-  m_Name: GetRandomBespokeAttachment
+  m_Name: GetRandomBespokeAttachmentFromHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 114508420103039860}
   - component: {fileID: 65435504710033876}
   m_Layer: 10
-  m_Name: GetRandomAmmoObject
+  m_Name: GetRandomAmmoObjectFromHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1744785266825102
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,8 +289,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 180, y: 16, z: 2}
-  m_Center: {x: 90, y: -8, z: 0}
+  m_Size: {x: 240, y: 16, z: 2}
+  m_Center: {x: 120, y: -8, z: 0}
 --- !u!65 &65132650444619786
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -325,8 +325,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 140, y: 16, z: 2}
-  m_Center: {x: 70, y: -8, z: 0}
+  m_Size: {x: 200, y: 16, z: 2}
+  m_Center: {x: 100, y: -8, z: 0}
 --- !u!65 &65539550792901780
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -478,11 +478,13 @@ MonoBehaviour:
   ObjectControlStart: {x: 86, y: -192}
   ObjectControls: []
   UpdatingObjectControls: []
+  SavedObjectControls: []
   Panel: {fileID: 0}
   ItemImage: {fileID: 114408199714903506}
   ItemImageNoIcon: {fileID: 21300000, guid: bbff17535dc0eed4ebb3e0e853bdfcfd, type: 3}
   ItemInfo: {fileID: 114741449730223940}
   SpawnPos: {fileID: 224449175628334072}
+  OpenInItemSpawnerButton: {fileID: 1699547160975198}
 --- !u!114 &114132012943871070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1313,7 +1315,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Get Random Bespoke Attachment
+  m_Text: Get Random Bespoke Attachment From Hand
 --- !u!114 &114798902389207102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1559,7 +1561,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Get Random Ammo Object
+  m_Text: Get Random Ammo Object From Hand
 --- !u!114 &114977080314539838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1699,7 +1701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 380, y: -224}
+  m_AnchoredPosition: {x: 380, y: -176}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224149450031180036
@@ -1717,7 +1719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 380, y: -160}
+  m_AnchoredPosition: {x: 380, y: -112}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224149711850660140
@@ -1794,7 +1796,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1412069614449984}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -40}
+  m_LocalPosition: {x: 0, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224149711850660140}
@@ -1910,7 +1912,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 380, y: -176}
+  m_AnchoredPosition: {x: 380, y: -128}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224848983633449138
@@ -1920,7 +1922,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460999907895418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -3.9}
   m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
   m_Children: []
   m_Father: {fileID: 224149711850660140}
@@ -1928,7 +1930,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: 0}
+  m_AnchoredPosition: {x: 200, y: 2.2}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224986526517897178
@@ -1946,6 +1948,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 380, y: -208}
+  m_AnchoredPosition: {x: 380, y: -160}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}

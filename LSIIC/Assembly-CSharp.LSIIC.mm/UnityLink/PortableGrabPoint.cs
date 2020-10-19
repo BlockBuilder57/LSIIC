@@ -63,7 +63,7 @@ namespace LSIIC
 			}
 
 			if (m_timeSincePickup > 0f && !(m_grabPointActive || m_hand != null))
-				m_timeSincePickup -= Time.deltaTime;
+				m_timeSincePickup = Mathf.Clamp(m_timeSincePickup - Time.deltaTime, 0f, 1f);
 
 			if (GeoRenderer != null && GeoRenderer.material != null)
 				GeoRenderer.material.SetColor("_EmissionColor", Color.Lerp(RingColorInactive, RingColorActive, m_timeSincePickup));

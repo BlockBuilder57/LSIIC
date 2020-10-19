@@ -29,7 +29,7 @@ namespace LSIIC.Core
 			if (options.HasFlag(H3Info.DateTime))
 				ret += "\n" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); //ISO 8601 best girl
 			if (options.HasFlag(H3Info.Transform))
-				ret += $"\nTransform: {GM.CurrentPlayerRoot.transform.position:F3}@{Mathf.RoundToInt(GM.CurrentPlayerRoot.eulerAngles.y)}°";
+				ret += $"\nTransform: {GM.CurrentPlayerRoot.transform.position.ToString("F2")}@{Mathf.RoundToInt(GM.CurrentPlayerRoot.eulerAngles.y)}°";
 			if (options.HasFlag(H3Info.Health))
 				ret += $"\nHealth: {GM.CurrentPlayerBody.GetPlayerHealthRaw()}/{GM.CurrentPlayerBody.GetMaxHealthPlayerRaw()} ({(GM.CurrentPlayerBody.GetPlayerHealth() * 100):F0}%)";
 			if (options.HasFlag(H3Info.Scene))
@@ -142,6 +142,18 @@ namespace LSIIC.Core
 			else
 				temp += $"\n[Round Status]: Ready\n";
 			return temp;
+		}
+
+		public static string GetHierarchyPath(Transform obj)
+		{
+			string name = obj.name;
+			Transform parent = obj.parent;
+			while (parent != null)
+			{
+				name = $"{parent.name}/{name}";
+				parent = parent.parent;
+			}
+			return name;
 		}
 
 		/*
