@@ -113,7 +113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1620169886333356
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +339,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1750949936343340}
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -400,8 +400,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1482151952094614}
-  m_LocalRotation: {x: 0.96196485, y: -0.034043536, z: -0.23101832, w: -0.14175797}
-  m_LocalPosition: {x: 0.2517, y: -0.1699, z: 0.4959}
+  m_LocalRotation: {x: 0.96196485, y: -0.03404353, z: -0.2310183, w: -0.14175797}
+  m_LocalPosition: {x: 0.182, y: -0.124, z: 0.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4386553876828246}
@@ -1237,7 +1237,6 @@ MonoBehaviour:
   LoudnessVelocityMult: 1
   MaxLoudness: 10
   UsesAltTypes: 0
-  Alts: []
 --- !u!114 &114920322389701970
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisplayedInMainEntry: 1
   DisplayName: Portable Grab Point
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: e98c7374ffe04d84ba27f8d839f91c48, type: 3}
   SubHeading: Do people still do parkour?
   Description: 
   Infographic: {fileID: 0}
