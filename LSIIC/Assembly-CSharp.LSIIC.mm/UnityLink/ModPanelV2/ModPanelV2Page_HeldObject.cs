@@ -22,6 +22,7 @@ namespace LSIIC.ModPanel
 			}
 		}
 
+		[Header("Held Object Page")]
 		public Vector2[] Columns = new Vector2[] { new Vector2(20, -16), new Vector2(130, -16), new Vector2(240, -16) };
 		public bool ClearObjectControlsOnRelease = true;
 
@@ -240,7 +241,7 @@ namespace LSIIC.ModPanel
 						{
 							BreakActionWeapon baw = Object as BreakActionWeapon;
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], baw, new string[] { "m_isLatched", "UsesManuallyCockedHammers", "FireAllBarrels", "PopOutEmpties" });
-							for (int i = 0; i < Math.Max(baw.Barrels.Length, 14); i++) //capped to 14 to avoid controls overflowing
+							for (int i = 0; i < Math.Min(baw.Barrels.Length, 14); i++) //capped to 14 to avoid controls overflowing
 								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], baw.Barrels[i].Chamber, new string[] { "ChamberVelocityMultiplier" });
 						}
 
@@ -248,7 +249,7 @@ namespace LSIIC.ModPanel
 						{
 							Derringer derringer = Object as Derringer;
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], derringer, new string[] { "HingeValues", "DoesAutoEjectRounds", "IsTriggerDoubleAction", "DeletesCartridgeOnFire" });
-							for (int i = 0; i < Math.Max(derringer.Barrels.Count, 14); i++) //capped to 14 to avoid controls overflowing
+							for (int i = 0; i < Math.Min(derringer.Barrels.Count, 14); i++) //capped to 14 to avoid controls overflowing
 								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], derringer.Barrels[i].Chamber, new string[] { "ChamberVelocityMultiplier" });
 						}
 

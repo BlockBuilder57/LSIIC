@@ -12,6 +12,7 @@ namespace LSIIC.ModPanel
 {
 	public class ModPanelV2Page_Spawner : ModPanelV2Page
 	{
+		[Header("Spawner Page")]
 		public Image ItemImage;
 		public Sprite ItemImageNoIcon;
 		public Text ItemInfo;

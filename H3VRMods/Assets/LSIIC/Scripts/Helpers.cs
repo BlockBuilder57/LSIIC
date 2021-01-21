@@ -81,15 +81,53 @@ namespace LSIIC.Core
 
 		public static string GetHeldObjects()
 		{
-			return "Sorry nothing";
+			return "epepsi";
 		}
 
-		public static string GetHeldObjects_RoundInfo(FVRFireArmRound round)
+		public static string GetObjectInfo(GameObject targetObject, Rigidbody attachedRigidbody = null)
 		{
-			return "Sorry nothing";
+			string info = targetObject.name;
+			foreach (Component comp in targetObject.GetComponents<Component>())
+			{
+				Type t = comp.GetType();
+				bool firstClass = true;
+				while (t != null && (firstClass || !t.Namespace.StartsWith("UnityEngine")))
+				{
+					info += firstClass ? "\nType: " + t.ToString() : " : " + t.ToString();
+					t = t.BaseType;
+					firstClass = false;
+				}
+			}
+			info += string.Format("\nLayer(s): {0}", LayerMask.LayerToName(targetObject.layer));
+			info += string.Format("\nTag: {0}", targetObject.tag);
+
+			if (attachedRigidbody != null && attachedRigidbody.transform != targetObject.transform)
+			{
+				info += string.Format("\n\nAttached Rigidbody: {0}", GetObjectHierarchyPath(attachedRigidbody.transform));
+				foreach (Component comp in attachedRigidbody.GetComponents<Component>())
+				{
+					Type t = comp.GetType();
+					bool firstClass = true;
+					while (t != null && (firstClass || !t.Namespace.StartsWith("UnityEngine")))
+					{
+						info += firstClass ? "\n  Type: " + t.ToString() : " : " + t.ToString();
+						t = t.BaseType;
+						firstClass = false;
+					}
+				}
+				info += string.Format("\n  Layer(s): {0}", LayerMask.LayerToName(attachedRigidbody.gameObject.layer));
+				info += string.Format("\n  Tag: {0}", attachedRigidbody.gameObject.tag);
+			}
+
+			return info;
 		}
 
-		public static string GetHierarchyPath(Transform obj)
+		public static string GetObjectInfo_RoundInfo(FVRFireArmRound round)
+		{
+			return "round haa";
+		}
+
+		public static string GetObjectHierarchyPath(Transform obj)
 		{
 			string name = obj.name;
 			Transform parent = obj.parent;

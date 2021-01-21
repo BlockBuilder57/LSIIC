@@ -94,44 +94,63 @@ namespace LSIIC.Core
 			string holdingInfo = "";
 			foreach (FVRViveHand hand in GM.CurrentMovementManager.Hands)
 			{
-				GameObject targetObject = null;
 				if (hand.CurrentInteractable != null)
 				{
-					targetObject = hand.CurrentInteractable.gameObject;
-				}
-				if (targetObject != null)
-				{
-					holdingInfo += $"Holding: {targetObject.name}";
-					foreach (Component comp in targetObject.GetComponents<Component>())
-					{
-						Type t = comp.GetType();
-						bool firstClass = true;
-						while (t?.Namespace != "UnityEngine")
-						{
-							holdingInfo += firstClass ? "\nType: " + t.ToString() : " : " + t.ToString();
-							t = t.BaseType;
-							firstClass = false;
-						}
-					}
-					holdingInfo += $"\nLayer(s): {LayerMask.LayerToName(targetObject.layer)}";
-					holdingInfo += $"\nTag: {targetObject.tag}";
-
-					if (targetObject.GetComponent<FVRFireArmRound>() != null)
-						holdingInfo += GetHeldObjects_RoundInfo(targetObject.GetComponent<FVRFireArmRound>());
-					if (targetObject.GetComponentInChildren<FVRFireArmMagazine>() != null)
-						holdingInfo += $"\n[Mag Type]: {targetObject.GetComponentInChildren<FVRFireArmMagazine>().RoundType}\n[Mag Rounds]: {targetObject.GetComponentInChildren<FVRFireArmMagazine>().m_numRounds}/{targetObject.GetComponentInChildren<FVRFireArmMagazine>().m_capacity}";
-					if (targetObject.GetComponentInChildren<FVRFireArmClip>() != null)
-						holdingInfo += $"\n[Clip Type]: {targetObject.GetComponentInChildren<FVRFireArmClip>().RoundType}\n[Clip Rounds]: {targetObject.GetComponentInChildren<FVRFireArmClip>().m_numRounds}/{targetObject.GetComponentInChildren<FVRFireArmClip>().m_capacity}";
-					if (targetObject.GetComponent<FVRFireArm>() != null)
-						holdingInfo += $"\n[Round Type]: {targetObject.GetComponent<FVRFireArm>().RoundType}";
-				}
-				if (holdingInfo != "")
+					holdingInfo += $"Holding: {GetObjectHierarchyPath(hand.CurrentInteractable.transform)}\n{GetObjectInfo(hand.CurrentInteractable.gameObject)}";
 					holdingInfo += "\n\n";
+				}	
 			}
 			return holdingInfo;
 		}
 
-		public static string GetHeldObjects_RoundInfo(FVRFireArmRound round)
+		public static string GetObjectInfo(GameObject targetObject, Rigidbody attachedRigidbody = null)
+		{
+			string info = "";
+			foreach (Component comp in targetObject.GetComponents<Component>())
+			{
+				Type t = comp.GetType();
+				bool firstClass = true;
+				while (t?.Namespace != "UnityEngine")
+				{
+					info += firstClass ? "\nType: " + t.ToString() : " : " + t.ToString();
+					t = t.BaseType;
+					firstClass = false;
+				}
+			}
+			info += $"\nLayer(s): {LayerMask.LayerToName(targetObject.layer)}";
+			info += $"\nTag: {targetObject.tag}";
+
+			if (targetObject.GetComponent<FVRFireArmRound>() != null)
+				info += GetObjectInfo_RoundInfo(targetObject.GetComponent<FVRFireArmRound>());
+			if (targetObject.GetComponentInChildren<FVRFireArmMagazine>() != null)
+				info += $"\n[Mag Type]: {targetObject.GetComponentInChildren<FVRFireArmMagazine>().RoundType}\n[Mag Rounds]: {targetObject.GetComponentInChildren<FVRFireArmMagazine>().m_numRounds}/{targetObject.GetComponentInChildren<FVRFireArmMagazine>().m_capacity}";
+			if (targetObject.GetComponentInChildren<FVRFireArmClip>() != null)
+				info += $"\n[Clip Type]: {targetObject.GetComponentInChildren<FVRFireArmClip>().RoundType}\n[Clip Rounds]: {targetObject.GetComponentInChildren<FVRFireArmClip>().m_numRounds}/{targetObject.GetComponentInChildren<FVRFireArmClip>().m_capacity}";
+			if (targetObject.GetComponent<FVRFireArm>() != null)
+				info += $"\n[Round Type]: {targetObject.GetComponent<FVRFireArm>().RoundType}";
+
+			if (attachedRigidbody != null && attachedRigidbody.transform != targetObject.transform)
+			{
+				info += string.Format("\n\nAttached Rigidbody: {0}", GetObjectHierarchyPath(attachedRigidbody.transform));
+				foreach (Component comp in attachedRigidbody.GetComponents<Component>())
+				{
+					Type t = comp.GetType();
+					bool firstClass = true;
+					while (t?.Namespace != "UnityEngine")
+					{
+						info += firstClass ? "\n  Type: " + t.ToString() : " : " + t.ToString();
+						t = t.BaseType;
+						firstClass = false;
+					}
+				}
+				info += string.Format("\n  Layer(s): {0}", LayerMask.LayerToName(attachedRigidbody.gameObject.layer));
+				info += string.Format("\n  Tag: {0}", attachedRigidbody.gameObject.tag);
+			}
+
+			return info;
+		}
+
+		public static string GetObjectInfo_RoundInfo(FVRFireArmRound round)
 		{
 			string temp = "";
 			temp += $"\n[Round Type]: {round.RoundType}\n[Round Class]: {round.RoundClass}\n[Round Projectile Count:] {round.NumProjectiles}*{round.ProjectileSpread}s";
@@ -144,7 +163,7 @@ namespace LSIIC.Core
 			return temp;
 		}
 
-		public static string GetHierarchyPath(Transform obj)
+		public static string GetObjectHierarchyPath(Transform obj)
 		{
 			string name = obj.name;
 			Transform parent = obj.parent;

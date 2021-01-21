@@ -12,6 +12,7 @@ namespace LSIIC.ModPanel
 {
 	public class ModPanelV2Page_Index : ModPanelV2Page
 	{
+		[Header("Index Page")]
 		public Text H3InfoText;
 		public Text[] PageButtons;
 

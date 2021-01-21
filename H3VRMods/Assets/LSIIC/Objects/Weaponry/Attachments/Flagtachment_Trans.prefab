@@ -182,7 +182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1659192509952566
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +888,6 @@ MonoBehaviour:
   LoudnessVelocityMult: 1
   MaxLoudness: 10
   UsesAltTypes: 0
-  Alts: []
 --- !u!114 &114204697731247434
 MonoBehaviour:
   m_ObjectHideFlags: 1

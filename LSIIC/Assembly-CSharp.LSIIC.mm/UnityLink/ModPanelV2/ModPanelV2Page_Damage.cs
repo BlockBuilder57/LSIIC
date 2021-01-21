@@ -10,6 +10,7 @@ namespace LSIIC.ModPanel
 {
 	public class ModPanelV2Page_Damage : ModPanelV2Page
 	{
+		[Header("Damage Page")]
 		public Text FieldValues;
 		public bool AverageDamages;
 

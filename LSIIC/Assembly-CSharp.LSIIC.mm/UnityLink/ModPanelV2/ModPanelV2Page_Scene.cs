@@ -9,6 +9,7 @@ namespace LSIIC.ModPanel
 {
 	public class ModPanelV2Page_Scene : ModPanelV2Page
 	{
+		[Header("Scene Page")]
 		public Vector2[] Columns = new Vector2[] { new Vector2(20, -16), new Vector2(130, -16), new Vector2(240, -16) };
 		private int[] m_columnStarts = new int[] { 0, 0, 0 };
 

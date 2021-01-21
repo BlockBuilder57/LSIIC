@@ -43,6 +43,18 @@ namespace LSIIC.VirtualObjectsInjector
 
 			foreach (string file in Directory.GetFiles(Paths.GameRootPath + @"\VirtualObjects", "*", SearchOption.AllDirectories))
 			{
+				//field existence checks
+				bool FVROhasItemID = AccessTools.Field(typeof(FVRObject), "ItemID") != null;
+				bool FVROhasCategory = AccessTools.Field(typeof(FVRObject), "Category") != null;
+				bool FVROhasTagEra = AccessTools.Field(typeof(FVRObject), "TagEra") != null;
+				bool FVROhasTagFirearmSize = AccessTools.Field(typeof(FVRObject), "TagFirearmSize") != null;
+				bool FVROhasTagFirearmAction = AccessTools.Field(typeof(FVRObject), "TagFirearmAction") != null;
+				bool FVROhasTagFirearmFiringModes = AccessTools.Field(typeof(FVRObject), "TagFirearmFiringModes") != null;
+				bool FVROhasTagFirearmFeedOption = AccessTools.Field(typeof(FVRObject), "TagFirearmFeedOption") != null;
+				bool FVROhasTagFirearmMounts = AccessTools.Field(typeof(FVRObject), "TagFirearmMounts") != null;
+				bool FVROhasTagAttachmentMount = AccessTools.Field(typeof(FVRObject), "TagAttachmentMount") != null;
+				bool FVROhasTagAttachmentFeature = AccessTools.Field(typeof(FVRObject), "TagAttachmentFeature") != null;
+
 				if (Path.GetFileName(file) != Path.GetFileNameWithoutExtension(file) || Path.GetFileName(file).Contains("VirtualObjects"))
 					continue;
 
@@ -65,17 +77,31 @@ namespace LSIIC.VirtualObjectsInjector
 							original.Bundle = relativeFile;
 							anvilPrefab.SetValue(fvrObj, original);
 
-							IM.OD.Add(fvrObj.ItemID, fvrObj);
+							if (FVROhasItemID)
+								IM.OD.Add(fvrObj.ItemID, fvrObj);
+							if (FVROhasCategory)
+								__instance.odicTagCategory.AddOrCreate(fvrObj.Category).Add(fvrObj);
+							if (FVROhasTagEra)
+								__instance.odicTagFirearmEra.AddOrCreate(fvrObj.TagEra).Add(fvrObj);
+							if (FVROhasTagFirearmSize)
+								__instance.odicTagFirearmSize.AddOrCreate(fvrObj.TagFirearmSize).Add(fvrObj);
+							if (FVROhasTagFirearmAction)
+								__instance.odicTagFirearmAction.AddOrCreate(fvrObj.TagFirearmAction).Add(fvrObj);
 
-							__instance.odicTagCategory.AddOrCreate(fvrObj.Category).Add(fvrObj);
-							__instance.odicTagFirearmEra.AddOrCreate(fvrObj.TagEra).Add(fvrObj);
-							__instance.odicTagFirearmSize.AddOrCreate(fvrObj.TagFirearmSize).Add(fvrObj);
-							__instance.odicTagFirearmAction.AddOrCreate(fvrObj.TagFirearmAction).Add(fvrObj);
-							__instance.odicTagFirearmFiringMode.AddOrCreate(fvrObj.TagFirearmFiringModes.FirstOrDefault()).Add(fvrObj);
-							__instance.odicTagFirearmFeedOption.AddOrCreate(fvrObj.TagFirearmFeedOption.FirstOrDefault()).Add(fvrObj);
-							__instance.odicTagFirearmMount.AddOrCreate(fvrObj.TagFirearmMounts.FirstOrDefault()).Add(fvrObj);
-							__instance.odicTagAttachmentMount.AddOrCreate(fvrObj.TagAttachmentMount).Add(fvrObj);
-							__instance.odicTagAttachmentFeature.AddOrCreate(fvrObj.TagAttachmentFeature).Add(fvrObj);
+							if (FVROhasTagFirearmFiringModes)
+								foreach (FVRObject.OTagFirearmFiringMode firingMode in fvrObj.TagFirearmFiringModes)
+									__instance.odicTagFirearmFiringMode.AddOrCreate(firingMode).Add(fvrObj);
+							if (FVROhasTagFirearmFeedOption)
+								foreach (FVRObject.OTagFirearmFeedOption feedOption in fvrObj.TagFirearmFeedOption)
+									__instance.odicTagFirearmFeedOption.AddOrCreate(feedOption).Add(fvrObj);
+							if (FVROhasTagFirearmMounts)
+								foreach (FVRObject.OTagFirearmMount mount in fvrObj.TagFirearmMounts)
+									__instance.odicTagFirearmMount.AddOrCreate(mount).Add(fvrObj);
+
+							if (FVROhasTagAttachmentMount)
+								__instance.odicTagAttachmentMount.AddOrCreate(fvrObj.TagAttachmentMount).Add(fvrObj);
+							if (FVROhasTagAttachmentFeature)
+								__instance.odicTagAttachmentFeature.AddOrCreate(fvrObj.TagAttachmentFeature).Add(fvrObj);
 
 							objectsFound++;
 						}
@@ -95,7 +121,7 @@ namespace LSIIC.VirtualObjectsInjector
 #if !DEBUG
 							Logger.LogWarning("This plugin has been deprecated and has been integrated into H3VR.Sideloader.");
 							Logger.LogWarning("It should only be used for hassle-free rapid prototyping from Unity into H3VR.");
-							Logger.LogWarning("Please ask the creators of the asset bundle to covert their object(s) to a Sideloader mod.");
+							Logger.LogWarning("Please ask the creators of the asset bundle to covert their object(s) to a Sideloader or Deli mod.");
 #endif
 						}
 					}

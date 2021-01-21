@@ -42,6 +42,7 @@ MonoBehaviour:
   ObjectControlStart: {x: 20, y: -16}
   ObjectControls: []
   UpdatingObjectControls: []
+  SavedObjectControls: []
   Panel: {fileID: 0}
   Columns:
   - {x: 20, y: -16}
