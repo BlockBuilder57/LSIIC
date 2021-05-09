@@ -21,6 +21,7 @@ namespace LSIIC.VirtualObjectsInjector
 	public class VirtualObjectsInjectorPlugin : BaseUnityPlugin
 	{
 		public static ManualLogSource Logger { get; set; }
+		public static bool shownDeprecationMessage = false;
 
 		private void Awake()
 		{
@@ -65,9 +66,8 @@ namespace LSIIC.VirtualObjectsInjector
 				{
 					if (bundle.Result != null)
 					{
-						Logger.Log(LogLevel.Info, $"Injecting FVRObject(s) and ItemSpawnerID(s) from {Path.GetFileName(file)}");
-
 						int objectsFound = 0;
+						int spawnerIdsFound = 0;
 
 						foreach (FVRObject fvrObj in bundle.Result.LoadAllAssets<FVRObject>())
 						{
@@ -107,21 +107,31 @@ namespace LSIIC.VirtualObjectsInjector
 						}
 						foreach (ItemSpawnerID id in bundle.Result.LoadAllAssets<ItemSpawnerID>())
 						{
-							IM.CD[id.Category].Add(id);
-							IM.SCD[id.SubCategory].Add(id);
 							if (!___SpawnerIDDic.ContainsKey(id.ItemID))
+							{
 								___SpawnerIDDic[id.ItemID] = id;
+								IM.CD[id.Category].Add(id);
+								IM.SCD[id.SubCategory].Add(id);
+
+								spawnerIdsFound++;
+							}
 							else
 								Logger.LogError($"ItemID {id.ItemID} from {Path.GetFileName(file)} already exists in SpawnerIDDic! You need to change the ItemID in your ItemSpawnerID to something else.");
 						}
 
 						if (objectsFound > 0)
 						{
-							Logger.LogWarning($"{objectsFound} object(s) were loaded through VirtualObjectsInjector!");
+							Logger.LogInfo($"Injecting {objectsFound} FVRObject(s) and {spawnerIdsFound} ItemSpawnerID(s) from {Path.GetFileName(file)}!");
+
 #if !DEBUG
-							Logger.LogWarning("This plugin has been deprecated and has been integrated into H3VR.Sideloader.");
-							Logger.LogWarning("It should only be used for hassle-free rapid prototyping from Unity into H3VR.");
-							Logger.LogWarning("Please ask the creators of the asset bundle to covert their object(s) to a Sideloader or Deli mod.");
+							if (!shownDeprecationMessage)
+							{
+								Logger.LogWarning("This plugin has been deprecated and has been integrated into H3VR.Sideloader.");
+								Logger.LogWarning("It should only be used for hassle-free rapid prototyping from Unity into H3VR.");
+								Logger.LogWarning("Please ask the creators of the asset bundle to covert their object(s) to a loader mod's format.");
+
+								shownDeprecationMessage = true;
+							}
 #endif
 						}
 					}
