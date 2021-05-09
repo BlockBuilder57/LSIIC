@@ -149,6 +149,9 @@ namespace LSIIC.ModPanel
 
 			m_selection = null;
 			m_selectionParent = null;
+			RaycastCylinder.gameObject.SetActive(false);
+
+			this.Panel.RootRigidbody.ResetCenterOfMass();
 
 			if (ButtonSelectText != null)
 				ButtonSelectText.text = "Select Object";
