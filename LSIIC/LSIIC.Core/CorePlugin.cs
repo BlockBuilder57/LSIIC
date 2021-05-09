@@ -86,6 +86,10 @@ namespace LSIIC.Core
 
 			SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
+			Helpers.CachedSceneIndex = SceneManager.GetActiveScene().buildIndex;
+			Helpers.CachedSceneName = SceneManager.GetActiveScene().name;
+			Helpers.CachedLaunchTime = DateTime.Now.AddSeconds(-Time.realtimeSinceStartup);
+
 			Logger.Log(LogLevel.Debug, "Core post");
 		}
 

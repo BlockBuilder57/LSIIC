@@ -27,6 +27,7 @@ namespace LSIIC.ModPanel
 
 		public List<GameObject> ControlPrefabs;
 
+		private ModPanelV2Page m_curPage;
 		private int m_pageIndex = 0;
 
 		public void Awake()
@@ -77,7 +78,24 @@ namespace LSIIC.ModPanel
 				BackgroundText.text = Helpers.H3InfoPrint(Helpers.H3Info.All);
 
 			if (HeldObjectsText != null)
-				HeldObjectsText.text = LSIIC.Core.Helpers.GetHeldObjects();
+			{
+				bool holdingAnything = false;
+#if !UNITY_EDITOR && !UNITY_STANDALONE
+				foreach (FVRViveHand hand in GM.CurrentMovementManager.Hands)
+				{
+					if (hand.CurrentInteractable != null)
+					{
+						holdingAnything = true;
+						break;
+					}
+				}
+#endif
+
+				if (holdingAnything)
+					HeldObjectsText.text = Helpers.GetHeldObjects();
+				else if (!string.IsNullOrEmpty(HeldObjectsText.text))
+					HeldObjectsText.text = "";
+			}
 
 #if UNITY_EDITOR || UNITY_STANDALONE
 			if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -91,12 +109,19 @@ namespace LSIIC.ModPanel
 		{
 			index = (int)Mathf.Repeat(index, Pages.Count);
 
-			Pages[m_pageIndex].PageClose();
-			Pages[m_pageIndex].gameObject.SetActive(false);
-			Pages[index].gameObject.SetActive(true);
-			Pages[index].PageOpen();
+			if (m_curPage != null)
+			{
+				m_curPage.PageClose();
+				m_curPage.gameObject.SetActive(false);
+			}
+
+			m_curPage = Pages[index];
+
+			m_curPage.gameObject.SetActive(true);
+			m_curPage.PageOpen();
 			if (PageNameText != null)
-				PageNameText.text = Pages[index].PageTitle;
+				PageNameText.text = m_curPage.PageTitle;
+
 			m_pageIndex = index;
 		}
 
@@ -109,13 +134,7 @@ namespace LSIIC.ModPanel
 				return;
 			}
 
-			Pages[m_pageIndex].PageClose();
-			Pages[m_pageIndex].gameObject.SetActive(false);
-			Pages[index].gameObject.SetActive(true);
-			Pages[index].PageOpen();
-			if (PageNameText != null)
-				PageNameText.text = Pages[index].PageTitle;
-			m_pageIndex = index;
+			SwitchPage(index);
 		}
 
 		public void SwitchPage(Type pagetype)
@@ -126,13 +145,20 @@ namespace LSIIC.ModPanel
 				return;
 			}
 
-			Pages[m_pageIndex].PageClose();
-			Pages[m_pageIndex].gameObject.SetActive(false);
-			PagesByType[pagetype].gameObject.SetActive(true);
-			PagesByType[pagetype].PageOpen();
+			if (m_curPage != null)
+			{
+				m_curPage.PageClose();
+				m_curPage.gameObject.SetActive(false);
+			}
+
+			m_curPage = PagesByType[pagetype];
+
+			m_curPage.gameObject.SetActive(true);
+			m_curPage.PageOpen();
 			if (PageNameText != null)
-				PageNameText.text = PagesByType[pagetype].PageTitle;
-			m_pageIndex = Pages.IndexOf(PagesByType[pagetype]);
+				PageNameText.text = m_curPage.PageTitle;
+
+			m_pageIndex = Pages.IndexOf(m_curPage);
 		}
 
 		public void PrevPage() { SwitchPage(m_pageIndex - 1); }

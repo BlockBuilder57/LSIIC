@@ -16,24 +16,36 @@ namespace LSIIC.Core
 {
 	public class Helpers
 	{
-		public static string SceneName;
-		public static int SceneIndex;
+		public static string CachedSceneName;
+		public static int CachedSceneIndex;
+		public static DateTime CachedLaunchTime;
+
+		private static string m_cachedDateTime;
+		private static string m_cachedHeld;
+		private static float m_lastCachedDateTime;
+		private static int m_lastFrameCachedHeld;
 
 		public static string H3InfoPrint(H3Info options, bool controllerDirection = true)
 		{
+			if (Time.time - m_lastCachedDateTime > 1f)
+			{
+				m_cachedDateTime = (CachedLaunchTime.AddSeconds(Time.realtimeSinceStartup)).ToString("s"); // ISO 8601 best girl
+				m_lastCachedDateTime = Time.time;
+			}
+
 			string ret = "";
 			//0b00101111 
 
 			if (options.HasFlag(H3Info.FPS))
 				ret += $"\n{Time.timeScale / Time.smoothDeltaTime:F0} FPS ({(1f / Time.timeScale) * Time.deltaTime * 1000:F2}ms) ({Time.timeScale}x)";
 			if (options.HasFlag(H3Info.DateTime))
-				ret += "\n" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); //ISO 8601 best girl
+				ret += "\n" + m_cachedDateTime;
 			if (options.HasFlag(H3Info.Transform))
 				ret += $"\nTransform: {GM.CurrentPlayerRoot.transform.position.ToString("F2")}@{Mathf.RoundToInt(GM.CurrentPlayerRoot.eulerAngles.y)}°";
 			if (options.HasFlag(H3Info.Health))
 				ret += $"\nHealth: {GM.CurrentPlayerBody.GetPlayerHealthRaw()}/{GM.CurrentPlayerBody.GetMaxHealthPlayerRaw()} ({(GM.CurrentPlayerBody.GetPlayerHealth() * 100):F0}%)";
 			if (options.HasFlag(H3Info.Scene))
-				ret += $"\nScene: {SceneName} - level{SceneIndex}";
+				ret += $"\nScene: {CachedSceneName} - level{CachedSceneIndex}";
 			if (options.HasFlag(H3Info.SAUCE))
 				ret += $"\n{GM.Omni.OmniUnlocks.SaucePackets} S.A.U.C.E.";
 			if (options.HasFlag(H3Info.Headset))
@@ -91,15 +103,20 @@ namespace LSIIC.Core
 
 		public static string GetHeldObjects()
 		{
+			if (Time.frameCount == m_lastFrameCachedHeld)
+				return m_cachedHeld;
+
 			string holdingInfo = "";
 			foreach (FVRViveHand hand in GM.CurrentMovementManager.Hands)
 			{
 				if (hand.CurrentInteractable != null)
 				{
-					holdingInfo += $"Holding: {GetObjectHierarchyPath(hand.CurrentInteractable.transform)}\n{GetObjectInfo(hand.CurrentInteractable.gameObject)}";
-					holdingInfo += "\n\n";
-				}	
+					holdingInfo += $"Holding: {GetObjectHierarchyPath(hand.CurrentInteractable.transform)}\n{GetObjectInfo(hand.CurrentInteractable.gameObject)}\n\n";
+				}
 			}
+
+			m_lastFrameCachedHeld = Time.frameCount;
+			m_cachedHeld = holdingInfo;
 			return holdingInfo;
 		}
 
