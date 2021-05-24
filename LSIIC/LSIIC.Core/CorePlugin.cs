@@ -187,8 +187,8 @@ namespace LSIIC.Core
 
 		private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode loadMode)
 		{
-			Helpers.SceneName = scene.name;
-			Helpers.SceneIndex = scene.buildIndex;
+			Helpers.CachedSceneName = scene.name;
+			Helpers.CachedSceneIndex = scene.buildIndex;
 		}
 
 		/*
