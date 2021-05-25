@@ -10,10 +10,10 @@ using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[assembly: AssemblyVersion("1.3")]
+[assembly: AssemblyVersion("1.4")]
 namespace LSIIC.Core
 {
-	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.3")]
+	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.4")]
 	[BepInDependency("dll.cursed.timescale", BepInDependency.DependencyFlags.SoftDependency)]
 	public class CorePlugin : BaseUnityPlugin
 	{

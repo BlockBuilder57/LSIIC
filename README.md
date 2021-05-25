@@ -5,25 +5,28 @@ Here's that weird [Hot Dogs, Horseshoes, and Hand Grenades](http://h3vr.com) mod
 ## Features
 
 - ModPanelV2
-	- A redone version of the old ModPanel, now authored entirely in Unity.
+	- A redone version of the old version's ModPanel, now authored entirely in Unity.
 	- Pages:
 		- Portable Item Spawner
 		- Held Object Modifier
 		- Scene Settings and Options
 		- Damage Report/Rate of Fire Tester
+        - Debug Information
 - COOL GUNS
 	- COOLREVOLVER
 		- The first ever custom gun in H3VR, this is the COOLEST REVOLVER EVER MADE!!!1!
     - COOLCLOSEDBOLT
-		- A more feature packed alternative to the MP7A1, this is the COOLEST CLOSED BOLT EVER MADE!!!1!
+		- A more feature-packed alternative to the MP7A1, this is the COOLEST CLOSED BOLT EVER MADE!!!1!
 - env_cubemap
 	- The first ever custom melee weapon for H3VR, doubles as a cubemap viewer.
-- Flagtachments
+- New Flagtachments
 	- Fun flag(s) to attach on your gun.
 - Spectator Camera
-	- The first spectator system for H3VR, added in to the game officially when systems were ready.
+	- The first spectator system for H3VR, eventually added into the game officially when systems were ready.
 - Spectator Camera Attachment
 	- Above, but as an attachment.
+- Portable Grab Point
+	- A ladder grab point you can take anywhere!
 
 This repo also includes a WurstMod testing map for LSIIC.
 
@@ -88,10 +91,10 @@ Conceptualized by Jack Foxtrot, smart palming will only take as many rounds as n
 
 #### `LSIIC.VirtualObjectsInjector` -- inject custom objects into the game
 
-This plugin is now a part of [H3VR.Sideloader](https://github.com/denikson/H3VR.Sideloader/). However, it is still in the LSIIC repo for its hassle-free rapid prototyping. While included in releases, I'd recommend that object makers make Sideloader mods for easier distribution.
+This plugin is now a part of [H3VR.Sideloader](https://github.com/denikson/H3VR.Sideloader/). However, it is still in the LSIIC repo for its hassle-free rapid prototyping. While included in releases, I'd recommend that object makers make Sideloader or OtherLoader mods for easier distribution.
 
 ## Compiling/Developing
 
 The LSIIC plugins can be compiled with any C# compilier, but it has been written under Visual Studio 2019 with some MSBuild customization written by [modeco80](https://github.com/modeco80). These custom MSBuild scripts will automatically copy the built dlls to the average H3VR install folder. (when Steam is in `C:\Program Files (x86)`) If needed, line 17 of [LSIIC.CopyToGame.targets](LSIIC/LSIIC.CopyToGame.targets) can be changed to your local install folder. Check the [README](lib/README.md) in /lib to see what dependencies are needed for a successful compilation.
 
-The Unity side of LSIIC is found in the H3VRMods folder. To avoid uploading other's work, the only parts of the project included there are the project settings and `Assets/LSIIC` folder. The project requires this specific fork of [Alloy](https://github.com/Josh015/Alloy/tree/unity-5-6/), the PBR rendering pipeline used in H3VR, and [WurstMod](https://github.com/Nolenz/WurstMod) for the testing area map. Unity's [AssetBundles Browser](https://github.com/Unity-Technologies/AssetBundles-Browser) addon is also used to export the `lsiic` assetbundle in `H3VR/VirtualObjects`, when LSIIC.VirtualObjectsInjector is installed. The project uses [uTinyRipper](https://github.com/mafaca/UtinyRipper) for the .meta files from H3VR. To extract these, drag/select the h3vr_Data folder in your H3VR install folder and export the scripts from the output.
+The Unity side of LSIIC is found in the H3VRMods folder. To avoid uploading other's work, the only parts of the project included there are the project settings and `Assets/LSIIC` folder. The project requires this specific fork of [Alloy](https://github.com/Josh015/Alloy/tree/unity-5-6/) (the PBR rendering pipeline used in H3VR), and [WurstMod](https://github.com/Nolenz/WurstMod) for the testing area map. Unity's [AssetBundles Browser](https://github.com/Unity-Technologies/AssetBundles-Browser) addon is also used to export the `lsiic` assetbundle in `H3VR/VirtualObjects`, when LSIIC.VirtualObjectsInjector is installed. The project uses [uTinyRipper](https://github.com/mafaca/UtinyRipper) for the .meta files from H3VR. To extract these, drag/select the h3vr_Data folder in your H3VR install folder and export the scripts from the output.
