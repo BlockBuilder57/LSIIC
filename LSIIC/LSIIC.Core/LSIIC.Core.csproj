@@ -14,39 +14,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Reference Include="0Harmony">
-			<HintPath>$(SolutionDir)..\lib\0Harmony.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
 		<Reference Include="Assembly-CSharp, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
 		  <HintPath>..\..\lib\Assembly-CSharp_publicized.dll</HintPath>
 		</Reference>
 		<Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
 		  <HintPath>..\..\lib\Assembly-CSharp-firstpass.dll</HintPath>
-		</Reference>
-		<Reference Include="ES2">
-			<HintPath>$(SolutionDir)..\lib\ES2.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>$(SolutionDir)..\lib\Assembly-CSharp.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>$(SolutionDir)..\lib\Assembly-CSharp-firstpass.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="BepInEx">
-			<HintPath>$(SolutionDir)..\lib\BepInEx.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="UnityEngine">
-			<HintPath>$(SolutionDir)..\lib\UnityEngine.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="UnityEngine.UI">
-			<HintPath>$(SolutionDir)..\lib\UnityEngine.UI.dll</HintPath>
-			<Private>false</Private>
 		</Reference>
 	</ItemGroup>
 
