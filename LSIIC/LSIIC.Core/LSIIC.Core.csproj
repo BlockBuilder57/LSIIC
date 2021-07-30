@@ -21,6 +21,9 @@
 		<Reference Include="Assembly-CSharp, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
 		  <HintPath>..\..\lib\Assembly-CSharp_publicized.dll</HintPath>
 		</Reference>
+		<Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+		  <HintPath>..\..\lib\Assembly-CSharp-firstpass.dll</HintPath>
+		</Reference>
 		<Reference Include="ES2">
 			<HintPath>$(SolutionDir)..\lib\ES2.dll</HintPath>
 			<Private>false</Private>

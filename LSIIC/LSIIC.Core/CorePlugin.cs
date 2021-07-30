@@ -6,6 +6,7 @@ using BepInEx.Logging;
 using FistVR;
 using HarmonyLib;
 using RUST.Steamworks;
+using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

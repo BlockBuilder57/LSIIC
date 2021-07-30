@@ -44,7 +44,7 @@ namespace LSIIC
 			}
 		}
 
-		protected override void FVRUpdate()
+		public override void FVRUpdate()
 		{
 			base.FVRUpdate();
 
