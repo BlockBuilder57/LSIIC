@@ -33,6 +33,9 @@
 			<HintPath>$(SolutionDir)..\lib\Assembly-CSharp.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+		<Reference Include="Assembly-CSharp, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
+		  <HintPath>..\..\lib\Assembly-CSharp_publicized.dll</HintPath>
+		</Reference>
 		<Reference Include="Assembly-CSharp-firstpass">
 		  <HintPath>..\..\lib\Assembly-CSharp-firstpass.dll</HintPath>
 			<Private>false</Private>
@@ -49,6 +52,12 @@
 		  <HintPath>..\..\lib\UnityEngine.UI.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="BepInEx.Core" Version="5.4.11" />
+	  <PackageReference Include="UnityEngine.Core" Version="5.6.1" />
+	  <PackageReference Include="UnityEngine.UI" Version="5.6.1" />
 	</ItemGroup>
 
 	<!-- Import our commonized copy-to-game logic -->

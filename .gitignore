@@ -1,5 +1,5 @@
 # libraries
-lib/*.dll
+lib/Assembly-CSharp-firstpass.dll
 
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
