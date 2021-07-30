@@ -19,29 +19,29 @@ namespace LSIIC.Core
 	{
 		public static ManualLogSource Logger { get; set; }
 
-		public static ConfigEntry<bool> _timeStopsOnJump;
-		public static ConfigEntry<bool> _pilotPlayerSosigBodyHead;
+		public static ConfigEntry<bool> TimeStopsOnJump;
+		public static ConfigEntry<bool> PilotPlayerSosigBodyHead;
 
-		public static ConfigEntry<KeyboardShortcut> _shortcutDeleteFVRPhysicalObjects;
-		public static ConfigEntry<KeyboardShortcut> _shortcutPrintLayerAndTagsInfo;
-		public static ConfigEntry<KeyboardShortcut> _shortcutPrintAllStreamingAssetsBundles;
+		private static ConfigEntry<KeyboardShortcut> _shortcutDeleteFVRPhysicalObjects;
+		private static ConfigEntry<KeyboardShortcut> _shortcutPrintLayerAndTagsInfo;
+		private static ConfigEntry<KeyboardShortcut> _shortcutPrintAllStreamingAssetsBundles;
 
-		public static ConfigEntry<KeyboardShortcut> _shortcutTelePlayerToOrigin;
-		public static ConfigEntry<KeyboardShortcut> _shortcutTelePlayerToReset;
-		public static ConfigEntry<KeyboardShortcut> _shortcutTelePlayer2mForward;
+		private static ConfigEntry<KeyboardShortcut> _shortcutTelePlayerToOrigin;
+		private static ConfigEntry<KeyboardShortcut> _shortcutTelePlayerToReset;
+		private static ConfigEntry<KeyboardShortcut> _shortcutTelePlayer2mForward;
 
-		public static ConfigEntry<KeyboardShortcut> _shortcutSpawnModPanelV2;
-		public static ConfigEntry<KeyboardShortcut> _shortcutScrambleMaterials;
-		public static ConfigEntry<KeyboardShortcut> _shortcutScrambleMeshes;
+		private static ConfigEntry<KeyboardShortcut> _shortcutSpawnModPanelV2;
+		private static ConfigEntry<KeyboardShortcut> _shortcutScrambleMaterials;
+		private static ConfigEntry<KeyboardShortcut> _shortcutScrambleMeshes;
 
 		private void Awake()
 		{
 			Logger = base.Logger;
 			Logger.Log(LogLevel.Debug, "Core pre");
 
-			_timeStopsOnJump = Config.Bind("Functionality", "Time Stops On Jump", false,
+			TimeStopsOnJump = Config.Bind("Functionality", "Time Stops On Jump", false,
 				"Insert funny JoJoke™ here. This one gets better with the timescale plugin from the CursedDlls.");
-			_pilotPlayerSosigBodyHead = Config.Bind("Functionality", "Pilot PlayerSosigBody Head", true,
+			PilotPlayerSosigBodyHead = Config.Bind("Functionality", "Pilot PlayerSosigBody Head", true,
 				"Pilot the PlayerSosigBody's head with your actual head rotation instead of the head's physics joint.");
 
 			_shortcutDeleteFVRPhysicalObjects = Config.Bind("Keybinds - Debug", "Delete FVRPhysicalObjects", new KeyboardShortcut(KeyCode.P, KeyCode.LeftShift),

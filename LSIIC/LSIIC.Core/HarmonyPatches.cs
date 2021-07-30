@@ -188,19 +188,19 @@ namespace LSIIC.Core
 		[HarmonyPrefix]
 		public static bool StopTimeOnJump(FVRMovementManager __instance)
 		{
-			if (CorePlugin._timeStopsOnJump.Value)
+			if (CorePlugin.TimeStopsOnJump.Value)
 			{
 				Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 				Time.fixedDeltaTime = Time.timeScale / SteamVR.instance.hmd_DisplayFrequency;
 			}
-			return !CorePlugin._timeStopsOnJump.Value; //skip the rest of the function when the config is true
+			return !CorePlugin.TimeStopsOnJump.Value; //skip the rest of the function when the config is true
 		}
 
 		[HarmonyPatch(typeof(PlayerSosigBody), "SosigPhys")]
 		[HarmonyPrefix]
 		public static bool PilotPlayerSosigBodyHead(PlayerSosigBody __instance)
 		{
-			if (CorePlugin._pilotPlayerSosigBodyHead.Value && GM.CurrentPlayerBody != null)
+			if (CorePlugin.PilotPlayerSosigBodyHead.Value && GM.CurrentPlayerBody != null)
 				__instance.Sosig_Head.rotation = GM.CurrentPlayerBody.Head.rotation;
 
 			return true;

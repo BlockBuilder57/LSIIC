@@ -34,8 +34,8 @@ namespace LSIIC.Core
 			}
 
 			string ret = "";
-			//0b00101111 
-
+			//0b00101111
+			
 			if (options.HasFlag(H3Info.FPS))
 				ret += $"\n{Time.timeScale / Time.smoothDeltaTime:F0} FPS ({(1f / Time.timeScale) * Time.deltaTime * 1000:F2}ms) ({Time.timeScale}x)";
 			if (options.HasFlag(H3Info.DateTime))

@@ -15,8 +15,8 @@ namespace LSIIC.SmartPalming
 	{
 		public static ManualLogSource Logger { get; set; }
 
-		public static ConfigEntry<bool> _enableSmartPalming;
-		public static ConfigEntry<bool> _addPlusOneForChamber;
+		private static ConfigEntry<bool> _enableSmartPalming;
+		private static ConfigEntry<bool> _addPlusOneForChamber;
 
 		private void Awake()
 		{
