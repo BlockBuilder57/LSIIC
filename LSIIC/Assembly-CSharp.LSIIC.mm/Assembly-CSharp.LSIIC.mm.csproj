@@ -51,6 +51,12 @@
 		</Reference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="BepInEx.Core" Version="5.4.16" />
+	  <PackageReference Include="H3VR.GameLibs" Version="0.100.2-r.1" />
+	  <PackageReference Include="UnityEngine" Version="5.6.1" />
+	</ItemGroup>
+
 	<!-- Import our commonized copy-to-game logic -->
 	<Import Project="$(SolutionDir)LSIIC.CopyToGame.targets" />
 
