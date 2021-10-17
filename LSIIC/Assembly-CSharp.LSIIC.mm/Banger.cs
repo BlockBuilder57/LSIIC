@@ -10,53 +10,36 @@ namespace FistVR
 {
 	public class patch_Banger : Banger
 	{
-		public string descrip;
-
-		public List<Banger.PowerUpSplode> PowerupSplodes;
-
-		public bool m_isSticky;
-		public bool m_isSilent;
-		public bool m_isHoming;
-		public bool m_canbeshot;
-
-		public Vector2 m_shrapnelVel;
-
 		public override GameObject DuplicateFromSpawnLock(FVRViveHand hand)
 		{
-			GameObject gameObject = Instantiate(ObjectWrapper.GetGameObject(), Transform.position, Transform.rotation);
+			GameObject gameObject = Instantiate(this.ObjectWrapper.GetGameObject(), this.Transform.position, this.Transform.rotation);
 			Banger banger = gameObject.GetComponent<Banger>();
 			hand.ForceSetInteractable(banger);
 			banger.SetQuickBeltSlot(null);
 			banger.BeginInteraction(hand);
 
-			banger.Payloads.AddRange(Payloads);
-			banger.Shrapnel.AddRange(Shrapnel);
-			banger.ShrapnelLeftToFire.AddRange(ShrapnelLeftToFire);
+			banger.Payloads.AddRange(this.Payloads);
+			banger.Shrapnel.AddRange(this.Shrapnel);
+			banger.ShrapnelLeftToFire.AddRange(this.ShrapnelLeftToFire);
 
-			FieldInfo splodesRef = AccessTools.Field(typeof(Banger), "PowerupSplodes");
-			if (splodesRef != null)
-			{
-				List<Banger.PowerUpSplode> OtherPowerupSplodes = (List<PowerUpSplode>)splodesRef.GetValue(banger);
-				OtherPowerupSplodes.AddRange(PowerupSplodes);
-				splodesRef.SetValue(banger, OtherPowerupSplodes);
-			}
-			
-			AccessTools.Field(typeof(Banger), "descrip").SetValue(banger, descrip);
+			banger.PowerupSplodes.AddRange(this.PowerupSplodes);
 
-			AccessTools.Field(typeof(Banger), "m_isSticky").SetValue(banger, m_isSticky);
-			AccessTools.Field(typeof(Banger), "m_isSilent").SetValue(banger, m_isSilent);
-			AccessTools.Field(typeof(Banger), "m_isHoming").SetValue(banger, m_isHoming);
-			AccessTools.Field(typeof(Banger), "m_canbeshot").SetValue(banger, m_canbeshot);
+			banger.descrip = this.descrip;
 
-			AccessTools.Field(typeof(Banger), "m_shrapnelVel").SetValue(banger, m_shrapnelVel);
+			banger.m_isSticky = this.m_isSticky;
+			banger.m_isSilent = this.m_isSilent;
+			banger.m_isHoming = this.m_isHoming;
+			banger.m_canbeshot = this.m_canbeshot;
 
-			if (m_colliders[0].material.bounciness == PhysMat_Bouncy.bounciness)
-				AccessTools.Method(typeof(Banger), "SetToBouncy").Invoke(banger, null);
+			banger.m_shrapnelVel = this.m_shrapnelVel;
 
-			banger.ThrowVelMultiplier = ThrowVelMultiplier;
-			banger.ThrowAngMultiplier = ThrowAngMultiplier;
-			banger.RootRigidbody.drag = RootRigidbody.drag;
-			banger.RootRigidbody.angularDrag = RootRigidbody.angularDrag;
+			if (this.m_colliders[0].material.bounciness == PhysMat_Bouncy.bounciness)
+				banger.SetToBouncy();
+
+			banger.ThrowVelMultiplier = this.ThrowVelMultiplier;
+			banger.ThrowAngMultiplier = this.ThrowAngMultiplier;
+			banger.RootRigidbody.drag = this.RootRigidbody.drag;
+			banger.RootRigidbody.angularDrag = this.RootRigidbody.angularDrag;
 
 			banger.Complete();
 

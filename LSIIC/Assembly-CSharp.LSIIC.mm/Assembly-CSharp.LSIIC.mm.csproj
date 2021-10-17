@@ -5,17 +5,13 @@
 		<!-- ignore .NET sdk generating one for us... -->
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<!-- output release binaries in a single directory -->
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<OutputPath>$(SolutionDir)..\bin\BepInEx\monomod\LSIIC</OutputPath>
 		<DebugType>none</DebugType>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<!-- We set a special BepInEx output path, as this is a MonoMod assembly. -->
-		<BepInExOutputPath>monomod\LSIIC</BepInExOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
