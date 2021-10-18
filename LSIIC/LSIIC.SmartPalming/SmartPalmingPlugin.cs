@@ -3,6 +3,7 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using FistVR;
 using HarmonyLib;
+using Sodalite.Api;
 using System;
 using System.Reflection;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace LSIIC.SmartPalming
 		public static ConfigEntry<bool> _enableSmartPalming;
 		public static ConfigEntry<bool> _addPlusOneForChamber;
 
-		private void Awake()
+		public SmartPalmingPlugin()
 		{
 			Logger = base.Logger;
 
@@ -53,41 +54,11 @@ namespace LSIIC.SmartPalming
 
 				if (_addPlusOneForChamber.Value && hand.OtherHand.CurrentInteractable is FVRFireArm)
 				{
-					if (hand.OtherHand.CurrentInteractable is BreakActionWeapon)
-					{
-						BreakActionWeapon baw = hand.OtherHand.CurrentInteractable as BreakActionWeapon;
-						for (int j = 0; j < baw.Barrels.Length; j++)
-							if (!baw.Barrels[j].Chamber.IsFull)
-								roundsNeeded += 1;
-					}
-					else if (hand.OtherHand.CurrentInteractable is Derringer)
-					{
-						Derringer derringer = hand.OtherHand.CurrentInteractable as Derringer;
-						for (int j = 0; j < derringer.Barrels.Count; j++)
-							if (!derringer.Barrels[j].Chamber.IsFull)
-								roundsNeeded += 1;
-					}
-					else if (hand.OtherHand.CurrentInteractable is SingleActionRevolver)
-					{
-						SingleActionRevolver saRevolver = hand.OtherHand.CurrentInteractable as SingleActionRevolver;
-						for (int j = 0; j < saRevolver.Cylinder.Chambers.Length; j++)
-							if (!saRevolver.Cylinder.Chambers[j].IsFull)
-								roundsNeeded += 1;
-					}
+					FVRFireArmChamber[] chambers = FirearmAPI.GetFirearmChambers(hand.OtherHand.CurrentInteractable as FVRFireArm);
 
-					if (hand.OtherHand.CurrentInteractable.GetType().GetField("Chamber") != null) //handles most guns
-					{
-						FVRFireArmChamber Chamber = (FVRFireArmChamber)hand.OtherHand.CurrentInteractable.GetType().GetField("Chamber").GetValue(hand.OtherHand.CurrentInteractable);
-						if (!Chamber.IsFull)
+					for (int i = 0; i < chambers.Length; i++)
+						if (chambers[i].IsManuallyChamberable && (!chambers[i].IsFull || chambers[i].IsSpent))
 							roundsNeeded += 1;
-					}
-					if (hand.OtherHand.CurrentInteractable.GetType().GetField("Chambers") != null) //handles Revolver, LAPD2019, RevolvingShotgun
-					{
-						FVRFireArmChamber[] Chambers = (FVRFireArmChamber[])hand.OtherHand.CurrentInteractable.GetType().GetField("Chambers").GetValue(hand.OtherHand.CurrentInteractable);
-						for (int j = 0; j < Chambers.Length; j++)
-							if (!Chambers[j].IsFull)
-								roundsNeeded += 1;
-					}
 				}
 
 				//if rounds are needed, and if rounds needed is less than the proxy rounds + the real round (1)
