@@ -7,8 +7,10 @@ using FistVR;
 using HarmonyLib;
 using RUST.Steamworks;
 using Steamworks;
+using Sodalite.Api;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sodalite;
 
 [assembly: AssemblyVersion("1.4")]
 namespace LSIIC.Core
@@ -34,7 +36,7 @@ namespace LSIIC.Core
 		public static ConfigEntry<KeyboardShortcut> _shortcutScrambleMaterials;
 		public static ConfigEntry<KeyboardShortcut> _shortcutScrambleMeshes;
 
-		private void Awake()
+		public CorePlugin()
 		{
 			Logger = base.Logger;
 			Logger.Log(LogLevel.Debug, "Core pre");
@@ -91,6 +93,11 @@ namespace LSIIC.Core
 			Helpers.CachedLaunchTime = DateTime.Now.AddSeconds(-Time.realtimeSinceStartup);
 
 			Logger.Log(LogLevel.Debug, "Core post");
+		}
+
+		public void Start()
+		{
+			WristMenuAPI.Buttons.Add(new WristMenuButton("Spawn ModPanelV2", 0, SpawnModPanel));
 		}
 
 		public void Update()
@@ -189,6 +196,16 @@ namespace LSIIC.Core
 		{
 			Helpers.CachedSceneName = scene.name;
 			Helpers.CachedSceneIndex = scene.buildIndex;
+		}
+
+		private void SpawnModPanel(object sender, ButtonClickEventArgs e)
+		{
+			ItemSpawnerID id = IM.GetSpawnerID("MiscUtModPanelV2");
+			if (id != null)
+			{
+				GameObject panel = Instantiate(id.MainObject.GetGameObject(), e.Hand.Input.Pos, e.Hand.Input.Rot);
+				WristMenuAPI.Instance?.m_currentHand.RetrieveObject(panel.GetComponent<FVRPhysicalObject>());
+			}
 		}
 
 		/*

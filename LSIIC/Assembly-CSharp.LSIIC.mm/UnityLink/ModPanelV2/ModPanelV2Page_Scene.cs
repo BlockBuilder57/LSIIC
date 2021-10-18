@@ -50,11 +50,11 @@ namespace LSIIC.ModPanel
 				}
 				if (ManagerSingleton<SM>.Instance != null)
 				{
-					m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, this, new string[] { "", "SetReverbEnvironment", "m_soundEnv" }, new string[] { "This function will only work when the player\nis not in a reverb environment. The Indoor\nRange is a good place to test this out." });
+					m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, this, new string[] { "", "SetReverbEnvironment", "m_soundEnv" }, new string[] { "This function will only work when the player\nis not in a reverb environment. The Indoor\nRange is a good place to test this out." }, null, new bool[] { false, true });
 				}
 				if (GM.Options != null && GM.Options.ControlOptions != null)
 				{
-					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], this, new string[] { "UpdateSosigPlayerBodyState" });
+					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], this, new string[] { "UpdateSosigPlayerBodyState" }, null, null, new bool[] { true });
 					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], GM.Options.ControlOptions, new string[] { "MBClothing", "CamFOV", "CamSmoothingLinear", "CamSmoothingRotational", "CamLeveling" }, null, new bool[] { true, true, true, true, true });
 				}
 			}

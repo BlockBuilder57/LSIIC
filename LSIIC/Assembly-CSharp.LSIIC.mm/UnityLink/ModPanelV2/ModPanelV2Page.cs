@@ -87,9 +87,9 @@ namespace LSIIC.ModPanel
 				{
 					if (instance != null)
 					{
-						Field = AccessTools.Field(instance.GetType(), memberName);
-
-						if (Field == null || isMethod)
+						if (!isMethod)
+							Field = AccessTools.Field(instance.GetType(), memberName);
+						else
 						{
 							Type[] paramTypes;
 							if (methodParameters != null)
