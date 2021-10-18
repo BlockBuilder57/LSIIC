@@ -1,0 +1,11 @@
+{
+  "author": "BlockBuilder57",
+  "name": "LSIIC",
+  "version_number": "1.4.0",
+  "dependencies": [
+	"devyndamonster-OtherLoader-1.1.0",
+	"nrgill28-Sodalite-1.1.0"
+  ],
+  "description": "A mod for H3VR that adds some weird custom objects and behaviors.",
+  "website_url": "https://github.com/BlockBuilder57/LSIIC"
+}

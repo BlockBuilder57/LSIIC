@@ -1,0 +1,11 @@
+version: 1
+dependencies:
+  hard:
+    h3vr.otherloader: 1.1.0
+assets:
+  runtime:
+    nested:
+    - assets:
+      - path: lsiic
+        plugin: h3vr.otherloader
+        loader: item

@@ -1,3 +1,8 @@
+# These should be built, no need to include the folders in the repo
+Thunderstore/monomod
+Thunderstore/plugins
+Thunderstore/*.zip
+
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
