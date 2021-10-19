@@ -52,13 +52,14 @@ namespace LSIIC.SmartPalming
 				if (clip != null)
 					roundsNeeded = clip.m_capacity - clip.m_numRounds;
 
-				if (_addPlusOneForChamber.Value && hand.OtherHand.CurrentInteractable is FVRFireArm)
+				if (hand.OtherHand.CurrentInteractable is FVRFireArm)
 				{
 					FVRFireArmChamber[] chambers = FirearmAPI.GetFirearmChambers(hand.OtherHand.CurrentInteractable as FVRFireArm);
 
-					for (int i = 0; i < chambers.Length; i++)
-						if (chambers[i].IsManuallyChamberable && (!chambers[i].IsFull || chambers[i].IsSpent))
-							roundsNeeded += 1;
+					if (_addPlusOneForChamber.Value || chambers.Length > 1)
+						for (int i = 0; i < chambers.Length; i++)
+							if (chambers[i].IsManuallyChamberable && (!chambers[i].IsFull || chambers[i].IsSpent))
+								roundsNeeded += 1;
 				}
 
 				//if rounds are needed, and if rounds needed is less than the proxy rounds + the real round (1)
