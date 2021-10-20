@@ -39,6 +39,7 @@ namespace LSIIC.ModPanel
 
 			if (ObjectControls.Count <= 0)
 			{
+#if !UNITY_EDITOR && !UNITY_STANDALONE
 				if (GM.CurrentSceneSettings != null)
 				{
 					m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], GM.CurrentSceneSettings, new string[] { "IsSpawnLockingEnabled", "DoesDamageGetRegistered", "MaxProjectileRange", "ForcesCasingDespawn", "DoesTeleportUseCooldown", "DoesAllowAirControl", "UsesPlayerCatcher", "CatchHeight", "DefaultPlayerIFF", "IsQuickbeltSwappingAllowed", "IsSceneLowLight", "IsAmmoInfinite", "AllowsInfiniteAmmoMags", "UsesUnlockSystem" });
@@ -57,6 +58,7 @@ namespace LSIIC.ModPanel
 					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], this, new string[] { "UpdateSosigPlayerBodyState" }, null, 0, 0b1);
 					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], GM.Options.ControlOptions, new string[] { "MBClothing", "CamFOV", "CamSmoothingLinear", "CamSmoothingRotational", "CamLeveling" }, null, 0b11111);
 				}
+#endif
 			}
 
 			if (GM.CurrentPlayerBody != null)

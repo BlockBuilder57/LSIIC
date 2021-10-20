@@ -178,6 +178,7 @@ namespace LSIIC.ModPanel
 
 			if (Object != null)
 			{
+#if !UNITY_EDITOR && !UNITY_STANDALONE
 				if (Panel != null && Panel.PageNameText != null)
 				{
 					if (Object is FVRInteractiveObject)
@@ -194,8 +195,6 @@ namespace LSIIC.ModPanel
 						m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], Object, new string[] { "ToggleKinematicLocked" }, null, 0, 0b1);
 					}
 				}
-
-#if !UNITY_EDITOR && !UNITY_STANDALONE
 
 				if (Object.GetComponentInChildren<FVRFireArmMagazine>() != null)
 					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], Object.GetComponentInChildren<FVRFireArmMagazine>(), new string[] { "m_capacity", "IsInfinite", "MagazineType", "RoundType", "FuelAmountLeft", "CanManuallyEjectRounds" });
@@ -366,8 +365,10 @@ namespace LSIIC.ModPanel
 
 		public void RefreshObjectControls_AttachmentInterfaces(FVRFireArmAttachmentInterface attachInterface)
 		{
+#if !UNITY_EDITOR && !UNITY_STANDALONE
 			if (attachInterface is Amplifier && (attachInterface as Amplifier).ScopeCam != null)
 				m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], (attachInterface as Amplifier).ScopeCam, new string[] { "OnEnable", "Magnification", "Resolution", "AngleBlurStrength", "CutoffSoftness", "AngularOccludeSensitivity", "ReticuleScale", "MagnificationEnabledAtStart", "LensSpaceDistortion", "LensChromaticDistortion" }, null, 0, 0b1);
+#endif
 		}
 	}
 }
