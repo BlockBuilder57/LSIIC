@@ -1,7 +1,7 @@
 {
   "author": "BlockBuilder57",
   "name": "LSIIC",
-  "version_number": "1.4.0",
+  "version_number": "1.5.0",
   "dependencies": [
 	"devyndamonster-OtherLoader-1.1.0",
 	"nrgill28-Sodalite-1.1.0"

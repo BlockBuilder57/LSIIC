@@ -12,10 +12,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sodalite;
 
-[assembly: AssemblyVersion("1.4")]
+[assembly: AssemblyVersion("1.5")]
 namespace LSIIC.Core
 {
-	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.4")]
+	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.5")]
 	[BepInDependency("dll.cursed.timescale", BepInDependency.DependencyFlags.SoftDependency)]
 	public class CorePlugin : BaseUnityPlugin
 	{
