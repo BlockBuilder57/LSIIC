@@ -151,7 +151,7 @@ namespace LSIIC.ModPanel
 		/// <br>{2} - Method.Name</br>
 		/// <br>{3} - Parameters in "{curParam.ParameterType.Name} {curParam.Name}" format</br>
 		/// </param>
-		public int AddObjectControls(Vector2 startOffset, int startIndex, object instance, string[] memberNames, string[] messages = null, bool[] updatesOnTick = null, bool[] methods = null, object[][] methodParams = null)
+		public int AddObjectControls(Vector2 startOffset, int startIndex, object instance, string[] memberNames, string[] messages = null, ulong updatesOnTick = 0ul, ulong methods = 0ul, object[][] methodParams = null)
 		{
 			for (int i = 0; i < memberNames.Length; i++)
 			{
@@ -159,8 +159,10 @@ namespace LSIIC.ModPanel
 				if (!string.IsNullOrEmpty(memberNames[i]) || (messages != null && messages.Length > i && !string.IsNullOrEmpty(messages[i])))
 				{
 					string message = messages != null && messages.Length > i ? messages[i] : "";
-					bool isMethod = methods != null && methods.Length > i ? methods[i] : false;
-					bool updates = updatesOnTick != null && updatesOnTick.Length > i ? updatesOnTick[i] : false;
+					// these have to be written in reverse order
+					// it makes the code less readable but it's way better than creating a bunch of new bool[]s every time it gets called
+					bool isMethod = ((methods >> i) & 1) != 0;
+					bool updates = ((updatesOnTick >> i) & 1) != 0;
 					object[] parameters = methodParams != null && methodParams.Length > i ? methodParams[i] : null;
 					AddObjectControl(startOffset, startIndex + i, instance, memberNames[i], message, updates, isMethod, parameters);
 				}

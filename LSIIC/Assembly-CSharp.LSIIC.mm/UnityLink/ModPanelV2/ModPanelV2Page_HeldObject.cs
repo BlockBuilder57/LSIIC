@@ -191,7 +191,7 @@ namespace LSIIC.ModPanel
 						if (PhysObject.ObjectWrapper != null)
 							Panel.PageNameText.text = PageTitle + " - " + PhysObject.ObjectWrapper.DisplayName;
 						m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], Object, new string[] { "SpawnLockable", "Harnessable", "Size", "ThrowVelMultiplier", "ThrowAngMultiplier", "UsesGravity", "DistantGrabbable", "DoesQuickbeltSlotFollowHead", "IsPickUpLocked", "m_doesDirectParent" });
-						m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], Object, new string[] { "ToggleKinematicLocked" }, null, null, new bool[] { true });
+						m_columnStarts[0] = AddObjectControls(Columns[0], m_columnStarts[0], Object, new string[] { "ToggleKinematicLocked" }, null, 0, 0b1);
 					}
 				}
 
@@ -210,14 +210,14 @@ namespace LSIIC.ModPanel
 
 						TryToGetCurrentChamber();
 						if (m_curChamber != null)
-							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], m_curChamber, new string[] { "ChamberVelocityMultiplier", "IsManuallyExtractable" }, null, new bool[] { true, true, true });
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], m_curChamber, new string[] { "ChamberVelocityMultiplier", "IsManuallyExtractable" });
 
 						if (Object is Handgun)
 						{
 							Handgun handgun = Object as Handgun;
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun, new string[] { "HasSlideRelease", "HasSlideReleaseControl", "HasSlideLockFunctionality", "HasManualDecocker", "HasMagReleaseInput", "CanPhysicsSlideRack" });
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, handgun.Slide, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundSlideHoldOpen" });
-							AddObjectControls(Columns[2], 14, handgun.FireSelectorModes[handgun.FireSelectorModeIndex], new string[] { "ModeType", "BurstAmount" }, null, new bool[] { true });
+							AddObjectControls(Columns[2], 14, handgun.FireSelectorModes[handgun.FireSelectorModeIndex], new string[] { "ModeType", "BurstAmount" }, null, 0b1);
 						}
 
 						else if (Object is OpenBoltReceiver)
@@ -225,7 +225,7 @@ namespace LSIIC.ModPanel
 							OpenBoltReceiver obr = Object as OpenBoltReceiver;
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, obr, new string[] { "HasMagReleaseButton" });
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, obr.Bolt, new string[] { "BoltSpeed_Forward", "BoltSpeed_Rearward", "BoltSpeed_Held", "BoltSpringStiffness", "HasLastRoundBoltHoldOpen", "BoltRot_Standard", "BoltRot_Safe", "BoltRot_SlipDistance" });
-							AddObjectControls(Columns[2], 14, obr.FireSelector_Modes[obr.FireSelectorModeIndex], new string[] { "ModeType" }, null, new bool[] { true });
+							AddObjectControls(Columns[2], 14, obr.FireSelector_Modes[obr.FireSelectorModeIndex], new string[] { "ModeType" }, null, 0b1);
 							AddObjectControls(Columns[2], 15, obr, new string[] { "SuperBurstAmount" });
 						}
 
@@ -234,13 +234,13 @@ namespace LSIIC.ModPanel
 							ClosedBoltWeapon cbw = Object as ClosedBoltWeapon;
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw, new string[] { "EjectsMagazineOnEmpty", "BoltLocksWhenNoMagazineFound", "DoesClipEntryRequireBoltBack", "HasMagReleaseButton", "HasBoltReleaseButton" });
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, cbw.Bolt, new string[] { "Speed_Forward", "Speed_Rearward", "Speed_Held", "SpringStiffness", "HasLastRoundBoltHoldOpen", "DoesClipHoldBoltOpen" });
-							AddObjectControls(Columns[2], 14, cbw.FireSelector_Modes[cbw.FireSelectorModeIndex], new string[] { "ModeType", "BurstAmount" }, null, new bool[] { true });
+							AddObjectControls(Columns[2], 14, cbw.FireSelector_Modes[cbw.FireSelectorModeIndex], new string[] { "ModeType", "BurstAmount" }, null, 0b1);
 						}
 
 						else if (Object is BreakActionWeapon)
 						{
 							BreakActionWeapon baw = Object as BreakActionWeapon;
-							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], baw, new string[] { "m_isLatched", "UsesManuallyCockedHammers", "FireAllBarrels", "PopOutEmpties" });
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], baw, new string[] { "m_isLatched", "UsesManuallyCockedHammers", "FireAllBarrels", "PopOutEmpties" }, null, 0, 0b1000);
 							for (int i = 0; i < Math.Min(baw.Barrels.Length, 14); i++) //capped to 14 to avoid controls overflowing
 								m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], baw.Barrels[i].Chamber, new string[] { "ChamberVelocityMultiplier" });
 						}
@@ -303,25 +303,25 @@ namespace LSIIC.ModPanel
 						else if (Object is RevolvingShotgun)
 						{
 							RevolvingShotgun revolvingShotgun = Object as RevolvingShotgun;
-							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, revolvingShotgun, new string[] { "DoesFiringRecock", "CylinderLoaded", "IsCylinderRotClockwise", "EjectCylinder" });
-							AddObjectControls(Columns[2], 15, revolvingShotgun.FireSelector_Modes[revolvingShotgun.FireSelectorModeIndex], new string[] { "ModeType" }, null, new bool[] { true });
+							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1] + 1, revolvingShotgun, new string[] { "DoesFiringRecock", "CylinderLoaded", "IsCylinderRotClockwise", "EjectCylinder" }, null, 0, 0b1000);
+							AddObjectControls(Columns[2], 15, revolvingShotgun.FireSelector_Modes[revolvingShotgun.FireSelectorModeIndex], new string[] { "ModeType" }, null, 0b1);
 						}
 					}
 
 					else if (Object is FVRFireArmRound)
 						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as FVRFireArmRound, new string[] { "RoundType", "RoundClass", "IsHighPressure", "NumProjectiles", "ProjectileSpread", "IsDestroyedAfterCounter", "m_isKillCounting", "isCookingOff", "isManuallyChamberable", "IsCaseless", "isMagazineLoadable", "isPalmable", "MaxPalmedAmount" });
 
-					else if (Object is FVRGrenade)
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as FVRGrenade, new string[] { "DefaultFuse", "IFF", "ReleaseLever" });
+					else if (Object is PinnedGrenade)
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as FVRGrenade, new string[] { "ReleaseLever", "DefaultFuse", "HasImpactFuse" }, null, 0, 0b1);
 
 					else if (Object is MF2_Medigun)
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as MF2_Medigun, new string[] { "EngageRange", "MaxRange", "TryEngageBeam", "EngageUber", "DisEngageBeam", "m_uberChargeUp", "m_uberChargeOut" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as MF2_Medigun, new string[] { "EngageRange", "MaxRange", "TryEngageBeam", "EngageUber", "DisEngageBeam", "m_uberChargeUp", "m_uberChargeOut" }, null, 0b1100000, 0b11100);
 
 					else if (Object.GetComponent<SosigLink>() != null)
 					{
 						SosigLink L = Object.GetComponent<SosigLink>();
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], L.S, new string[] { "ClearSosig", "", "BodyState", "CurrentOrder", "Mustard", "BleedDamageMult", "BleedRateMult", "Speed_Crawl", "Speed_Sneak", "Speed_Walk", "Speed_Run" }, null, new bool[] { false, false, true, true, true });
-						m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], L, new string[] { "m_integrity", "StaggerMagnitude", "DamMult" }, null, new bool[] { true });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], L.S, new string[] { "ClearSosig", "", "BodyState", "CurrentOrder", "Mustard", "BleedDamageMult", "BleedRateMult", "Speed_Crawl", "Speed_Sneak", "Speed_Walk", "Speed_Run" }, null, 0b11100, 0b1);
+						m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], L, new string[] { "m_integrity", "StaggerMagnitude", "DamMult" }, null, 0b1);
 						m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2] + 1, L.S.E, new string[] { "IFFCode" });
 					}
 
@@ -329,7 +329,7 @@ namespace LSIIC.ModPanel
 						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], (Object as SosigWeaponPlayerInterface).W, new string[] { "CycleSpeedForward", "CycleSpeedBackward", "ShotsPerLoad", "m_shotsLeft", "ProjectilesPerShot", "ProjectileSpread", "isFullAuto", "ReloadTime", "BurstLimit" });
 
 					else if (Object is RW_Powerup)
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as RW_Powerup, new string[] { "PowerupType", "PowerupIntensity", "PowerupDuration", "PowerUpSpecial", "Cooked", "UpdateSymbols" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as RW_Powerup, new string[] { "PowerupType", "PowerupIntensity", "PowerupDuration", "Cooked", "UpdateSymbols" }, null, 0, 0b10000);
 
 					else if (Object is ShatterablePhysicalObject)
 						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as ShatterablePhysicalObject, new string[] { "currentToughness", "TransfersVelocityExplosively", "DamageReceivedMultiplier", "CollisionShatterThreshold" });
@@ -340,17 +340,17 @@ namespace LSIIC.ModPanel
 					else if (Object is Banger)
 					{
 						Banger banger = Object as Banger;
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], banger, new string[] { "BType", "BSize", "m_isArmed", "m_timeToPayload", "ProxRange", "m_timeSinceArmed", "m_shrapnelVel", "m_isSticky", "m_isSilent", "m_isHoming", "m_canbeshot", "SetToBouncy" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], banger, new string[] { "BType", "BSize", "m_isArmed", "m_timeToPayload", "ProxRange", "m_timeSinceArmed", "m_shrapnelVel", "m_isSticky", "m_isSilent", "m_isHoming", "m_canbeshot", "SetToBouncy" }, null, 0, 0b100000000000);
 
 						if (banger.BDial != null)
 							m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], banger.BDial, new string[] { "DialTick", "m_isPrimed", "m_hasDinged" });
 					}
 
 					else if (Object is BangerDetonator)
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as BangerDetonator, new string[] { "TriggerRange", "Detonate" });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as BangerDetonator, new string[] { "Detonate", "TriggerRange" }, null, 0, 0b1);
 
 					else if (Object is GronchHatCase)
-						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as GronchHatCase, new string[] { "m_isOpen", "Open", "HID" }, null, null, new bool[] { false, true, false }, new object[][] { null, new object[] { new GameObject("dummy").AddComponent<GronchHatCaseKey>() }, null });
+						m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], Object as GronchHatCase, new string[] { "m_isOpen", "HID" });
 
 					else if (Object.GetComponent<FVRFireArmAttachment>() != null && Object.GetComponent<FVRFireArmAttachment>().AttachmentInterface != null)
 						RefreshObjectControls_AttachmentInterfaces(Object.GetComponent<FVRFireArmAttachment>().AttachmentInterface);
@@ -367,7 +367,7 @@ namespace LSIIC.ModPanel
 		public void RefreshObjectControls_AttachmentInterfaces(FVRFireArmAttachmentInterface attachInterface)
 		{
 			if (attachInterface is Amplifier && (attachInterface as Amplifier).ScopeCam != null)
-				m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], (attachInterface as Amplifier).ScopeCam, new string[] { "OnEnable", "Magnification", "Resolution", "AngleBlurStrength", "CutoffSoftness", "AngularOccludeSensitivity", "ReticuleScale", "MagnificationEnabledAtStart", "LensSpaceDistortion", "LensChromaticDistortion" });
+				m_columnStarts[1] = AddObjectControls(Columns[1], m_columnStarts[1], (attachInterface as Amplifier).ScopeCam, new string[] { "OnEnable", "Magnification", "Resolution", "AngleBlurStrength", "CutoffSoftness", "AngularOccludeSensitivity", "ReticuleScale", "MagnificationEnabledAtStart", "LensSpaceDistortion", "LensChromaticDistortion" }, null, 0, 0b1);
 		}
 	}
 }
