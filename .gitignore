@@ -3,6 +3,9 @@ Thunderstore/monomod
 Thunderstore/plugins
 Thunderstore/*.zip
 
+# config.yaml doesn't need to be included lol
+Thunderstore/config.yaml
+
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
