@@ -40,7 +40,8 @@ namespace LSIIC.SmartPalming
 		public static void FVRFireArmRound_DuplicateFromSpawnLock(FVRFireArmRound __instance, ref GameObject __result, FVRViveHand hand)
 		{
 			FVRFireArmRound round = __result.GetComponent<FVRFireArmRound>();
-			if (_enableSmartPalming.Value && round != null && hand.OtherHand.CurrentInteractable != null)
+			// this build id is u100a6
+			if (Steamworks.SteamApps.GetAppBuildId() < 7705797 && _enableSmartPalming.Value && round != null && hand.OtherHand.CurrentInteractable != null)
 			{
 				int roundsNeeded = 0;
 
