@@ -53,9 +53,9 @@ Some new functionality includes (among other changes):
 - Hover Bench can be picked up even with an object on it.
 - Bangers can be spawnlocked.
 
-#### `LSIIC.SmartPalming` -- smarter round palming
+#### `LSIIC.SmartPalming` -- former plugin
 
-Conceptualized by Jack Foxtrot, smart palming will only take as many rounds as needed to fill your magazines/clip/gun. 
+Conceptualized by Jack Foxtrot, smart palming was added in Update 100 Alpha 6.
 
 ## Compiling/Developing
 

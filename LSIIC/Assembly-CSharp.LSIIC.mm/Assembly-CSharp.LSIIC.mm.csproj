@@ -22,8 +22,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="BepInEx.Core" Version="5.4.16" />
-	  <PackageReference Include="H3VR.GameLibs" Version="0.100.2-r.1" />
+	  <PackageReference Include="BepInEx.Core" Version="6.0.0-be.553" />
+	  <PackageReference Include="H3VR.GameLibs" Version="0.102.0.1-r.0" />
 	  <PackageReference Include="UnityEngine" Version="5.6.1" />
 	</ItemGroup>
 
