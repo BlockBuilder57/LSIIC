@@ -1,10 +1,10 @@
 {
   "author": "BlockBuilder57",
   "name": "LSIIC",
-  "version_number": "1.5.2",
+  "version_number": "1.5.3",
   "dependencies": [
-	"devyndamonster-OtherLoader-1.3.5",
-	"nrgill28-Sodalite-1.3.3"
+	"devyndamonster-OtherLoader-1.3.0",
+	"nrgill28-Sodalite-1.3.0"
   ],
   "description": "A mod for H3VR that adds some weird custom objects and behaviors.",
   "website_url": "https://github.com/BlockBuilder57/LSIIC"
