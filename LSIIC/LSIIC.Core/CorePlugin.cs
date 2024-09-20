@@ -12,16 +12,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sodalite;
 
-[assembly: AssemblyVersion("1.5")]
+[assembly: AssemblyVersion("1.6.0")]
 namespace LSIIC.Core
 {
-	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.5")]
+	[BepInPlugin("net.block57.lsiic.core", "LSIIC - Core", "1.6.0")]
 	[BepInDependency("dll.cursed.timescale", BepInDependency.DependencyFlags.SoftDependency)]
 	public class CorePlugin : BaseUnityPlugin
 	{
 		public static ManualLogSource Logger { get; set; }
 
-		public static ConfigEntry<bool> _timeStopsOnJump;
 		public static ConfigEntry<bool> _pilotPlayerSosigBodyHead;
 
 		public static ConfigEntry<KeyboardShortcut> _shortcutDeleteFVRPhysicalObjects;
@@ -41,8 +40,6 @@ namespace LSIIC.Core
 			Logger = base.Logger;
 			Logger.Log(LogLevel.Debug, "Core pre");
 
-			_timeStopsOnJump = Config.Bind("Functionality", "Time Stops On Jump", false,
-				"Insert funny JoJoke™ here. This one gets better with the timescale plugin from the CursedDlls.");
 			_pilotPlayerSosigBodyHead = Config.Bind("Functionality", "Pilot PlayerSosigBody Head", true,
 				"Pilot the PlayerSosigBody's head with your actual head rotation instead of the head's physics joint.");
 

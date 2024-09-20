@@ -153,13 +153,6 @@ namespace LSIIC.Core
 			return true;
 		}
 
-		[HarmonyPatch(typeof(Banger), nameof(Banger.Complete))]
-		[HarmonyPostfix]
-		public static void BangerSpawnLockableOnComplete(Banger __instance)
-		{
-			__instance.SpawnLockable = true;
-		}
-
 		[HarmonyPatch(typeof(ClosedBoltWeapon), "UpdateInputAndAnimate")]
 		[HarmonyTranspiler]
 		public static IEnumerable<CodeInstruction> ClosedBoltWeaponStickyFireSelector(IEnumerable<CodeInstruction> instrs)
@@ -180,22 +173,6 @@ namespace LSIIC.Core
 			.InstructionEnumeration();
 		}
 
-		/*
-		 * Functionality Patches
-		 * Changes that add functionality or information
-		 */
-		[HarmonyPatch(typeof(FVRMovementManager), "Jump")]
-		[HarmonyPrefix]
-		public static bool StopTimeOnJump(FVRMovementManager __instance)
-		{
-			if (CorePlugin._timeStopsOnJump.Value)
-			{
-				Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-				Time.fixedDeltaTime = Time.timeScale / SteamVR.instance.hmd_DisplayFrequency;
-			}
-			return !CorePlugin._timeStopsOnJump.Value; //skip the rest of the function when the config is true
-		}
-
 		[HarmonyPatch(typeof(PlayerSosigBody), "SosigPhys")]
 		[HarmonyPrefix]
 		public static bool PilotPlayerSosigBodyHead(PlayerSosigBody __instance)
@@ -204,34 +181,6 @@ namespace LSIIC.Core
 				__instance.Sosig_Head.rotation = GM.CurrentPlayerBody.Head.rotation;
 
 			return true;
-		}
-
-		[HarmonyPatch(typeof(FVRWristMenu), nameof(FVRWristMenu.Awake))]
-		[HarmonyPostfix]
-		public static void OverflowClockText(FVRWristMenu __instance)
-		{
-			__instance.SetSelectedButton(0);
-			__instance.Clock.verticalOverflow = VerticalWrapMode.Overflow;
-			__instance.Clock.horizontalOverflow = HorizontalWrapMode.Overflow;
-		}
-
-		[HarmonyPatch(typeof(FVRWristMenu), nameof(FVRWristMenu.Update))]
-		[HarmonyPostfix]
-		public static void UpdateEnhancedWristMenu(FVRWristMenu __instance, bool ___m_isActive, bool ___m_hasHands, FVRViveHand ___m_currentHand)
-		{
-			if (___m_isActive)
-			{
-				if (__instance.Clock.alignment != TextAnchor.LowerCenter)
-				{
-					__instance.Clock.rectTransform.anchoredPosition = new Vector2(0f, 7.8f);
-					__instance.Clock.alignment = TextAnchor.LowerCenter;
-				}
-
-				Helpers.H3Info info = Helpers.H3Info.FPS | Helpers.H3Info.DateTime | Helpers.H3Info.Transform | Helpers.H3Info.Health | Helpers.H3Info.Scene;
-				if (___m_hasHands)
-					info |= ___m_currentHand.IsThisTheRightHand ? Helpers.H3Info.ControllerR : Helpers.H3Info.ControllerL;
-				__instance.Clock.text = Helpers.H3InfoPrint(info, false) + "\nH3 Enhanced Wrist Menu";
-			}
 		}
 	}
 }
