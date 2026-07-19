@@ -42,7 +42,8 @@ namespace LSIIC
 					if (CameraOn && (Vector2.Angle(hand.Input.TouchpadAxes, Vector2.left) <= 45f || Vector2.Angle(hand.Input.TouchpadAxes, Vector2.right) <= 45f))
 					{
 						int direction = (int)Mathf.Sign(touchpadAxes.x) * 10;
-						GM.Options.ControlOptions.CamFOV = Mathf.Clamp(GM.Options.ControlOptions.CamFOV + direction, 10f, 180f);
+						if (!H3VRCurrentCompatibility.TryAdjustSpectatorFov(direction))
+							return;
 						//DisplayCam.fieldOfView = Mathf.Clamp(DisplayCam.fieldOfView + direction, 20, 80);
 						if (FOVChange.Clips.Count > 0)
 							SM.PlayCoreSound(FVRPooledAudioType.UIChirp, FOVChange, this.transform.position);

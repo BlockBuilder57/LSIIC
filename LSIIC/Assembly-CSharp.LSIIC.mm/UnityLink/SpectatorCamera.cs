@@ -69,7 +69,8 @@ namespace LSIIC
 					if (CameraOn && (Vector2.Angle(hand.Input.TouchpadAxes, Vector2.left) <= 45f || Vector2.Angle(hand.Input.TouchpadAxes, Vector2.right) <= 45f))
 					{
 						int direction = (int)Mathf.Sign(touchpadAxes.x) * 10;
-						GM.Options.ControlOptions.CamFOV = Mathf.Clamp(GM.Options.ControlOptions.CamFOV + direction, 10f, 180f);
+						if (!H3VRCurrentCompatibility.TryAdjustSpectatorFov(direction))
+							return;
 						//DisplayCam.fieldOfView = Mathf.Clamp(DisplayCam.fieldOfView + direction, 20, 80);
 						//RenderTargetCam.fieldOfView = DisplayCam.fieldOfView;
 						if (FOVChange.Clips.Count > 0)
@@ -105,7 +106,7 @@ namespace LSIIC
 			{
 				if (DisplayCam)
 					GM.CurrentSceneSettings.SetCamObjectPoint(DisplayCam.transform);
-				GM.Options.ControlOptions.PCamMode = ControlOptions.PreviewCamMode.Enabled;
+				H3VRCurrentCompatibility.TryEnableSpectatorPreview();
 			}
 
 			if (LEDRenderer != null)

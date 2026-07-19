@@ -56,7 +56,10 @@ namespace LSIIC.ModPanel
 				if (GM.Options != null && GM.Options.ControlOptions != null)
 				{
 					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], this, new string[] { "UpdateSosigPlayerBodyState" }, null, 0, 0b1);
-					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], GM.Options.ControlOptions, new string[] { "MBClothing", "CamFOV", "CamSmoothingLinear", "CamSmoothingRotational", "CamLeveling" }, null, 0b11111);
+					m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], GM.Options.ControlOptions, new string[] { "MBClothingId" }, null, 0b1);
+					object spectatorCameraSettings = H3VRCurrentCompatibility.GetSpectatorCameraSettings();
+					if (spectatorCameraSettings != null)
+						m_columnStarts[2] = AddObjectControls(Columns[2], m_columnStarts[2], spectatorCameraSettings, new string[] { "CameraFov", "CameraSmoothingLinear", "CameraSmoothingAngular", "CameraRollRemoval" }, null, 0b1111);
 				}
 #endif
 			}
@@ -90,15 +93,10 @@ namespace LSIIC.ModPanel
 
 		public void UpdateSosigPlayerBodyState()
 		{
-			if (GM.Options == null)
+			if (GM.CurrentPlayerBody == null)
 				return;
 
-			if (ManagerSingleton<IM>.Instance.odicSosigObjsByID.ContainsKey(GM.Options.ControlOptions.MBClothing))
-			{
-				SosigEnemyTemplate set = ManagerSingleton<IM>.Instance.odicSosigObjsByID[GM.Options.ControlOptions.MBClothing];
-				if (GM.CurrentPlayerBody != null)
-					GM.CurrentPlayerBody.SetOutfit(set);
-			}
+			H3VRCurrentCompatibility.UpdateSosigPlayerBodyState(GM.CurrentPlayerBody);
 		}
 	}
 }

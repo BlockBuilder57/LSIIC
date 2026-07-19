@@ -249,7 +249,7 @@ namespace LSIIC.ModPanel
 				m_objectTableDef = (ObjectTableDef)ScriptableObject.CreateInstance(typeof(ObjectTableDef));
 			}
 
-			m_objectTable.Initialize(m_objectTableDef, category);
+			H3VRCurrentCompatibility.InitializeObjectTable(m_objectTable, m_objectTableDef, category);
 			UpdateCurrentGameObj(m_objectTable.GetRandomObject());
 		}
 
@@ -284,7 +284,7 @@ namespace LSIIC.ModPanel
 			foreach (FVRViveHand hand in GM.CurrentMovementManager.Hands)
 			{
 				if (hand.CurrentInteractable != null && hand.CurrentInteractable is FVRPhysicalObject && m_currentFVRObj != null)
-					UpdateCurrentGameObj(m_currentFVRObj.GetRandomAmmoObject((hand.CurrentInteractable as FVRPhysicalObject).ObjectWrapper));
+					UpdateCurrentGameObj(H3VRCurrentCompatibility.GetRandomAmmoObject((hand.CurrentInteractable as FVRPhysicalObject).ObjectWrapper));
 			}
 		}
 		#endregion
