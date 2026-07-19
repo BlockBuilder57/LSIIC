@@ -12,14 +12,12 @@ namespace LSIIC
 		private static FieldInfo m_spectatorFov;
 		private static FieldInfo m_previewMode;
 		private static MethodInfo m_getRandomAmmoObject;
-		private static MethodInfo m_initializeObjectTable;
 		private static MethodInfo m_updateSosigPlayerBodyState;
 
 		private static bool m_warnedSpectatorOptions;
 		private static bool m_warnedSpectatorFov;
 		private static bool m_warnedPreviewMode;
 		private static bool m_warnedRandomAmmo;
-		private static bool m_warnedObjectTable;
 		private static bool m_warnedPlayerSosigBody;
 
 		public static bool TryAdjustSpectatorFov(float delta)
@@ -102,26 +100,33 @@ namespace LSIIC
 
 		public static void InitializeObjectTable(ObjectTable table, ObjectTableDef definition, FVRObject.ObjectCategory category)
 		{
-			if (m_initializeObjectTable == null)
-			{
-				foreach (MethodInfo method in AccessTools.GetDeclaredMethods(typeof(ObjectTable)))
-				{
-					ParameterInfo[] parameters = method.GetParameters();
-					if (method.Name == "Initialize" && parameters.Length > 1 && parameters[0].ParameterType == typeof(ObjectTableDef) && parameters[1].ParameterType == typeof(FVRObject.ObjectCategory))
-					{
-						m_initializeObjectTable = method;
-						break;
-					}
-				}
-			}
-			if (m_initializeObjectTable == null)
-			{
-				WarnOnce(ref m_warnedObjectTable, "ObjectTable initialization method is unavailable.");
-				return;
-			}
+			definition.Category = category;
+			table.Initialize(definition);
+			LogDebug("ObjectTable initialized for " + category + " with " + table.Objs.Count + " candidates.");
+		}
 
-			m_initializeObjectTable.Invoke(table, GetArguments(m_initializeObjectTable, definition, category));
-			LogDebug("ObjectTable initialized for " + category + ".");
+		[System.Diagnostics.Conditional("LOCAL_VERIFICATION")]
+		public static void LogRandomObjectSelection(FVRObject item)
+		{
+		#if LOCAL_VERIFICATION
+			LogDebug("Random object selection returned " + (item == null ? "no item" : item.ItemID) + ".");
+		#endif
+		}
+
+		[System.Diagnostics.Conditional("LOCAL_VERIFICATION")]
+		public static void LogBespokeAttachmentSelection(FVRObject item, FVRObject attachment)
+		{
+		#if LOCAL_VERIFICATION
+			LogDebug("Bespoke attachment selection for " + (item == null ? "no item" : item.ItemID) + " returned " + (attachment == null ? "no item" : attachment.ItemID) + ".");
+		#endif
+		}
+
+		[System.Diagnostics.Conditional("LOCAL_VERIFICATION")]
+		public static void LogSpawnerSelection(FVRObject item, ItemSpawnerID itemSpawnerID, bool categoryFound, bool subCategoryFound)
+		{
+		#if LOCAL_VERIFICATION
+			LogDebug("Spawner selected " + (item == null ? "no item" : item.ItemID) + "; ItemSpawner category=" + (itemSpawnerID == null ? "none" : itemSpawnerID.Category.ToString()) + "; category found=" + categoryFound + "; subcategory found=" + subCategoryFound + ".");
+		#endif
 		}
 
 		public static void UpdateSosigPlayerBodyState(FVRPlayerBody playerBody)
@@ -178,15 +183,12 @@ namespace LSIIC
 			return arguments;
 		}
 
+		[System.Diagnostics.Conditional("LOCAL_VERIFICATION")]
 		private static void LogDebug(string message)
 		{
-			Type corePlugin = AccessTools.TypeByName("LSIIC.Core.CorePlugin");
-			FieldInfo debugLogging = corePlugin == null ? null : AccessTools.Field(corePlugin, "_debugCompatibilityLogging");
-			object configEntry = debugLogging == null ? null : debugLogging.GetValue(null);
-			PropertyInfo value = configEntry == null ? null : AccessTools.Property(configEntry.GetType(), "Value");
-			object debugValue = value == null ? null : value.GetValue(configEntry, null);
-			if (debugValue is bool && (bool)debugValue)
-				Debug.Log("[LSIIC][Current H3VR] " + message);
+		#if LOCAL_VERIFICATION
+			Debug.Log("[LSIIC][Current H3VR] " + message);
+		#endif
 		}
 
 		private static void WarnOnce(ref bool wasWarned, string message)

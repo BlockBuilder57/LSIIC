@@ -9,6 +9,10 @@
 		<CopyLocalLocKFileAssemblies>false</CopyLocalLocKFileAssemblies>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<DefineConstants>$(DefineConstants);LOCAL_VERIFICATION</DefineConstants>
+	</PropertyGroup>
+
 	<!-- output release binaries in a single directory -->
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<OutputPath>$(SolutionDir)..\Thunderstore\monomod</OutputPath>

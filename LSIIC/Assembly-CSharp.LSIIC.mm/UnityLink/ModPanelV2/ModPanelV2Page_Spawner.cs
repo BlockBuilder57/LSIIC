@@ -201,8 +201,15 @@ namespace LSIIC.ModPanel
 
 				if (m_currentItemSpawnerID != null)
 				{
-					ItemSpawnerCategoryDefinitions.Category Cat = Array.Find(ManagerSingleton<IM>.Instance.CatDefs.Categories, x => x.Cat == m_currentItemSpawnerID.Category);
-					ItemSpawnerCategoryDefinitions.SubCategory SubCat = Array.Find(Cat.Subcats, x => x.Subcat == m_currentItemSpawnerID.SubCategory);
+					ItemSpawnerCategoryDefinitions.Category Cat = null;
+					ItemSpawnerCategoryDefinitions.SubCategory SubCat = null;
+					if (ManagerSingleton<IM>.Instance != null && ManagerSingleton<IM>.Instance.CatDefs != null && ManagerSingleton<IM>.Instance.CatDefs.Categories != null)
+					{
+						Cat = Array.Find(ManagerSingleton<IM>.Instance.CatDefs.Categories, x => x.Cat == m_currentItemSpawnerID.Category);
+						if (Cat != null && Cat.Subcats != null)
+							SubCat = Array.Find(Cat.Subcats, x => x.Subcat == m_currentItemSpawnerID.SubCategory);
+					}
+					H3VRCurrentCompatibility.LogSpawnerSelection(m_currentFVRObj, m_currentItemSpawnerID, Cat != null, SubCat != null);
 
 					output += $"\n\n";
 					if (Cat != null)
@@ -210,7 +217,7 @@ namespace LSIIC.ModPanel
 					if (SubCat != null)
 						output += $"{SubCat.DisplayName} ({SubCat.DoesDisplay_Sandbox}, {SubCat.DoesDisplay_Unlocks}) | ";
 					output += $"{m_currentItemSpawnerID.DisplayName} ({m_currentItemSpawnerID.ItemID})";
-					output += $"\nSpawns: {m_currentItemSpawnerID.MainObject.DisplayName} on {(!(m_currentItemSpawnerID.UsesLargeSpawnPad || m_currentItemSpawnerID.UsesHugeSpawnPad) ? "Small" : (m_currentItemSpawnerID.UsesLargeSpawnPad ? "Large" : "Huge"))}";
+					output += $"\nSpawns: {(m_currentItemSpawnerID.MainObject == null ? "no primary object" : m_currentItemSpawnerID.MainObject.DisplayName)} on {(!(m_currentItemSpawnerID.UsesLargeSpawnPad || m_currentItemSpawnerID.UsesHugeSpawnPad) ? "Small" : (m_currentItemSpawnerID.UsesLargeSpawnPad ? "Large" : "Huge"))}";
 					if (m_currentItemSpawnerID.SecondObject != null)
 						output += $", {m_currentItemSpawnerID.SecondObject.DisplayName}";
 					output += $"\nUnlock Cost: {m_currentItemSpawnerID.UnlockCost} S.A.U.C.E. {(m_currentItemSpawnerID.IsUnlockedByDefault ? "(Unlocked by default) -" : "-")} Is Reward: {m_currentItemSpawnerID.IsReward}";
@@ -243,14 +250,13 @@ namespace LSIIC.ModPanel
 		#region Get Random FVRObjects
 		public void GetRandomFVRObjectFromCategory(FVRObject.ObjectCategory category)
 		{
-			if (m_objectTable == null)
-			{
-				m_objectTable = new ObjectTable();
+			m_objectTable = new ObjectTable();
+			if (m_objectTableDef == null)
 				m_objectTableDef = (ObjectTableDef)ScriptableObject.CreateInstance(typeof(ObjectTableDef));
-			}
-
 			H3VRCurrentCompatibility.InitializeObjectTable(m_objectTable, m_objectTableDef, category);
-			UpdateCurrentGameObj(m_objectTable.GetRandomObject());
+			FVRObject item = m_objectTable.GetRandomObject();
+			H3VRCurrentCompatibility.LogRandomObjectSelection(item);
+			UpdateCurrentGameObj(item);
 		}
 
 		public void GetRandomFVRObject()
@@ -268,23 +274,28 @@ namespace LSIIC.ModPanel
 
 			foreach (FVRViveHand hand in GM.CurrentMovementManager.Hands)
 			{
-				if (hand.CurrentInteractable != null && hand.CurrentInteractable is FVRPhysicalObject)
-					UpdateCurrentGameObj(m_objectTable.GetRandomBespokeAttachment((hand.CurrentInteractable as FVRPhysicalObject).ObjectWrapper));
+				FVRPhysicalObject heldObject = hand.CurrentInteractable as FVRPhysicalObject;
+				if (heldObject == null || heldObject.ObjectWrapper == null)
+					continue;
+
+				FVRObject attachment = m_objectTable.GetRandomBespokeAttachment(heldObject.ObjectWrapper);
+				H3VRCurrentCompatibility.LogBespokeAttachmentSelection(heldObject.ObjectWrapper, attachment);
+				if (attachment != null)
+					UpdateCurrentGameObj(attachment);
 			}
 		}
 
 		public void GetRandomAmmoObject()
 		{
-			if (m_objectTable == null)
-			{
-				m_objectTable = new ObjectTable();
-				m_objectTableDef = (ObjectTableDef)ScriptableObject.CreateInstance(typeof(ObjectTableDef));
-			}
-
 			foreach (FVRViveHand hand in GM.CurrentMovementManager.Hands)
 			{
-				if (hand.CurrentInteractable != null && hand.CurrentInteractable is FVRPhysicalObject && m_currentFVRObj != null)
-					UpdateCurrentGameObj(H3VRCurrentCompatibility.GetRandomAmmoObject((hand.CurrentInteractable as FVRPhysicalObject).ObjectWrapper));
+				FVRPhysicalObject heldObject = hand.CurrentInteractable as FVRPhysicalObject;
+				if (heldObject == null || heldObject.ObjectWrapper == null)
+					continue;
+
+				FVRObject ammo = H3VRCurrentCompatibility.GetRandomAmmoObject(heldObject.ObjectWrapper);
+				if (ammo != null)
+					UpdateCurrentGameObj(ammo);
 			}
 		}
 		#endregion

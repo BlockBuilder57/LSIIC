@@ -125,6 +125,9 @@ namespace LSIIC.Core
 			string info = "";
 			foreach (Component comp in targetObject.GetComponents<Component>())
 			{
+				if (comp == null)
+					continue;
+
 				Type t = comp.GetType();
 				bool firstClass = true;
 				while (t?.Namespace != "UnityEngine")
@@ -151,6 +154,9 @@ namespace LSIIC.Core
 				info += string.Format("\n\nAttached Rigidbody: {0}", GetObjectHierarchyPath(attachedRigidbody.transform));
 				foreach (Component comp in attachedRigidbody.GetComponents<Component>())
 				{
+					if (comp == null)
+						continue;
+
 					Type t = comp.GetType();
 					bool firstClass = true;
 					while (t?.Namespace != "UnityEngine")
